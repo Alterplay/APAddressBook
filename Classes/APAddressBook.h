@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum
+{
+    APAddressBookAccessUnknown = 0,
+    APAddressBookAccessGranted = 1,
+    APAddressBookAccessDenied = 2
+} APAddressBookAccess;
+
 @interface APAddressBook : NSObject
 
-+ (BOOL)isPermissionsDetermined;
++ (APAddressBookAccess)access;
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock;
 
 @end

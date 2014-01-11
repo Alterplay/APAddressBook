@@ -43,9 +43,21 @@
 
 #pragma mark - public
 
-+ (BOOL)isPermissionsDetermined
++ (APAddressBookAccess)access
 {
-    return ABAddressBookGetAuthorizationStatus() != kABAuthorizationStatusNotDetermined;
+    ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
+    switch (status)
+    {
+        case kABAuthorizationStatusDenied:
+        case kABAuthorizationStatusRestricted:
+            return APAddressBookAccessDenied;
+
+        case kABAuthorizationStatusAuthorized:
+            return APAddressBookAccessGranted;
+
+        default:
+            return APAddressBookAccessUnknown;
+    }
 }
 
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock
