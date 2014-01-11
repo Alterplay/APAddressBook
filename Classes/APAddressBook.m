@@ -75,30 +75,13 @@
             for (NSUInteger i = 0; i < contactCount; i++)
             {
                 ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
-                ABMultiValueRef phonesValueRef = ABRecordCopyValue(recordRef, kABPersonPhoneProperty);
-                NSUInteger phonesCount = (NSUInteger)ABMultiValueGetCount(phonesValueRef);
-                NSMutableArray *phones = [[NSMutableArray alloc] init];
-                for (NSUInteger j = 0; j < phonesCount; j++)
-                {
-                    CFTypeRef value = ABMultiValueCopyValueAtIndex(phonesValueRef, j);
-                    NSString *number = (__bridge_transfer NSString *)value;
-                    if (number)
-                    {
-                        [phones addObject:number];
-                    }
-                };
-                CFRelease(phonesValueRef);
-                CFTypeRef valueRef = (ABRecordCopyValue(recordRef, kABPersonFirstNameProperty));
-                NSString *firstName = (__bridge_transfer NSString *)valueRef;
-                valueRef = (ABRecordCopyValue(recordRef, kABPersonLastNameProperty));
-                NSString *lastName = (__bridge_transfer NSString *)valueRef;
                 APContact *contact = [[APContact alloc] init];
-                contact.phones = phones;
-                contact.firstName = firstName;
-                contact.lastName = lastName;
+                contact.firstName = [APAddressBook firstNameFromRecord:recordRef];
+                contact.lastName = [APAddressBook lastNameFromRecord:recordRef];
+                contact.phones = [APAddressBook phonesFromRecord:recordRef];
                 [contacts addObject:contact];
             }
-            array = [NSArray arrayWithArray:contacts];
+            array = contacts.copy;
         }
         else if (errorRef)
         {
@@ -113,6 +96,38 @@
             }
         });
     });
+}
+
+#pragma mark - private
+
++ (NSString *)firstNameFromRecord:(ABRecordRef)recordRef
+{
+    CFTypeRef valueRef = (ABRecordCopyValue(recordRef, kABPersonFirstNameProperty));
+    return (__bridge_transfer NSString *)valueRef;
+}
+
++ (NSString *)lastNameFromRecord:(ABRecordRef)recordRef
+{
+    CFTypeRef valueRef = (ABRecordCopyValue(recordRef, kABPersonLastNameProperty));
+    return (__bridge_transfer NSString *)valueRef;
+}
+
++ (NSArray *)phonesFromRecord:(ABRecordRef)recordRef
+{
+    ABMultiValueRef phonesValueRef = ABRecordCopyValue(recordRef, kABPersonPhoneProperty);
+    NSUInteger phonesCount = (NSUInteger)ABMultiValueGetCount(phonesValueRef);
+    NSMutableArray *phones = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i < phonesCount; i++)
+    {
+        CFTypeRef value = ABMultiValueCopyValueAtIndex(phonesValueRef, i);
+        NSString *number = (__bridge_transfer NSString *)value;
+        if (number)
+        {
+            [phones addObject:number];
+        }
+    }
+    CFRelease(phonesValueRef);
+    return phones.copy;
 }
 
 @end
