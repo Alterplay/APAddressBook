@@ -37,6 +37,9 @@ APAddressBook *addressBook = [[APAddressBook alloc] init];
 }];
 ```
 
+### Note
+> Callback block will be run in main thread!
+
 ---
 
 ###### Select contact fields bit-mask
