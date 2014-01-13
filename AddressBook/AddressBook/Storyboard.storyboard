@@ -64,31 +64,11 @@
                     <connections>
                         <outlet property="activity" destination="qCc-8T-6qI" id="3kC-Mn-9nQ"/>
                         <outlet property="tableView" destination="jh6-dS-3e7" id="f40-AU-ADT"/>
-                        <segue destination="x3S-fv-DkB" kind="push" identifier="ContactViewController" id="3el-3x-UoO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0tZ-fz-LlY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="558" y="249"/>
-        </scene>
-        <!--Contact View Controller - Contact-->
-        <scene sceneID="EWy-hb-qee">
-            <objects>
-                <viewController id="x3S-fv-DkB" customClass="ContactViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4Kk-H1-FrX"/>
-                        <viewControllerLayoutGuide type="bottom" id="i7k-ir-VQQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Nzm-nX-8Df">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Contact" id="Kk3-2E-aHR"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qPt-XG-BXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="979" y="249"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

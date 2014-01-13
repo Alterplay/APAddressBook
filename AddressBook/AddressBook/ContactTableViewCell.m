@@ -9,6 +9,14 @@
 #import "ContactTableViewCell.h"
 #import "APContact.h"
 
+@interface ContactTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *photoView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *companyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *phonesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailsLabel;
+@end
+
 @implementation ContactTableViewCell
 
 #pragma mark - life cycle
@@ -28,8 +36,11 @@
 - (void)updateWithModel:(id)model
 {
     APContact *contact = model;
-    self.textLabel.text = [self contactName:contact];
-    self.detailTextLabel.text = [self contactPhones:contact];
+    self.nameLabel.text = [self contactName:contact];
+    self.companyLabel.text = contact.company ?: @"(No company)";
+    self.phonesLabel.text = [self contactPhones:contact];
+    self.emailsLabel.text = [self contactEmails:contact];
+    self.photoView.image = contact.photo ?: [UIImage imageNamed:@"no_photo"];
 }
 
 #pragma mark - private
@@ -58,7 +69,19 @@
     }
     else
     {
-        return contact.phones.firstObject ?: @"No phones";
+        return contact.phones.firstObject ?: @"(No phones)";
+    }
+}
+
+- (NSString *)contactEmails:(APContact *)contact
+{
+    if (contact.emails.count > 1)
+    {
+        return [contact.emails componentsJoinedByString:@", "];
+    }
+    else
+    {
+        return contact.emails.firstObject ?: @"(No emails)";
     }
 }
 

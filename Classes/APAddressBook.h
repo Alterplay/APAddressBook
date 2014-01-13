@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "APTypes.h"
 
-typedef enum
-{
-    APAddressBookAccessUnknown = 0,
-    APAddressBookAccessGranted = 1,
-    APAddressBookAccessDenied = 2
-} APAddressBookAccess;
+@class APContact;
 
 @interface APAddressBook : NSObject
+
+@property (nonatomic, assign) APContactField fieldsMask;
+@property (nonatomic, copy) APContactFilterBlock filterBlock;
+@property (nonatomic, strong) NSArray *sortDescriptors;
 
 + (APAddressBookAccess)access;
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock;

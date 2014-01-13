@@ -27,8 +27,10 @@
         _addressBook = ABAddressBookCreateWithOptions(NULL, error);
         if (error)
         {
-            NSLog(@"%@", CFErrorCopyFailureReason(*error));
+            NSLog(@"%@", (__bridge_transfer NSString *)CFErrorCopyFailureReason(*error));
+            return nil;
         }
+        self.fieldsMask = APContactFieldDefault;
     }
     return self;
 }
@@ -63,6 +65,9 @@
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock
 {
     __weak __typeof (self) weakSelf = self;
+    APContactField fieldMask = self.fieldsMask;
+    NSArray *descriptors = self.sortDescriptors;
+    APContactFilterBlock filterBlock = self.filterBlock;
     ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef errorRef)
     {
         NSArray *array = nil;
@@ -75,12 +80,14 @@
             for (NSUInteger i = 0; i < contactCount; i++)
             {
                 ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
-                APContact *contact = [[APContact alloc] init];
-                contact.firstName = [APAddressBook firstNameFromRecord:recordRef];
-                contact.lastName = [APAddressBook lastNameFromRecord:recordRef];
-                contact.phones = [APAddressBook phonesFromRecord:recordRef];
-                [contacts addObject:contact];
+                APContact *contact = [[APContact alloc] initWithRecordRef:recordRef
+                                                                fieldMask:fieldMask];
+                if (!filterBlock || filterBlock(contact))
+                {
+                    [contacts addObject:contact];
+                }
             }
+            [contacts sortUsingDescriptors:descriptors];
             array = contacts.copy;
         }
         else if (errorRef)
@@ -96,38 +103,6 @@
             }
         });
     });
-}
-
-#pragma mark - private
-
-+ (NSString *)firstNameFromRecord:(ABRecordRef)recordRef
-{
-    CFTypeRef valueRef = (ABRecordCopyValue(recordRef, kABPersonFirstNameProperty));
-    return (__bridge_transfer NSString *)valueRef;
-}
-
-+ (NSString *)lastNameFromRecord:(ABRecordRef)recordRef
-{
-    CFTypeRef valueRef = (ABRecordCopyValue(recordRef, kABPersonLastNameProperty));
-    return (__bridge_transfer NSString *)valueRef;
-}
-
-+ (NSArray *)phonesFromRecord:(ABRecordRef)recordRef
-{
-    ABMultiValueRef phonesValueRef = ABRecordCopyValue(recordRef, kABPersonPhoneProperty);
-    NSUInteger phonesCount = (NSUInteger)ABMultiValueGetCount(phonesValueRef);
-    NSMutableArray *phones = [[NSMutableArray alloc] init];
-    for (NSUInteger i = 0; i < phonesCount; i++)
-    {
-        CFTypeRef value = ABMultiValueCopyValueAtIndex(phonesValueRef, i);
-        NSString *number = (__bridge_transfer NSString *)value;
-        if (number)
-        {
-            [phones addObject:number];
-        }
-    }
-    CFRelease(phonesValueRef);
-    return phones.copy;
 }
 
 @end

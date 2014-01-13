@@ -10,7 +10,6 @@
 #import "ContactTableViewCell.h"
 #import "APContact.h"
 #import "APAddressBook.h"
-#import "ContactViewController.h"
 
 @interface ListViewController ()
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
@@ -43,12 +42,18 @@
     [self loadContacts];
 }
 
+#pragma mark - table view data source implementation
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 85.f;
+}
+
 #pragma mark - table view delegate implementation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self performSegueWithIdentifier:NSStringFromClass(ContactViewController.class) sender:self];
 }
 
 #pragma mark - private
@@ -57,6 +62,14 @@
 {
     [self.activity startAnimating];
     __weak __typeof(self) weakSelf = self;
+    addressBook.fieldsMask = APContactFieldAll;
+    addressBook.sortDescriptors = @[
+    [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES],
+    [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES]];
+    addressBook.filterBlock = ^BOOL(APContact *contact)
+    {
+        return contact.phones.count > 0;
+    };
     [addressBook loadContacts:^(NSArray *contacts, NSError *error)
     {
         [weakSelf.activity stopAnimating];
