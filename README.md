@@ -1,10 +1,6 @@
 <img src="https://dl.dropboxusercontent.com/u/11819370/APAddressBook/APAddressBook_722x250.png">
-APAddressBook
 
-#### About
 APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.com/library/ios/documentation/AddressBook/Reference/AddressBook_iPhoneOS_Framework/_index.html)
-
----
 
 #### Features
 * Load contacts from iOS address book asynchronously
@@ -14,8 +10,6 @@ APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.co
 
 #### Installation
 Add `APAddressBook` pod to Podfile
-
----
 
 #### Using
 
@@ -40,8 +34,6 @@ APAddressBook *addressBook = [[APAddressBook alloc] init];
 ### Note
 > Callback block will be run in main thread!
 
----
-
 ###### Select contact fields bit-mask
 Available fields:
 * APContactFieldFirstName - *contact first name*
@@ -59,8 +51,6 @@ APAddressBook *addressBook = [[APAddressBook alloc] init];
 addressBook.fieldsMask = APContactFieldFirstName | APContactFieldPhoto;
 ```
 
----
-
 ###### Filter contacts
 The most common use of this option is to filter contacts without phone number. Example:
 ```objective-c
@@ -69,8 +59,6 @@ addressBook.filterBlock = ^BOOL(APContact *contact)
     return contact.phones.count > 0;
 };
 ```
-
----
 
 ###### Sort contacts
 APAddressBook returns unsorted contacts. So, most of users would like to sort contacts by first name and last name.
@@ -99,7 +87,8 @@ switch([APAddressBook access])
 }
 ```
 
----
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/b3f8691205854e15dcfebe3fc2ed599e "githalytics.com")](http://githalytics.com/Alterplay/APAddressBook)
+If you have improvements or concerns, feel free to post [an issue](https://github.com/Alterplay/APAddressBook/issues) and write details.
 
 #### Contacts
 
