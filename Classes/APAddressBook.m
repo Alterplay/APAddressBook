@@ -64,7 +64,6 @@
 
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock
 {
-    __weak __typeof (self) weakSelf = self;
     APContactField fieldMask = self.fieldsMask;
     NSArray *descriptors = self.sortDescriptors;
     APContactFilterBlock filterBlock = self.filterBlock;
@@ -74,7 +73,7 @@
         NSError *error = nil;
         if (granted)
         {
-            CFArrayRef peopleArrayRef = ABAddressBookCopyArrayOfAllPeople(weakSelf.addressBook);
+            CFArrayRef peopleArrayRef = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
             NSUInteger contactCount = (NSUInteger)CFArrayGetCount(peopleArrayRef);
             NSMutableArray *contacts = [[NSMutableArray alloc] init];
             for (NSUInteger i = 0; i < contactCount; i++)
