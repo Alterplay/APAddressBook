@@ -94,3 +94,11 @@ If you have improvements or concerns, feel free to post [an issue](https://githu
 
 [Check out](https://github.com/Alterplay) all Alterplay's GitHub projects.
 [Email us](mailto:hello@alterplay.com?subject=From%20GitHub%20APAddressBook) with other ideas and projects.
+
+#### Versions
+
+**Version 0.0.2**
+* Fixed potential crash on fetching contacts using non-property APAddressBook object. Thanks to [Evgen Bakumenko](https://github.com/evgenbakumenko).
+
+**Version 0.0.1**
+* First release.
