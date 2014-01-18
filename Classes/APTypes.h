@@ -28,10 +28,11 @@ typedef enum
     APContactFieldPhones    = 1 << 3,
     APContactFieldEmails    = 1 << 4,
     APContactFieldPhoto     = 1 << 5,
+    APContactFieldPhotoThumb= 1 << 6,
     APContactFieldDefault   = APContactFieldFirstName | APContactFieldLastName |
                               APContactFieldPhones,
     APContactFieldAll       = APContactFieldDefault | APContactFieldCompany |
-                              APContactFieldEmails | APContactFieldPhoto
+                              APContactFieldEmails | APContactFieldPhoto | APContactFieldPhotoThumb
 } APContactField;
 
 #endif

@@ -43,6 +43,11 @@
             NSData *imageData = (__bridge_transfer NSData *)ABPersonCopyImageData(recordRef);
             _photo = [UIImage imageWithData:imageData scale:UIScreen.mainScreen.scale];
         }
+        if (fieldMask & APContactFieldPhotoThumb)
+        {
+            NSData *imageData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(recordRef, kABPersonImageFormatThumbnail);
+            _photoThumb = [UIImage imageWithData:imageData scale:UIScreen.mainScreen.scale];
+        }
     }
     return self;
 }
