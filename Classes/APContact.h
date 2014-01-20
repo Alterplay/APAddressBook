@@ -19,7 +19,7 @@
 @property (nonatomic, readonly) NSArray *phones;
 @property (nonatomic, readonly) NSArray *emails;
 @property (nonatomic, readonly) UIImage *photo;
-@property (nonatomic, readonly) UIImage *photoThumb;
+@property (nonatomic, readonly) UIImage *thumbnail;
 
 - (id)initWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 

@@ -42,8 +42,12 @@ Available fields:
 * APContactFieldPhones - *contact phones array*
 * APContactFieldEmails - *contact emails array*
 * APContactFieldPhoto - *contact photo*
+* APContactFieldThumbnail - *contact thumbnail*
 * APContactFieldDefault - *contact first name, last name and phones array*
 * APContactFieldAll - *all contact fields described above*
+
+### Note
+> You should use `APContactFieldPhoto` very carefully, because it takes a lot of memory and may crash the application. Using `APContactFieldThumbnail` is much safer.
 
 Example of loading contact with first name and photo:
 ```objective-c
@@ -96,6 +100,9 @@ If you have improvements or concerns, feel free to post [an issue](https://githu
 [Email us](mailto:hello@alterplay.com?subject=From%20GitHub%20APAddressBook) with other ideas and projects.
 
 #### Versions
+
+**Version 0.0.3**
+* Added loading contact thumbnail. Thanks ti [Carlos Fonseca](https://github.com/carlosefonseca).
 
 **Version 0.0.2**
 * Fixed potential crash on fetching contacts using non-property APAddressBook object. Thanks to [Evgen Bakumenko](https://github.com/evgenbakumenko).

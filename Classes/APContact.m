@@ -40,13 +40,11 @@
         }
         if (fieldMask & APContactFieldPhoto)
         {
-            NSData *imageData = (__bridge_transfer NSData *)ABPersonCopyImageData(recordRef);
-            _photo = [UIImage imageWithData:imageData scale:UIScreen.mainScreen.scale];
+            _photo = [self imagePropertyFullSize:YES fromRecord:recordRef];
         }
-        if (fieldMask & APContactFieldPhotoThumb)
+        if (fieldMask & APContactFieldThumbnail)
         {
-            NSData *imageData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(recordRef, kABPersonImageFormatThumbnail);
-            _photoThumb = [UIImage imageWithData:imageData scale:UIScreen.mainScreen.scale];
+            _thumbnail = [self imagePropertyFullSize:NO fromRecord:recordRef];
         }
     }
     return self;
@@ -77,4 +75,13 @@
     CFRelease(multiValue);
     return array.copy;
 }
+
+- (UIImage *)imagePropertyFullSize:(BOOL)isFullSize fromRecord:(ABRecordRef)recordRef
+{
+    ABPersonImageFormat format = isFullSize ? kABPersonImageFormatOriginalSize :
+                                 kABPersonImageFormatThumbnail;
+    NSData *data = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(recordRef, format);
+    return [UIImage imageWithData:data scale:UIScreen.mainScreen.scale];
+}
+
 @end

@@ -40,7 +40,7 @@
     self.companyLabel.text = contact.company ?: @"(No company)";
     self.phonesLabel.text = [self contactPhones:contact];
     self.emailsLabel.text = [self contactEmails:contact];
-    self.photoView.image = contact.photo ?: [UIImage imageNamed:@"no_photo"];
+    self.photoView.image = contact.thumbnail ?: [UIImage imageNamed:@"no_photo"];
 }
 
 #pragma mark - private
