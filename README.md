@@ -102,7 +102,7 @@ If you have improvements or concerns, feel free to post [an issue](https://githu
 #### Versions
 
 **Version 0.0.3**
-* Added loading contact thumbnail. Thanks ti [Carlos Fonseca](https://github.com/carlosefonseca).
+* Added loading contact thumbnail. Thanks to [Carlos Fonseca](https://github.com/carlosefonseca).
 
 **Version 0.0.2**
 * Fixed potential crash on fetching contacts using non-property APAddressBook object. Thanks to [Evgen Bakumenko](https://github.com/evgenbakumenko).
