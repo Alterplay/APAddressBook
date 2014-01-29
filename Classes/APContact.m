@@ -32,7 +32,15 @@
         }
         if (fieldMask & APContactFieldPhones)
         {
-            _phones = [self arrayProperty:kABPersonPhoneProperty fromRecord:recordRef];
+            NSArray *phonesWithLabels = [self arrayProperty:kABPersonPhoneProperty fromRecord:recordRef withLabel:YES];
+            NSMutableArray *phones = [[NSMutableArray alloc] init];
+            NSMutableArray *labels = [[NSMutableArray alloc] init];
+            for(NSArray *entry in phonesWithLabels) {
+                [phones addObject:entry[0]];
+                [labels addObject:entry[1]];
+            }
+            _phones = [[NSArray alloc] initWithArray:phones];
+            _phoneLabels = [[NSArray alloc] initWithArray:labels];
         }
         if (fieldMask & APContactFieldEmails)
         {
@@ -58,8 +66,7 @@
     return (__bridge_transfer NSString *)valueRef;
 }
 
-- (NSArray *)arrayProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
-{
+- (NSArray *)arrayProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef withLabel:(BOOL)withLabel {
     ABMultiValueRef multiValue = ABRecordCopyValue(recordRef, property);
     NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
     NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -69,11 +76,24 @@
         NSString *string = (__bridge_transfer NSString *)value;
         if (string)
         {
-            [array addObject:string];
+            if(withLabel) {
+                CFStringRef locLabel = ABMultiValueCopyLabelAtIndex(multiValue, i);
+                NSString *label = (__bridge_transfer NSString *) ABAddressBookCopyLocalizedLabel(locLabel);
+                [array addObject:[[NSArray alloc] initWithObjects:string, label, nil]];
+            }
+            else {
+                [array addObject:string];
+            }
         }
     }
     CFRelease(multiValue);
     return array.copy;
+}
+
+
+- (NSArray *)arrayProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
+{
+    return [self arrayProperty:property fromRecord:recordRef withLabel:NO];
 }
 
 - (UIImage *)imagePropertyFullSize:(BOOL)isFullSize fromRecord:(ABRecordRef)recordRef
