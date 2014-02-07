@@ -35,7 +35,7 @@
         {
             _phones = [self arrayProperty:kABPersonPhoneProperty fromRecord:recordRef];
         }
-        if (fieldMask & APContactFieldPhones)
+        if (fieldMask & APContactFieldPhonesWithLabels)
         {
             NSArray *phoneAndLabels = [self arrayPropertyWithLabel:kABPersonPhoneProperty fromRecord:recordRef];
             NSMutableArray *tmp_phonesWithLabels = [[NSMutableArray alloc] init];
