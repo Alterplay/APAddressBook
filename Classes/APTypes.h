@@ -34,7 +34,7 @@ typedef NS_OPTIONS(NSUInteger , APContactField)
                                      APContactFieldPhones,
     APContactFieldAll              = APContactFieldDefault | APContactFieldCompany |
                                      APContactFieldEmails | APContactFieldPhoto |
-                                     APContactFieldThumbnail
+                                     APContactFieldThumbnail | APContactFieldPhonesWithLabels
 };
 
 #endif

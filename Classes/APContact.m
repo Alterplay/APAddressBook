@@ -7,7 +7,7 @@
 //
 
 #import "APContact.h"
-#import "APPhoneLabel.h"
+#import "APPhoneWithLabel.h"
 
 @implementation APContact
 
@@ -37,12 +37,7 @@
         }
         if (fieldMask & APContactFieldPhonesWithLabels)
         {
-            NSArray *phoneAndLabels = [self arrayPropertyWithLabel:kABPersonPhoneProperty fromRecord:recordRef];
-            NSMutableArray *tmp_phonesWithLabels = [[NSMutableArray alloc] init];
-            for(NSArray *row in phoneAndLabels) {
-                [tmp_phonesWithLabels addObject:[[APPhoneLabel alloc] initWithTuple:row]];
-            }
-            _phonesWithLabels = (NSArray *)tmp_phonesWithLabels;
+            _phonesWithLabels = [self arrayOfPhonesWithLabelsFromRecord:recordRef];
         }
         if (fieldMask & APContactFieldEmails)
         {
@@ -68,46 +63,38 @@
     return (__bridge_transfer NSString *)valueRef;
 }
 
-- (NSArray *)arrayProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef {
-    ABMultiValueRef multiValue = ABRecordCopyValue(recordRef, property);
-    NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
+- (NSArray *)arrayProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
+{
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (NSUInteger i = 0; i < count; i++)
+    [self enumerateMultiValueOfProperty:property fromRecord:recordRef
+                              withBlock:^(ABMultiValueRef multiValue, NSUInteger index)
     {
-        CFTypeRef value = ABMultiValueCopyValueAtIndex(multiValue, i);
+        CFTypeRef value = ABMultiValueCopyValueAtIndex(multiValue, index);
         NSString *string = (__bridge_transfer NSString *)value;
         if (string)
         {
             [array addObject:string];
         }
-    }
-    CFRelease(multiValue);
+    }];
     return array.copy;
 }
 
-- (NSArray *)arrayPropertyWithLabel:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef {
-    ABMultiValueRef multiValue = ABRecordCopyValue(recordRef, property);
-    NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
+- (NSArray *)arrayOfPhonesWithLabelsFromRecord:(ABRecordRef)recordRef
+{
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (NSUInteger i = 0; i < count; i++)
+    [self enumerateMultiValueOfProperty:kABPersonPhoneProperty fromRecord:recordRef
+                              withBlock:^(ABMultiValueRef multiValue, NSUInteger index)
     {
-        CFTypeRef value = ABMultiValueCopyValueAtIndex(multiValue, i);
-        NSString *string = (__bridge_transfer NSString *)value;
-        if (string)
+        CFTypeRef rawPhone = ABMultiValueCopyValueAtIndex(multiValue, index);
+        NSString *phone = (__bridge_transfer NSString *)rawPhone;
+        if (phone)
         {
-            NSString *label;
-            CFStringRef rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, i);
-            if( rawLabel != NULL ) {
-                CFStringRef locLabel = ABAddressBookCopyLocalizedLabel(rawLabel);
-                label = (__bridge_transfer NSString *)locLabel;
-                CFRelease(rawLabel);
-            }
-            
-            [array addObject:[[NSArray alloc] initWithObjects:string, label, nil]];
+            NSString *label = [self localizedLabelFromMultiValue:multiValue index:index];
+            APPhoneWithLabel *phoneWithLabel = [[APPhoneWithLabel alloc] initWithPhone:phone
+                                                                                 label:label];
+            [array addObject:phoneWithLabel];
         }
-
-    }
-    CFRelease(multiValue);
+    }];
     return array.copy;
 }
 
@@ -117,6 +104,35 @@
                                  kABPersonImageFormatThumbnail;
     NSData *data = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(recordRef, format);
     return [UIImage imageWithData:data scale:UIScreen.mainScreen.scale];
+}
+
+- (NSString *)localizedLabelFromMultiValue:(ABMultiValueRef)multiValue index:(NSUInteger)index
+{
+    NSString *label;
+    CFTypeRef rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, index);
+    if (rawLabel)
+    {
+        CFStringRef localizedLabel = ABAddressBookCopyLocalizedLabel(rawLabel);
+        if (localizedLabel)
+        {
+            label = (__bridge_transfer NSString *)localizedLabel;
+            CFRelease(localizedLabel);
+        }
+        CFRelease(rawLabel);
+    }
+    return label;
+}
+
+- (void)enumerateMultiValueOfProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
+                            withBlock:(void (^)(ABMultiValueRef multiValue, NSUInteger index))block
+{
+    ABMultiValueRef multiValue = ABRecordCopyValue(recordRef, property);
+    NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
+    for (NSUInteger i = 0; i < count; i++)
+    {
+        block(multiValue, i);
+    }
+    CFRelease(multiValue);
 }
 
 @end

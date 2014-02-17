@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		054F704718A57A46002920B7 /* APPhoneLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F704618A57A46002920B7 /* APPhoneLabel.m */; };
+		054F704718A57A46002920B7 /* APPhoneWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 054F704618A57A46002920B7 /* APPhoneWithLabel.m */; };
 		A495CDF35F214F43AFF3AAF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6084C3D31A504C79BEA08B84 /* libPods.a */; };
 		FA66281C187FE9EF00667C81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA66281B187FE9EF00667C81 /* Foundation.framework */; };
 		FA66281E187FE9EF00667C81 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA66281D187FE9EF00667C81 /* CoreGraphics.framework */; };
@@ -26,8 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		054F704518A57A46002920B7 /* APPhoneLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APPhoneLabel.h; path = ../Classes/APPhoneLabel.h; sourceTree = "<group>"; };
-		054F704618A57A46002920B7 /* APPhoneLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APPhoneLabel.m; path = ../Classes/APPhoneLabel.m; sourceTree = "<group>"; };
+		054F704518A57A46002920B7 /* APPhoneWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APPhoneWithLabel.h; path = ../Classes/APPhoneWithLabel.h; sourceTree = "<group>"; };
+		054F704618A57A46002920B7 /* APPhoneWithLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APPhoneWithLabel.m; path = ../Classes/APPhoneWithLabel.m; sourceTree = "<group>"; };
 		6084C3D31A504C79BEA08B84 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB60104E5CF4C439C2D282C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FA662818187FE9EF00667C81 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,8 +168,8 @@
 				FA66285E187FFB2100667C81 /* APContact.h */,
 				FA66285F187FFB2100667C81 /* APContact.m */,
 				FAD1CCE718819F7000D03475 /* APTypes.h */,
-				054F704518A57A46002920B7 /* APPhoneLabel.h */,
-				054F704618A57A46002920B7 /* APPhoneLabel.m */,
+				054F704518A57A46002920B7 /* APPhoneWithLabel.h */,
+				054F704618A57A46002920B7 /* APPhoneWithLabel.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 			files = (
 				FA66282C187FE9EF00667C81 /* AppDelegate.m in Sources */,
 				FA66285C187FFACD00667C81 /* APAddressBook.m in Sources */,
-				054F704718A57A46002920B7 /* APPhoneLabel.m in Sources */,
+				054F704718A57A46002920B7 /* APPhoneWithLabel.m in Sources */,
 				FA66286618800DC500667C81 /* ContactTableViewCell.m in Sources */,
 				FA662860187FFB2100667C81 /* APContact.m in Sources */,
 				FA662828187FE9EF00667C81 /* main.m in Sources */,

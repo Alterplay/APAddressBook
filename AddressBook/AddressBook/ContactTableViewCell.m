@@ -8,6 +8,7 @@
 
 #import "ContactTableViewCell.h"
 #import "APContact.h"
+#import "APPhoneWithLabel.h"
 
 @interface ContactTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -63,13 +64,21 @@
 
 - (NSString *)contactPhones:(APContact *)contact
 {
-    if (contact.phones.count > 1)
+    if (contact.phonesWithLabels.count > 0)
     {
-        return [contact.phones componentsJoinedByString:@", "];
+        NSMutableString *result = [[NSMutableString alloc] init];
+        for (APPhoneWithLabel *phoneWithLabel in contact.phonesWithLabels)
+        {
+            NSString *string = phoneWithLabel.label.length == 0 ? phoneWithLabel.phone :
+                               [NSString stringWithFormat:@"%@ (%@)", phoneWithLabel.phone,
+                                         phoneWithLabel.label];
+            [result appendFormat:@"%@, ", string];
+        }
+        return result;
     }
     else
     {
-        return contact.phones.firstObject ?: @"(No phones)";
+        return @"(No phones)";
     }
 }
 
