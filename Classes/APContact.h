@@ -17,6 +17,7 @@
 @property (nonatomic, readonly) NSString *lastName;
 @property (nonatomic, readonly) NSString *company;
 @property (nonatomic, readonly) NSArray *phones;
+@property (nonatomic, readonly) NSArray *phonesWithLabels;
 @property (nonatomic, readonly) NSArray *emails;
 @property (nonatomic, readonly) UIImage *photo;
 @property (nonatomic, readonly) UIImage *thumbnail;

@@ -7,6 +7,7 @@
 //
 
 #import "APContact.h"
+#import "APPhoneLabel.h"
 
 @implementation APContact
 
@@ -34,6 +35,15 @@
         {
             _phones = [self arrayProperty:kABPersonPhoneProperty fromRecord:recordRef];
         }
+        if (fieldMask & APContactFieldPhonesWithLabels)
+        {
+            NSArray *phoneAndLabels = [self arrayPropertyWithLabel:kABPersonPhoneProperty fromRecord:recordRef];
+            NSMutableArray *tmp_phonesWithLabels = [[NSMutableArray alloc] init];
+            for(NSArray *row in phoneAndLabels) {
+                [tmp_phonesWithLabels addObject:[[APPhoneLabel alloc] initWithTuple:row]];
+            }
+            _phonesWithLabels = (NSArray *)tmp_phonesWithLabels;
+        }
         if (fieldMask & APContactFieldEmails)
         {
             _emails = [self arrayProperty:kABPersonEmailProperty fromRecord:recordRef];
@@ -58,8 +68,7 @@
     return (__bridge_transfer NSString *)valueRef;
 }
 
-- (NSArray *)arrayProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
-{
+- (NSArray *)arrayProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef {
     ABMultiValueRef multiValue = ABRecordCopyValue(recordRef, property);
     NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
     NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -71,6 +80,32 @@
         {
             [array addObject:string];
         }
+    }
+    CFRelease(multiValue);
+    return array.copy;
+}
+
+- (NSArray *)arrayPropertyWithLabel:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef {
+    ABMultiValueRef multiValue = ABRecordCopyValue(recordRef, property);
+    NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 0; i < count; i++)
+    {
+        CFTypeRef value = ABMultiValueCopyValueAtIndex(multiValue, i);
+        NSString *string = (__bridge_transfer NSString *)value;
+        if (string)
+        {
+            NSString *label;
+            CFStringRef rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, i);
+            if( rawLabel != NULL ) {
+                CFStringRef locLabel = ABAddressBookCopyLocalizedLabel(rawLabel);
+                label = (__bridge_transfer NSString *)locLabel;
+                CFRelease(rawLabel);
+            }
+            
+            [array addObject:[[NSArray alloc] initWithObjects:string, label, nil]];
+        }
+
     }
     CFRelease(multiValue);
     return array.copy;
