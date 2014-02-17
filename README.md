@@ -43,6 +43,7 @@ Available fields:
 * APContactFieldEmails - *contact emails array*
 * APContactFieldPhoto - *contact photo*
 * APContactFieldThumbnail - *contact thumbnail*
+* APContactFieldPhonesWithLabels - *contact phones with labels*
 * APContactFieldDefault - *contact first name, last name and phones array*
 * APContactFieldAll - *all contact fields described above*
 
@@ -91,21 +92,29 @@ switch([APAddressBook access])
 }
 ```
 
+#### History
+
+**Version 0.0.4**
+* Added retrieving phone labels.
+Thanks to [John Hobbs](https://github.com/jmhobbs)
+
+**Version 0.0.3**
+* Added loading contact thumbnail. 
+Thanks to [Carlos Fonseca](https://github.com/carlosefonseca).
+
+**Version 0.0.2**
+* Fixed potential crash on fetching contacts using non-property APAddressBook object. 
+Thanks to [Evgen Bakumenko](https://github.com/evgenbakumenko).
+
+**Version 0.0.1**
+* First release.
+
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/b3f8691205854e15dcfebe3fc2ed599e "githalytics.com")](http://githalytics.com/Alterplay/APAddressBook)
-If you have improvements or concerns, feel free to post [an issue](https://github.com/Alterplay/APAddressBook/issues) and write details.
 
 #### Contacts
+
+If you have improvements or concerns, feel free to post [an issue](https://github.com/Alterplay/APAddressBook/issues) and write details.
 
 [Check out](https://github.com/Alterplay) all Alterplay's GitHub projects.
 [Email us](mailto:hello@alterplay.com?subject=From%20GitHub%20APAddressBook) with other ideas and projects.
 
-#### Versions
-
-**Version 0.0.3**
-* Added loading contact thumbnail. Thanks to [Carlos Fonseca](https://github.com/carlosefonseca).
-
-**Version 0.0.2**
-* Fixed potential crash on fetching contacts using non-property APAddressBook object. Thanks to [Evgen Bakumenko](https://github.com/evgenbakumenko).
-
-**Version 0.0.1**
-* First release.
