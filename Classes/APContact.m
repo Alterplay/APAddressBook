@@ -116,7 +116,6 @@
         if (localizedLabel)
         {
             label = (__bridge_transfer NSString *)localizedLabel;
-            CFRelease(localizedLabel);
         }
         CFRelease(rawLabel);
     }

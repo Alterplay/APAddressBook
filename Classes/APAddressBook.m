@@ -88,6 +88,7 @@
             }
             [contacts sortUsingDescriptors:descriptors];
             array = contacts.copy;
+            CFRelease(peopleArrayRef);
         }
         else if (errorRef)
         {
