@@ -95,20 +95,24 @@ switch([APAddressBook access])
 #### History
 
 **Version 0.0.5**
-* Fixed bad access of phone label parsing
-* Fixed memory leak of peoples array
+* Fixed bad access of phone label parsing.
+* Fixed memory leak of peoples array.
+
 Thanks to [dong-seta](https://github.com/dong-seta) for found bug.
 
 **Version 0.0.4**
 * Added retrieving phone labels.
+
 Thanks to [John Hobbs](https://github.com/jmhobbs) for pull request.
 
 **Version 0.0.3**
-* Added loading contact thumbnail. 
+* Added loading contact thumbnail.
+ 
 Thanks to [Carlos Fonseca](https://github.com/carlosefonseca) for pull request.
 
 **Version 0.0.2**
 * Fixed potential crash on fetching contacts using non-property APAddressBook object. 
+
 Thanks to [Evgen Bakumenko](https://github.com/evgenbakumenko) for pull request.
 
 **Version 0.0.1**
