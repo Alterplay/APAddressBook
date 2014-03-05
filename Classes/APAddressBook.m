@@ -68,7 +68,7 @@
 }
 
 - (void)loadContactsOnQueue:(dispatch_queue_t)queue
-                 completion:(void (^)(NSArray *contacts, NSError *error))completionBlock;
+                 completion:(void (^)(NSArray *contacts, NSError *error))completionBlock
 {
     APContactField fieldMask = self.fieldsMask;
     NSArray *descriptors = self.sortDescriptors;

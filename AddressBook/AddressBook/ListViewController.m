@@ -70,8 +70,7 @@
     {
         return contact.phones.count > 0;
     };
-    [addressBook loadContactsOnQueue:dispatch_get_main_queue()
-                          completion:^(NSArray *contacts, NSError *error)
+    [addressBook loadContacts:^(NSArray *contacts, NSError *error)
     {
         [weakSelf.activity stopAnimating];
         if (!error)
