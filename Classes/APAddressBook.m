@@ -64,6 +64,11 @@
 
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock
 {
+    [self loadContacts:dispatch_get_main_queue() completion:callbackBlock];
+}
+
+- (void)loadContacts:(dispatch_queue_t)completionQueue completion:(void (^)(NSArray *contacts, NSError *error))callbackBlock;
+{
     APContactField fieldMask = self.fieldsMask;
     NSArray *descriptors = self.sortDescriptors;
     APContactFilterBlock filterBlock = self.filterBlock;
@@ -95,7 +100,7 @@
             error = (__bridge NSError *)errorRef;
         }
 
-        dispatch_async(dispatch_get_main_queue(), ^
+        dispatch_async(completionQueue, ^
         {
             if (callbackBlock)
             {
