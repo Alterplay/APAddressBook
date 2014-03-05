@@ -32,7 +32,7 @@ APAddressBook *addressBook = [[APAddressBook alloc] init];
 ```
 
 ### Note
-> Callback block will be run in main thread!
+> Callback block will be run on main queue! If you need to run callback block on custom queue use `loadContactsOnQueue:completion:` method
 
 ###### Select contact fields bit-mask
 Available fields:
@@ -94,6 +94,11 @@ switch([APAddressBook access])
 
 #### History
 
+**Version 0.0.6**
+* Added loading contacts on custom dispatch queue
+
+Thanks to [Marcin Krzyzanowski](https://github.com/krzak) for pull request.
+
 **Version 0.0.5**
 * Fixed bad access of phone label parsing.
 * Fixed memory leak of peoples array.
@@ -117,6 +122,10 @@ Thanks to [Evgen Bakumenko](https://github.com/evgenbakumenko) for pull request.
 
 **Version 0.0.1**
 * First release.
+
+#### Contributor's guide
+Please, send your pull request to the `develop` branch. Thank you!
+
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/b3f8691205854e15dcfebe3fc2ed599e "githalytics.com")](http://githalytics.com/Alterplay/APAddressBook)
 
