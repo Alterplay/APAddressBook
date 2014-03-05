@@ -20,6 +20,7 @@
 + (APAddressBookAccess)access;
 
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock;
-- (void)loadContacts:(dispatch_queue_t)completionQueue completion:(void (^)(NSArray *contacts, NSError *error))callbackBlock;
+- (void)loadContactsOnQueue:(dispatch_queue_t)queue
+                 completion:(void (^)(NSArray *contacts, NSError *error))completionBlock;
 
 @end
