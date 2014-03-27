@@ -51,6 +51,10 @@
         {
             _thumbnail = [self imagePropertyFullSize:NO fromRecord:recordRef];
         }
+        if (fieldMask & APContactFieldAddresses)
+        {
+            _addresses = [self arrayProperty:kABPersonAddressProperty fromRecord:recordRef];
+        }
     }
     return self;
 }
