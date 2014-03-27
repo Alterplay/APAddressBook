@@ -31,11 +31,12 @@ typedef NS_OPTIONS(NSUInteger , APContactField)
     APContactFieldThumbnail        = 1 << 6,
     APContactFieldPhonesWithLabels = 1 << 7,
     APContactFieldAddresses = 1 << 8,
+    APContactFieldRecordID = 1 << 9,
     APContactFieldDefault          = APContactFieldFirstName | APContactFieldLastName |
                                      APContactFieldPhones,
     APContactFieldAll              = APContactFieldDefault | APContactFieldCompany |
                                      APContactFieldEmails | APContactFieldPhoto |
-                                     APContactFieldThumbnail | APContactFieldPhonesWithLabels | APContactFieldAddresses
+                                     APContactFieldThumbnail | APContactFieldPhonesWithLabels | APContactFieldAddresses | APContactFieldRecordID
 };
 
 #endif

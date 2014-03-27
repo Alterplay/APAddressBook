@@ -22,6 +22,7 @@
 @property (nonatomic, readonly) NSArray *addresses;
 @property (nonatomic, readonly) UIImage *photo;
 @property (nonatomic, readonly) UIImage *thumbnail;
+@property (nonatomic, readonly) NSNumber *recordID;
 
 - (id)initWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 
