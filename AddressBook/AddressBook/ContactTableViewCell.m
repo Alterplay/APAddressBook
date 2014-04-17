@@ -48,7 +48,11 @@
 
 - (NSString *)contactName:(APContact *)contact
 {
-    if (contact.firstName && contact.lastName)
+    if (contact.compositeName)
+    {
+        return contact.compositeName;
+    }
+    else if (contact.firstName && contact.lastName)
     {
         return [NSString stringWithFormat:@"%@ %@", contact.firstName, contact.lastName];
     }

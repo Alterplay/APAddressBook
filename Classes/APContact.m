@@ -27,6 +27,10 @@
         {
             _lastName = [self stringProperty:kABPersonLastNameProperty fromRecord:recordRef];
         }
+        if (fieldMask & APContactFieldCompositeName)
+        {
+            _compositeName = [self compositeNameFromRecord:recordRef];
+        }
         if (fieldMask & APContactFieldCompany)
         {
             _company = [self stringProperty:kABPersonOrganizationProperty fromRecord:recordRef];
@@ -132,6 +136,17 @@
         block(multiValue, i);
     }
     CFRelease(multiValue);
+}
+
+/**
+ * Retrieves "the concatenated value of these properties: Prefix, Suffix, Organization, First name, and Last name."
+ *
+ * @param recordRef The ABRecordRef for the person (or group)
+ */
+- (NSString *)compositeNameFromRecord:(ABRecordRef)recordRef
+{
+    CFStringRef compositeNameRef = ABRecordCopyCompositeName(recordRef);
+    return (__bridge_transfer NSString *)compositeNameRef;
 }
 
 @end
