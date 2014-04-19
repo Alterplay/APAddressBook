@@ -15,6 +15,7 @@
 @property (nonatomic, readonly) APContactField fieldMask;
 @property (nonatomic, readonly) NSString *firstName;
 @property (nonatomic, readonly) NSString *lastName;
+@property (nonatomic, readonly) NSString *compositeName;
 @property (nonatomic, readonly) NSString *company;
 @property (nonatomic, readonly) NSArray *phones;
 @property (nonatomic, readonly) NSArray *phonesWithLabels;
