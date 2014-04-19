@@ -100,9 +100,12 @@ switch([APAddressBook access])
 
 **Version 0.0.7**
 * Added contact's concatenated name
+
 Thanks to [Peter Robinett](https://github.com/pr1001) for pull request.
+
 * Added contact's addresses
 * Added contact's ID in iOS AddressBook
+
 Thanks to [Cory Alder](https://github.com/coryalder) for pull request.
 
 **Version 0.0.6**
