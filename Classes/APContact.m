@@ -8,6 +8,7 @@
 
 #import "APContact.h"
 #import "APPhoneWithLabel.h"
+#import "APAddress.h"
 
 @implementation APContact
 
@@ -54,6 +55,21 @@
         if (fieldMask & APContactFieldThumbnail)
         {
             _thumbnail = [self imagePropertyFullSize:NO fromRecord:recordRef];
+        }
+        if (fieldMask & APContactFieldAddresses)
+        {
+            NSMutableArray *addresses = [[NSMutableArray alloc] init];
+            NSArray *array = [self arrayProperty:kABPersonAddressProperty fromRecord:recordRef];
+            for (NSDictionary *dictionary in array)
+            {
+                APAddress *address = [[APAddress alloc] initWithAddressDictionary:dictionary];
+                [addresses addObject:address];
+            }
+            _addresses = addresses.copy;
+        }
+        if (fieldMask & APContactFieldRecordID)
+        {
+            _recordID = [NSNumber numberWithInteger:ABRecordGetRecordID(recordRef)];
         }
     }
     return self;

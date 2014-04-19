@@ -23,6 +23,7 @@
 		FA662862187FFCA700667C81 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA662861187FFCA700667C81 /* AddressBook.framework */; };
 		FA66286618800DC500667C81 /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA66286518800DC500667C81 /* ContactTableViewCell.m */; };
 		FAD1CCE91881A18900D03475 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD1CCE81881A18900D03475 /* ContactTableViewCell.xib */; };
+		FAF5980C190286CC002E2865 /* APAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF5980B190286CC002E2865 /* APAddress.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		FA66286518800DC500667C81 /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		FAD1CCE718819F7000D03475 /* APTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = APTypes.h; path = ../Classes/APTypes.h; sourceTree = "<group>"; };
 		FAD1CCE81881A18900D03475 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
+		FAF5980A190286CC002E2865 /* APAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APAddress.h; path = ../Classes/APAddress.h; sourceTree = "<group>"; };
+		FAF5980B190286CC002E2865 /* APAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APAddress.m; path = ../Classes/APAddress.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +170,8 @@
 				FA66285B187FFACD00667C81 /* APAddressBook.m */,
 				FA66285E187FFB2100667C81 /* APContact.h */,
 				FA66285F187FFB2100667C81 /* APContact.m */,
+				FAF5980A190286CC002E2865 /* APAddress.h */,
+				FAF5980B190286CC002E2865 /* APAddress.m */,
 				FAD1CCE718819F7000D03475 /* APTypes.h */,
 				054F704518A57A46002920B7 /* APPhoneWithLabel.h */,
 				054F704618A57A46002920B7 /* APPhoneWithLabel.m */,
@@ -297,6 +302,7 @@
 				054F704718A57A46002920B7 /* APPhoneWithLabel.m in Sources */,
 				FA66286618800DC500667C81 /* ContactTableViewCell.m in Sources */,
 				FA662860187FFB2100667C81 /* APContact.m in Sources */,
+				FAF5980C190286CC002E2865 /* APAddress.m in Sources */,
 				FA662828187FE9EF00667C81 /* main.m in Sources */,
 				FA662854187FEC7F00667C81 /* ListViewController.m in Sources */,
 			);
