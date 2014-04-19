@@ -126,6 +126,12 @@
     return label;
 }
 
+- (NSString *)compositeNameFromRecord:(ABRecordRef)recordRef
+{
+    CFStringRef compositeNameRef = ABRecordCopyCompositeName(recordRef);
+    return (__bridge_transfer NSString *)compositeNameRef;
+}
+
 - (void)enumerateMultiValueOfProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
                             withBlock:(void (^)(ABMultiValueRef multiValue, NSUInteger index))block
 {
@@ -136,17 +142,6 @@
         block(multiValue, i);
     }
     CFRelease(multiValue);
-}
-
-/**
- * Retrieves "the concatenated value of these properties: Prefix, Suffix, Organization, First name, and Last name."
- *
- * @param recordRef The ABRecordRef for the person (or group)
- */
-- (NSString *)compositeNameFromRecord:(ABRecordRef)recordRef
-{
-    CFStringRef compositeNameRef = ABRecordCopyCompositeName(recordRef);
-    return (__bridge_transfer NSString *)compositeNameRef;
 }
 
 @end
