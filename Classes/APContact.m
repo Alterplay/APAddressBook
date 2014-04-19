@@ -51,6 +51,14 @@
         {
             _thumbnail = [self imagePropertyFullSize:NO fromRecord:recordRef];
         }
+        if (fieldMask & APContactFieldAddresses)
+        {
+            _addresses = [self arrayProperty:kABPersonAddressProperty fromRecord:recordRef];
+        }
+        if (fieldMask & APContactFieldRecordID)
+        {
+            _recordID = [NSNumber numberWithInteger:ABRecordGetRecordID(recordRef)];
+        }
     }
     return self;
 }
