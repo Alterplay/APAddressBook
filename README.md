@@ -44,8 +44,12 @@ Available fields:
 * APContactFieldPhoto - *contact photo*
 * APContactFieldThumbnail - *contact thumbnail*
 * APContactFieldPhonesWithLabels - *contact phones with labels*
+* APContactFieldCompositeName - *the concatenated value of prefix, suffix, organization, first name, and last name*
+* APContactFieldAddresses - *array of user addresses*
+* APContactFieldRecordID - *ID of record in iOS address book*
 * APContactFieldDefault - *contact first name, last name and phones array*
 * APContactFieldAll - *all contact fields described above*
+
 
 ### Note
 > You should use `APContactFieldPhoto` very carefully, because it takes a lot of memory and may crash the application. Using `APContactFieldThumbnail` is much safer.
@@ -93,6 +97,13 @@ switch([APAddressBook access])
 ```
 
 #### History
+
+**Version 0.0.7**
+* Added contact's concatenated name
+Thanks to [Peter Robinett](https://github.com/pr1001) for pull request.
+* Added contact's addresses
+* Added contact's ID in iOS AddressBook
+Thanks to [Cory Alder](https://github.com/coryalder) for pull request.
 
 **Version 0.0.6**
 * Added loading contacts on custom dispatch queue
