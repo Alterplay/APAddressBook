@@ -10,10 +10,11 @@ APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.co
 
 #### Installation
 Add `APAddressBook` pod to Podfile
-```objective-c
+```ruby
 platform :ios, '7.0'
-pod 'APAddressBook', '~> 0.0.7'
+pod "APAddressBook", "~> 0.0.7"
 ```
+
 #### Using
 
 ###### Load contacts
