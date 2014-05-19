@@ -24,6 +24,8 @@
 @property (nonatomic, readonly) UIImage *photo;
 @property (nonatomic, readonly) UIImage *thumbnail;
 @property (nonatomic, readonly) NSNumber *recordID;
+@property (nonatomic, readonly) NSDate *creationDate;
+@property (nonatomic, readonly) NSDate *modificationDate;
 
 - (id)initWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 
