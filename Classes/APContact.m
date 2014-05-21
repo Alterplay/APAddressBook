@@ -71,10 +71,12 @@
         {
             _recordID = [NSNumber numberWithInteger:ABRecordGetRecordID(recordRef)];
         }
-        if (fieldMask & APContactFieldCreationDate) {
+        if (fieldMask & APContactFieldCreationDate)
+        {
             _creationDate = [self dateProperty:kABPersonCreationDateProperty fromRecord:recordRef];
         }
-        if (fieldMask & APContactFieldModificationDate) {
+        if (fieldMask & APContactFieldModificationDate)
+        {
             _modificationDate = [self dateProperty:kABPersonModificationDateProperty fromRecord:recordRef];
         }
     }
