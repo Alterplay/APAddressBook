@@ -10,6 +10,10 @@ APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.co
 
 #### Installation
 Add `APAddressBook` pod to Podfile
+```ruby
+platform :ios, '7.0'
+pod "APAddressBook", "~> 0.0.7"
+```
 
 #### Using
 
@@ -38,11 +42,13 @@ APAddressBook *addressBook = [[APAddressBook alloc] init];
 Available fields:
 * APContactFieldFirstName - *contact first name*
 * APContactFieldLastName - *contact last name*
-* APContactFieldCompany - *contact company (organisation)*
+* APContactFieldCompany - *contact company (organization)*
 * APContactFieldPhones - *contact phones array*
 * APContactFieldEmails - *contact emails array*
 * APContactFieldPhoto - *contact photo*
 * APContactFieldThumbnail - *contact thumbnail*
+* APContactFieldCreationDate - *contact creation date*
+* APContactFieldModificationDate - *contact modification date*
 * APContactFieldPhonesWithLabels - *contact phones with labels*
 * APContactFieldCompositeName - *the concatenated value of prefix, suffix, organization, first name, and last name*
 * APContactFieldAddresses - *array of user addresses*

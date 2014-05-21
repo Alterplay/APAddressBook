@@ -71,6 +71,12 @@
         {
             _recordID = [NSNumber numberWithInteger:ABRecordGetRecordID(recordRef)];
         }
+        if (fieldMask & APContactFieldCreationDate) {
+            _creationDate = [self dateProperty:kABPersonCreationDateProperty fromRecord:recordRef];
+        }
+        if (fieldMask & APContactFieldModificationDate) {
+            _modificationDate = [self dateProperty:kABPersonModificationDateProperty fromRecord:recordRef];
+        }
     }
     return self;
 }
@@ -97,6 +103,13 @@
         }
     }];
     return array.copy;
+}
+
+
+- (NSDate *)dateProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
+{
+    CFDateRef dateRef = (ABRecordCopyValue(recordRef, property));
+    return (__bridge_transfer NSDate *)dateRef;
 }
 
 - (NSArray *)arrayOfPhonesWithLabelsFromRecord:(ABRecordRef)recordRef
