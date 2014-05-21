@@ -104,6 +104,12 @@ switch([APAddressBook access])
 
 #### History
 
+**Version 0.0.8**
+* Added contact record creation date
+* Added contact recorf modification date
+
+Thanks to [Natasha Murashev](https://github.com/NatashaTheRobot) for pull request.
+
 **Version 0.0.7**
 * Added contact's concatenated name
 
