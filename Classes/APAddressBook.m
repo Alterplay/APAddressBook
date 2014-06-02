@@ -73,42 +73,44 @@
     APContactField fieldMask = self.fieldsMask;
     NSArray *descriptors = self.sortDescriptors;
     APContactFilterBlock filterBlock = self.filterBlock;
-    ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef errorRef)
-    {
-        NSArray *array = nil;
-        NSError *error = nil;
-        if (granted)
-        {
-            CFArrayRef peopleArrayRef = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
-            NSUInteger contactCount = (NSUInteger)CFArrayGetCount(peopleArrayRef);
-            NSMutableArray *contacts = [[NSMutableArray alloc] init];
-            for (NSUInteger i = 0; i < contactCount; i++)
-            {
-                ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
-                APContact *contact = [[APContact alloc] initWithRecordRef:recordRef
-                                                                fieldMask:fieldMask];
-                if (!filterBlock || filterBlock(contact))
-                {
-                    [contacts addObject:contact];
-                }
-            }
-            [contacts sortUsingDescriptors:descriptors];
-            array = contacts.copy;
-            CFRelease(peopleArrayRef);
-        }
-        else if (errorRef)
-        {
-            error = (__bridge NSError *)errorRef;
-        }
 
-        dispatch_async(queue, ^
-        {
-            if (completionBlock)
-            {
-                completionBlock(array, error);
-            }
-        });
-    });
+	ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef errorRef)
+	{
+        /* Since we're referencing the address book we requested access for in
+         * the completion handler we need to dispatch back to the main thread 
+         * where we requested the access. The handler is called on an arbitrary
+         * queue. */
+	    dispatch_async(dispatch_get_main_queue(), ^{
+	        NSArray *array = nil;
+	        NSError *error = nil;
+	        if (granted) {
+	            CFArrayRef peopleArrayRef = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
+	            NSUInteger contactCount = (NSUInteger)CFArrayGetCount(peopleArrayRef);
+	            NSMutableArray *contacts = [[NSMutableArray alloc] init];
+	            for (NSUInteger i = 0; i < contactCount; i++) {
+	                ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
+	                APContact *contact = [[APContact alloc] initWithRecordRef:recordRef
+	                                                                fieldMask:fieldMask];
+	                if (!filterBlock || filterBlock(contact)) {
+	                    [contacts addObject:contact];
+					}
+				}
+	            [contacts sortUsingDescriptors:descriptors];
+	            array = contacts.copy;
+	            CFRelease(peopleArrayRef);
+			}
+	        else if (errorRef) {
+	            error = (__bridge NSError *)errorRef;
+			}
+
+	        dispatch_async(queue, ^
+	        {
+	            if (completionBlock) {
+	                completionBlock(array, error);
+				}
+			});
+		});
+	});
 }
 
 @end
