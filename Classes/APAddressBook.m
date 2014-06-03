@@ -115,7 +115,7 @@
 
 #pragma mark - External Change
 
-void APAddressBookExternalChangeCallback(ABAddressBookRef ntificationaddressbook,
+void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef,
                                          CFDictionaryRef info,
                                          void *context)
 {
