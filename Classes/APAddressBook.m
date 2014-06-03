@@ -30,6 +30,7 @@
             NSLog(@"%@", (__bridge_transfer NSString *)CFErrorCopyFailureReason(*error));
             return nil;
         }
+                
         self.fieldsMask = APContactFieldDefault;
     }
     return self;
@@ -41,6 +42,7 @@
     {
         CFRelease(_addressBook);
     }
+    self.addressBookExteranChangeCallback = nil;
 }
 
 #pragma mark - public
@@ -109,6 +111,42 @@
             }
         });
     });
+}
+
+#pragma mark - External Change
+
+void APAddressBookExternalChangeCallback(ABAddressBookRef ntificationaddressbook,
+                                         CFDictionaryRef info,
+                                         void *context)
+{
+    //Notify about AB changed
+    APAddressBook *addressBook = (__bridge APAddressBook *)(context);
+    if (addressBook.addressBookExteranChangeCallback != nil)
+    {
+        NSDictionary *changes = (__bridge NSDictionary *)info;
+        addressBook.addressBookExteranChangeCallback(changes);
+    }
+}
+
+- (void)setAddressBookExteranChangeCallback:(void (^)(NSDictionary *changes))addressBookExteranChangeCallback
+{
+    //Should register callback
+    if (_addressBookExteranChangeCallback == nil && addressBookExteranChangeCallback != nil)
+    {
+        ABAddressBookRegisterExternalChangeCallback(self.addressBook,
+                                                    APAddressBookExternalChangeCallback,
+                                                    (__bridge void *)(self));
+        
+    //Should unregister
+    } else if (addressBookExteranChangeCallback == nil)
+    {
+        ABAddressBookUnregisterExternalChangeCallback(self.addressBook,
+                                                      APAddressBookExternalChangeCallback,
+                                                      (__bridge void *)(self));
+    }
+ 
+    //Just change callback
+    _addressBookExteranChangeCallback = addressBookExteranChangeCallback;
 }
 
 @end
