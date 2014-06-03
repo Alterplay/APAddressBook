@@ -42,7 +42,7 @@
     {
         CFRelease(_addressBook);
     }
-    self.addressBookExteranChangeCallback = nil;
+    self.addressBookExternalChangeCallback = nil;
 }
 
 #pragma mark - public
@@ -121,32 +121,33 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef ntificationaddressbook
 {
     //Notify about AB changed
     APAddressBook *addressBook = (__bridge APAddressBook *)(context);
-    if (addressBook.addressBookExteranChangeCallback != nil)
+    if (addressBook.addressBookExternalChangeCallback != nil)
     {
         NSDictionary *changes = (__bridge NSDictionary *)info;
-        addressBook.addressBookExteranChangeCallback(changes);
+        addressBook.addressBookExternalChangeCallback(changes);
     }
 }
 
-- (void)setAddressBookExteranChangeCallback:(void (^)(NSDictionary *changes))addressBookExteranChangeCallback
+- (void)setAddressBookExternalChangeCallback:(void (^)(NSDictionary *changes))addressBookExternalChangeCallback
 {
     //Should register callback
-    if (_addressBookExteranChangeCallback == nil && addressBookExteranChangeCallback != nil)
+    if (_addressBookExternalChangeCallback == nil && addressBookExternalChangeCallback != nil)
     {
         ABAddressBookRegisterExternalChangeCallback(self.addressBook,
                                                     APAddressBookExternalChangeCallback,
                                                     (__bridge void *)(self));
         
-    //Should unregister
-    } else if (addressBookExteranChangeCallback == nil)
+        //Should unregister
+    } else if (addressBookExternalChangeCallback == nil)
     {
         ABAddressBookUnregisterExternalChangeCallback(self.addressBook,
                                                       APAddressBookExternalChangeCallback,
                                                       (__bridge void *)(self));
     }
- 
+    
     //Just change callback
-    _addressBookExteranChangeCallback = addressBookExteranChangeCallback;
+    _addressBookExternalChangeCallback = addressBookExternalChangeCallback;
 }
+
 
 @end

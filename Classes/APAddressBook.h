@@ -20,7 +20,7 @@
 // Doc says:
 // The info argument may eventually contain information describing the change. Currently
 // it will always be NULL.
-@property (nonatomic, copy) void (^addressBookExteranChangeCallback)(NSDictionary *changes);
+@property (nonatomic, copy) void (^addressBookExternalChangeCallback)(NSDictionary *changes);
 
 + (APAddressBookAccess)access;
 
