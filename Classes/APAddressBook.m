@@ -12,6 +12,7 @@
 
 @interface APAddressBook ()
 @property (nonatomic, readonly) ABAddressBookRef addressBook;
+@property (nonatomic, readonly) dispatch_queue_t localQueue;
 @end
 
 @implementation APAddressBook
@@ -30,7 +31,9 @@
             NSLog(@"%@", (__bridge_transfer NSString *)CFErrorCopyFailureReason(*error));
             return nil;
         }
-                
+        NSString *name = [NSString stringWithFormat:@"com.alterplay.addressbook.%ld",
+                                   (long)self.hash];
+        _localQueue = dispatch_queue_create([name cStringUsingEncoding:NSUTF8StringEncoding], NULL);
         self.fieldsMask = APContactFieldDefault;
     }
     return self;
@@ -38,11 +41,14 @@
 
 - (void)dealloc
 {
+    self.addressBookExternalChangeCallback = nil;
     if (_addressBook)
     {
         CFRelease(_addressBook);
     }
-    self.addressBookExternalChangeCallback = nil;
+#if !OS_OBJECT_USE_OBJC
+    dispatch_release(_localQueue);
+#endif
 }
 
 #pragma mark - public
@@ -78,39 +84,41 @@
 
 	ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef errorRef)
 	{
-        /* Since we're referencing the address book we requested access for in
-         * the completion handler we need to dispatch back to the main thread 
-         * where we requested the access. The handler is called on an arbitrary
-         * queue. */
-	    dispatch_async(dispatch_get_main_queue(), ^{
+	    dispatch_async(self.localQueue, ^
+        {
 	        NSArray *array = nil;
 	        NSError *error = nil;
-	        if (granted) {
-	            CFArrayRef peopleArrayRef = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
-	            NSUInteger contactCount = (NSUInteger)CFArrayGetCount(peopleArrayRef);
-	            NSMutableArray *contacts = [[NSMutableArray alloc] init];
-	            for (NSUInteger i = 0; i < contactCount; i++) {
-	                ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
-	                APContact *contact = [[APContact alloc] initWithRecordRef:recordRef
-	                                                                fieldMask:fieldMask];
-	                if (!filterBlock || filterBlock(contact)) {
-	                    [contacts addObject:contact];
-					}
-				}
-	            [contacts sortUsingDescriptors:descriptors];
-	            array = contacts.copy;
-	            CFRelease(peopleArrayRef);
-			}
-	        else if (errorRef) {
-	            error = (__bridge NSError *)errorRef;
-			}
+            if (granted)
+            {
+                CFArrayRef peopleArrayRef = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
+                NSUInteger contactCount = (NSUInteger)CFArrayGetCount(peopleArrayRef);
+                NSMutableArray *contacts = [[NSMutableArray alloc] init];
+                for (NSUInteger i = 0; i < contactCount; i++)
+                {
+                    ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
+                    APContact
+                    *contact = [[APContact alloc] initWithRecordRef:recordRef fieldMask:fieldMask];
+                    if (!filterBlock || filterBlock(contact))
+                    {
+                        [contacts addObject:contact];
+                    }
+                }
+                [contacts sortUsingDescriptors:descriptors];
+                array = contacts.copy;
+                CFRelease(peopleArrayRef);
+            }
+            else if (errorRef)
+            {
+                error = (__bridge NSError *)errorRef;
+            }
 
-	        dispatch_async(queue, ^
-	        {
-	            if (completionBlock) {
-	                completionBlock(array, error);
-				}
-			});
+            dispatch_async(queue, ^
+            {
+                if (completionBlock)
+                {
+                    completionBlock(array, error);
+                }
+            });
 		});
 	});
 }
@@ -140,7 +148,8 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef,
                                                     (__bridge void *)(self));
         
         //Should unregister
-    } else if (addressBookExternalChangeCallback == nil)
+    }
+    else if (addressBookExternalChangeCallback == nil)
     {
         ABAddressBookUnregisterExternalChangeCallback(self.addressBook,
                                                       APAddressBookExternalChangeCallback,
