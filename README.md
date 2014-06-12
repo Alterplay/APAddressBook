@@ -104,6 +104,16 @@ switch([APAddressBook access])
 
 #### History
 
+**Version 0.0.10**
+* Fixed intermittent crashing in requestAccessWithCompletion handler
+
+Thanks to [Daniel Ericsson](https://github.com/monowerker) for pull request.
+
+**Version 0.0.9**
+* Added observing of address book external changes
+
+Made by [Serg Krivoblotsky](https://github.com/Krivoblotsky)
+
 **Version 0.0.8**
 * Added contact record creation date
 * Added contact recorf modification date
