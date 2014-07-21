@@ -101,7 +101,7 @@ switch([APAddressBook access])
 }
 ```
 
-###### Observe external address book
+###### Observe address book external changes
 ```objective-c
 // start observing
 [addressBook startObserveChangesWithCallback:^
