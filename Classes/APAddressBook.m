@@ -10,9 +10,13 @@
 #import "APAddressBook.h"
 #import "APContact.h"
 
+void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDictionaryRef info,
+                                         void *context);
+
 @interface APAddressBook ()
 @property (nonatomic, readonly) ABAddressBookRef addressBook;
 @property (nonatomic, readonly) dispatch_queue_t localQueue;
+@property (nonatomic, copy) void (^changeCallback)();
 @end
 
 @implementation APAddressBook
@@ -41,7 +45,7 @@
 
 - (void)dealloc
 {
-    self.addressBookExternalChangeCallback = nil;
+    [self stopObserveChanges];
     if (_addressBook)
     {
         CFRelease(_addressBook);
@@ -123,42 +127,39 @@
 	});
 }
 
-#pragma mark - External Change
-
-void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef,
-                                         CFDictionaryRef info,
-                                         void *context)
+- (void)startObserveChangesWithCallback:(void (^)())callback
 {
-    //Notify about AB changed
-    APAddressBook *addressBook = (__bridge APAddressBook *)(context);
-    if (addressBook.addressBookExternalChangeCallback != nil)
+    if (callback)
     {
-        NSDictionary *changes = (__bridge NSDictionary *)info;
-        addressBook.addressBookExternalChangeCallback(changes);
+        if (!self.changeCallback)
+        {
+            ABAddressBookRegisterExternalChangeCallback(self.addressBook,
+                                                        APAddressBookExternalChangeCallback,
+                                                        (__bridge void *)(self));
+        }
+        self.changeCallback = callback;
     }
 }
 
-- (void)setAddressBookExternalChangeCallback:(void (^)(NSDictionary *changes))addressBookExternalChangeCallback
+- (void)stopObserveChanges
 {
-    //Should register callback
-    if (_addressBookExternalChangeCallback == nil && addressBookExternalChangeCallback != nil)
+    if (self.changeCallback)
     {
-        ABAddressBookRegisterExternalChangeCallback(self.addressBook,
-                                                    APAddressBookExternalChangeCallback,
-                                                    (__bridge void *)(self));
-        
-        //Should unregister
-    }
-    else if (addressBookExternalChangeCallback == nil)
-    {
+        self.changeCallback = nil;
         ABAddressBookUnregisterExternalChangeCallback(self.addressBook,
                                                       APAddressBookExternalChangeCallback,
                                                       (__bridge void *)(self));
     }
-    
-    //Just change callback
-    _addressBookExternalChangeCallback = addressBookExternalChangeCallback;
 }
 
+#pragma mark - external change callback
+
+void APAddressBookExternalChangeCallback(ABAddressBookRef __unused addressBookRef,
+                                         CFDictionaryRef __unused info,
+                                         void *context)
+{
+    APAddressBook *addressBook = (__bridge APAddressBook *)(context);
+    addressBook.changeCallback ? addressBook.changeCallback() : nil;
+}
 
 @end

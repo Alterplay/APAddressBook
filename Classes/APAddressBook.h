@@ -17,15 +17,13 @@
 @property (nonatomic, copy) APContactFilterBlock filterBlock;
 @property (nonatomic, strong) NSArray *sortDescriptors;
 
-// Doc says:
-// The info argument may eventually contain information describing the change. Currently
-// it will always be NULL.
-@property (nonatomic, copy) void (^addressBookExternalChangeCallback)(NSDictionary *changes);
-
 + (APAddressBookAccess)access;
 
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock;
 - (void)loadContactsOnQueue:(dispatch_queue_t)queue
                  completion:(void (^)(NSArray *contacts, NSError *error))completionBlock;
+
+- (void)startObserveChangesWithCallback:(void (^)())callback;
+- (void)stopObserveChanges;
 
 @end
