@@ -9,10 +9,9 @@ APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.co
 * Sort contacts with array of any [NSSortDescriptor](https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/classes/NSSortDescriptor_Class/Reference/Reference.html)
 
 #### Installation
-Add `APAddressBook` pod to Podfile
+Add `APAddressBook` pod to [Podfile](http://guides.cocoapods.org/syntax/podfile.html)
 ```ruby
-platform :ios, '7.0'
-pod "APAddressBook", "~> 0.0.7"
+pod "APAddressBook"
 ```
 
 #### Using
