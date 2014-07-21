@@ -104,6 +104,9 @@ switch([APAddressBook access])
 
 #### History
 
+**Version 0.1.0**
+* Refactored address book external changes observing
+
 **Version 0.0.10**
 * Fixed intermittent crashing in requestAccessWithCompletion handler
 
@@ -116,7 +119,7 @@ Made by [Serg Krivoblotsky](https://github.com/Krivoblotsky)
 
 **Version 0.0.8**
 * Added contact record creation date
-* Added contact recorf modification date
+* Added contact record modification date
 
 Thanks to [Natasha Murashev](https://github.com/NatashaTheRobot) for pull request.
 
@@ -148,11 +151,11 @@ Thanks to [John Hobbs](https://github.com/jmhobbs) for pull request.
 
 **Version 0.0.3**
 * Added loading contact thumbnail.
- 
+
 Thanks to [Carlos Fonseca](https://github.com/carlosefonseca) for pull request.
 
 **Version 0.0.2**
-* Fixed potential crash on fetching contacts using non-property APAddressBook object. 
+* Fixed potential crash on fetching contacts using non-property APAddressBook object.
 
 Thanks to [Evgen Bakumenko](https://github.com/evgenbakumenko) for pull request.
 
@@ -171,4 +174,3 @@ If you have improvements or concerns, feel free to post [an issue](https://githu
 
 [Check out](https://github.com/Alterplay) all Alterplay's GitHub projects.
 [Email us](mailto:hello@alterplay.com?subject=From%20GitHub%20APAddressBook) with other ideas and projects.
-
