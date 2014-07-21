@@ -11,7 +11,7 @@ APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.co
 #### Installation
 Add `APAddressBook` pod to [Podfile](http://guides.cocoapods.org/syntax/podfile.html)
 ```ruby
-pod "APAddressBook"
+pod 'APAddressBook'
 ```
 
 #### Using
