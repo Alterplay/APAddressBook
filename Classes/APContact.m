@@ -24,6 +24,10 @@
         {
             _firstName = [self stringProperty:kABPersonFirstNameProperty fromRecord:recordRef];
         }
+        if (fieldMask & APContactFieldMiddleName)
+        {
+            _middleName = [self stringProperty:kABPersonMiddleNameProperty fromRecord:recordRef];
+        }
         if (fieldMask & APContactFieldLastName)
         {
             _lastName = [self stringProperty:kABPersonLastNameProperty fromRecord:recordRef];

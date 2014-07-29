@@ -40,6 +40,7 @@ APAddressBook *addressBook = [[APAddressBook alloc] init];
 ###### Select contact fields bit-mask
 Available fields:
 * APContactFieldFirstName - *contact first name*
+* APContactFieldMiddleName - *contact middle name*
 * APContactFieldLastName - *contact last name*
 * APContactFieldCompany - *contact company (organization)*
 * APContactFieldPhones - *contact phones array*
