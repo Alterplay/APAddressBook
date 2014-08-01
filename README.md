@@ -10,6 +10,7 @@ APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.co
 
 #### Objective-c
 **Installation**
+
 Add `APAddressBook` pod to [Podfile](http://guides.cocoapods.org/syntax/podfile.html)
 ```ruby
 pod "APAddressBook"
@@ -36,6 +37,7 @@ APAddressBook *addressBook = [[APAddressBook alloc] init];
 > Callback block will be run on main queue! If you need to run callback block on custom queue use `loadContactsOnQueue:completion:` method
 
 **Select contact fields bit-mask**
+
 Available fields:
 * APContactFieldFirstName - *contact first name*
 * APContactFieldMiddleName - *contact middle name*
@@ -122,6 +124,7 @@ Import `APAddressBook-Bridging.h` to application's objective-c bridging file.
 ```
 
 **Example**
+
 See exmaple application in `Example/Swift` directory.
 ```Swift
 self.addressBook.loadContacts(
