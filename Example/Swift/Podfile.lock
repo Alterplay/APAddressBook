@@ -1,0 +1,24 @@
+PODS:
+  - DTModelStorage (0.8.0):
+    - DTModelStorage/All
+  - DTModelStorage/All (0.8.0):
+    - DTModelStorage/CoreDataStorage
+    - DTModelStorage/MemoryStorage
+    - DTModelStorage/ModelTransfer
+  - DTModelStorage/Core (0.8.0)
+  - DTModelStorage/CoreDataStorage (0.8.0):
+    - DTModelStorage/Core
+  - DTModelStorage/MemoryStorage (0.8.0):
+    - DTModelStorage/Core
+  - DTModelStorage/ModelTransfer (0.8.0)
+  - DTTableViewManager (2.5.1):
+    - DTModelStorage (= 0.8.0)
+
+DEPENDENCIES:
+  - DTTableViewManager
+
+SPEC CHECKSUMS:
+  DTModelStorage: 84b63252b63132c14238283d5de67aebe464694c
+  DTTableViewManager: e9963bc8d709614ebd4bef8c59f87a891e3ccb62
+
+COCOAPODS: 0.33.1
