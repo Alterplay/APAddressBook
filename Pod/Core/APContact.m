@@ -94,7 +94,7 @@
                 [profiles addObject:profile];
             }
             
-            _socialNetworks = profiles;
+            _socialProfiles = profiles;
         }
     }
     return self;
