@@ -9,6 +9,7 @@
 #import "APContact.h"
 #import "APPhoneWithLabel.h"
 #import "APAddress.h"
+#import "APSocialProfile.h"
 
 @implementation APContact
 
@@ -82,6 +83,18 @@
         if (fieldMask & APContactFieldModificationDate)
         {
             _modificationDate = [self dateProperty:kABPersonModificationDateProperty fromRecord:recordRef];
+        }
+        if (fieldMask & APContactFieldSocialProfiles)
+        {
+            NSMutableArray *profiles = [[NSMutableArray alloc] init];
+            NSArray *array = [self arrayProperty:kABPersonSocialProfileProperty fromRecord:recordRef];
+            for (NSDictionary *dictionary in array)
+            {
+                APSocialProfile *profile = [[APSocialProfile alloc] initWithSocialDictionary:dictionary];
+                [profiles addObject:profile];
+            }
+            
+            _socialNetworks = profiles;
         }
     }
     return self;

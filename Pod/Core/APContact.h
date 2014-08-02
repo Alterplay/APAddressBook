@@ -28,6 +28,8 @@
 @property (nonatomic, readonly) NSNumber *recordID;
 @property (nonatomic, readonly) NSDate *creationDate;
 @property (nonatomic, readonly) NSDate *modificationDate;
+@property (nonatomic, readonly) NSArray *socialNetworks;
+
 
 - (id)initWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 
