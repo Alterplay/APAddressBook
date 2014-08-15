@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(u_int, APSocialNetwork) {
-    APSocialNetwork_Unknown,
-    
-    APSocialNetwork_Facebook,
-    APSocialNetwork_Twitter,
-    APSocialNetwork_LinkedIn
+typedef NS_ENUM(NSUInteger, APSocialNetworkType)
+{
+    APSocialNetworkUnknown = 0,
+    APSocialNetworkFacebook = 1,
+    APSocialNetworkTwitter = 2,
+    APSocialNetworkLinkedIn = 3
 };
 
 @interface APSocialProfile : NSObject
 
-@property (nonatomic, readonly) APSocialNetwork socialNetwork;
+@property (nonatomic, readonly) APSocialNetworkType socialNetwork;
 @property (nonatomic, readonly) NSString *username;
 @property (nonatomic, readonly) NSString *userIdentifier;
 @property (nonatomic, readonly) NSURL *url;

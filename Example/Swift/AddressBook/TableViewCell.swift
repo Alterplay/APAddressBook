@@ -10,8 +10,12 @@ import Foundation
 
 class TableViewCell: DTTableViewCell {
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init(coder aDecoder: NSCoder!) {
+        super.init(coder: aDecoder)
     }
     
     override func updateWithModel(model: AnyObject!) {

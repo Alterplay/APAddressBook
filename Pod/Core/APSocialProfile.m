@@ -10,7 +10,7 @@
 #import <AddressBook/AddressBook.h>
 
 @interface APSocialProfile ()
-@property (nonatomic, readwrite) APSocialNetwork socialNetwork;
+@property (nonatomic, readwrite) APSocialNetworkType socialNetwork;
 @property (nonatomic, readwrite) NSString *username;
 @property (nonatomic, readwrite) NSString *userIdentifier;
 @property (nonatomic, readwrite) NSURL *url;
@@ -18,26 +18,46 @@
 
 @implementation APSocialProfile
 
-- (instancetype)initWithSocialDictionary:(NSDictionary *)dictionary {
+#pragma mark - life cycle
+
+- (instancetype)initWithSocialDictionary:(NSDictionary *)dictionary
+{
     
-    if (self = [super init]) {
-        
-        _url = [NSURL URLWithString:dictionary[(__bridge_transfer NSString *)kABPersonSocialProfileURLKey]];
-        _username = dictionary[(__bridge_transfer NSString *)kABPersonSocialProfileUsernameKey];
-        _userIdentifier = dictionary[(__bridge_transfer NSString *)kABPersonSocialProfileUserIdentifierKey];
-        
-        if ([dictionary[(__bridge_transfer NSString *)kABPersonSocialProfileServiceKey] isEqualToString:@"facebook"])
-            _socialNetwork = APSocialNetwork_Facebook;
-        else if ([dictionary[(__bridge_transfer NSString *)kABPersonSocialProfileServiceKey] isEqualToString:@"twitter"])
-            _socialNetwork = APSocialNetwork_Twitter;
-        else if ([dictionary[(__bridge_transfer NSString *)kABPersonSocialProfileServiceKey] isEqualToString:@"linkedin"])
-            _socialNetwork = APSocialNetwork_LinkedIn;
-        else
-            _socialNetwork = APSocialNetwork_Unknown;
+    if (self = [super init])
+    {
+        NSString *urlKey = (__bridge_transfer NSString *)kABPersonSocialProfileURLKey;
+        NSString *usernameKey = (__bridge_transfer NSString *)kABPersonSocialProfileUsernameKey;
+        NSString *userIdKey = (__bridge_transfer NSString *)kABPersonSocialProfileUserIdentifierKey;
+        NSString *serviceKey = (__bridge_transfer NSString *)kABPersonSocialProfileServiceKey;
+        _url = [NSURL URLWithString:dictionary[urlKey]];
+        _username = dictionary[usernameKey];
+        _userIdentifier = dictionary[userIdKey];
+        _socialNetwork = [self socialNetworkTypeFromString:dictionary[serviceKey]];
     }
     
     return self;
 }
 
+#pragma mark - private
+
+- (APSocialNetworkType)socialNetworkTypeFromString:(NSString *)string
+{
+    if ([string isEqualToString:@"facebook"])
+    {
+        return APSocialNetworkFacebook;
+    }
+    else if ([string isEqualToString:@"twitter"])
+    {
+        return APSocialNetworkTwitter;
+    }
+    else if ([string isEqualToString:@"linkedin"])
+    {
+        return APSocialNetworkLinkedIn;
+    }
+    else
+    {
+        return APSocialNetworkUnknown;
+    }
+}
 
 @end
