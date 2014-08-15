@@ -53,6 +53,7 @@ Available fields:
 * APContactFieldCompositeName - *the concatenated value of prefix, suffix, organization, first name, and last name*
 * APContactFieldAddresses - *array of user addresses*
 * APContactFieldRecordID - *ID of record in iOS address book*
+* APContactFieldSocialProfiles - *array of social profiles*
 * APContactFieldDefault - *contact first name, last name and phones array*
 * APContactFieldAll - *all contact fields described above*
 
@@ -139,6 +140,11 @@ self.addressBook.loadContacts(
 ```
 
 #### History
+
+**Version 0.1.2**
+* Added contact social profile
+
+Thanks to [David Muzi](https://github.com/davidmuzi) for pull request
 
 **Version 0.1.1**
 * Added `Swift` podspec with bridging header
