@@ -26,10 +26,10 @@ class ViewController: DTTableViewController {
         self.addressBook.loadContacts(
             { (contacts: [AnyObject]!, error: NSError!) in
                 self.activity.stopAnimating()
-                if contacts {
+                if (contacts != nil) {
                     self.memoryStorage().addItems(contacts)
                 }
-                else if error {
+                else if (error != nil) {
                     let alert = UIAlertView(title: "Error", message: error.localizedDescription,
                         delegate: nil, cancelButtonTitle: "OK")
                     alert.show()

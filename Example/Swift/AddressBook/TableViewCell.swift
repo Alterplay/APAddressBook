@@ -30,7 +30,7 @@ class TableViewCell: DTTableViewCell {
             return "\(contact.firstName) \(contact.lastName)"
         }
         else if contact.firstName != nil || contact.lastName != nil {
-            return contact.firstName ? "\(contact.firstName)" : "\(contact.lastName)"
+            return (contact.firstName != nil) ? "\(contact.firstName)" : "\(contact.lastName)"
         }
         else {
             return "Unnamed contact"
