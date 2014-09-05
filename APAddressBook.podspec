@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Swift' do |sp|
     sp.source_files = 'Pod/Swift/*.h'
+    sp.dependency 'APAddressBook/Core'
   end
 
   s.default_subspecs = 'Core'
