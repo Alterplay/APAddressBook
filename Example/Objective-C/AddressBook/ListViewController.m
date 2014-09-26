@@ -75,7 +75,7 @@
         [weakSelf.activity stopAnimating];
         if (!error)
         {
-            [weakSelf.memoryStorage addItems:contacts];
+            [weakSelf.memoryStorage addTableItems:contacts];
         }
         else
         {
