@@ -11,12 +11,12 @@
 
 @class APContact;
 
-typedef enum
+typedef NS_ENUM(NSUInteger, APAddressBookAccess)
 {
     APAddressBookAccessUnknown = 0,
     APAddressBookAccessGranted = 1,
     APAddressBookAccessDenied  = 2
-} APAddressBookAccess;
+};
 
 typedef BOOL(^APContactFilterBlock)(APContact *contact);
 
