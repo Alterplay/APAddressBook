@@ -141,6 +141,17 @@ self.addressBook.loadContacts(
 
 #### History
 
+**Version 0.1.4**
+* Changed the definition of APAddressBookAccess to use NS_ENUM so that Swift knows how to convert APAddressBookAccess for bridging.
+
+Thanks to [ndmeiri](https://github.com/ndmeiri) for pull request
+
+**Version 0.1.3**
+* Added the Core as a dependency of Swift subspec
+
+Thanks to [nicopuri](https://github.com/nicopuri) for pull request
+
+
 **Version 0.1.2**
 * Added contact social profile
 
