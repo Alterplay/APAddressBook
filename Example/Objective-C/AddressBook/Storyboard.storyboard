@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cEm-Sv-qGy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cEm-Sv-qGy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -19,7 +20,7 @@
             </objects>
             <point key="canvasLocation" x="94" y="246"/>
         </scene>
-        <!--List View Controller - Address Book-->
+        <!--Address Book-->
         <scene sceneID="KF3-3F-m86">
             <objects>
                 <viewController id="xpr-SJ-iaZ" customClass="ListViewController" sceneMemberID="viewController">
@@ -33,7 +34,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jh6-dS-3e7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="xpr-SJ-iaZ" id="qhp-5A-pYt"/>
@@ -42,7 +42,6 @@
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="qCc-8T-6qI">
                                 <rect key="frame" x="0.0" y="266" width="320" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="tWh-7a-9KG"/>
                                     <constraint firstAttribute="width" constant="320" id="wA3-mA-KgV"/>
@@ -60,7 +59,13 @@
                             <constraint firstAttribute="trailing" secondItem="jh6-dS-3e7" secondAttribute="trailing" id="tvQ-1k-1TW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Address Book" id="E5z-aE-wyD"/>
+                    <navigationItem key="navigationItem" title="Address Book" id="E5z-aE-wyD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="gwx-t8-OfS">
+                            <connections>
+                                <action selector="reloadPressed:" destination="xpr-SJ-iaZ" id="AAE-3V-aHJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activity" destination="qCc-8T-6qI" id="3kC-Mn-9nQ"/>
                         <outlet property="tableView" destination="jh6-dS-3e7" id="f40-AU-ADT"/>

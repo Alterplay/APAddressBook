@@ -25,6 +25,10 @@
     if (self)
     {
         addressBook = [[APAddressBook alloc] init];
+        __weak typeof(self) weakSelf = self;
+        [addressBook startObserveChangesWithCallback:^{
+            [weakSelf loadContacts];
+        }];
     }
     return self;
 }
@@ -39,6 +43,13 @@
                                                                             target:nil
                                                                             action:nil];
     [self registerCellClass:ContactTableViewCell.class forModelClass:APContact.class];
+    [self loadContacts];
+}
+
+#pragma mark - actions
+
+- (IBAction)reloadPressed:(id)sender
+{
     [self loadContacts];
 }
 
@@ -60,6 +71,7 @@
 
 - (void)loadContacts
 {
+    [self.memoryStorage removeAllTableItems];
     [self.activity startAnimating];
     __weak __typeof(self) weakSelf = self;
     addressBook.fieldsMask = APContactFieldAll;

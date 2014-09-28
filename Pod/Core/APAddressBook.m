@@ -100,8 +100,8 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
                 for (NSUInteger i = 0; i < contactCount; i++)
                 {
                     ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
-                    APContact
-                    *contact = [[APContact alloc] initWithRecordRef:recordRef fieldMask:fieldMask];
+                    APContact *contact = [[APContact alloc] initWithRecordRef:recordRef
+                                                                    fieldMask:fieldMask];
                     if (!filterBlock || filterBlock(contact))
                     {
                         [contacts addObject:contact];
