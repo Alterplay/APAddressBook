@@ -96,6 +96,9 @@
             
             _socialProfiles = profiles;
         }
+        if (fieldMask & APContactFieldNote) {
+            _note = [self stringProperty:kABPersonNoteProperty fromRecord:recordRef];
+        }
     }
     return self;
 }
