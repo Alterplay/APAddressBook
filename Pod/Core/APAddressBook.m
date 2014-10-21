@@ -162,4 +162,15 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef __unused addressBookRe
     addressBook.changeCallback ? addressBook.changeCallback() : nil;
 }
 
+#pragma mark - contact getter
+
+- (APContact*) getContactByRecordID:(NSNumber*)recordID
+{
+    // GET rule, we dont have to release `ref`
+    ABRecordRef ref = ABAddressBookGetPersonWithRecordID(self.addressBook, recordID.intValue);
+
+    return [[APContact alloc] initWithRecordRef:ref fieldMask:self.fieldsMask];
+}
+
+
 @end
