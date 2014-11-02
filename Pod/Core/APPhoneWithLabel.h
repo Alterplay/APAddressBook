@@ -12,7 +12,8 @@
 
 @property (nonatomic, readonly) NSString *phone;
 @property (nonatomic, readonly) NSString *label;
+@property (nonatomic, readonly) NSString *rawLabel;
 
-- (id)initWithPhone:(NSString *)phone label:(NSString *)label;
+- (id)initWithPhone:(NSString *)phone label:(NSString *)label rawlabel:(NSString*)rawlabel;
 
 @end
