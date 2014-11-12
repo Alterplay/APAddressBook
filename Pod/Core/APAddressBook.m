@@ -166,15 +166,19 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef __unused addressBookRe
 
 - (APContact*) getContactByRecordID:(NSNumber*)recordID
 {
-    // GET rule, we dont have to release `ref`
-    ABRecordRef ref = ABAddressBookGetPersonWithRecordID(self.addressBook, recordID.intValue);
+    __block APContact * newContact = nil;
+    dispatch_sync(self.localQueue, ^
+                  {
+                      // GET rule, we dont have to release `ref`
+                      ABRecordRef ref = ABAddressBookGetPersonWithRecordID(self.addressBook, recordID.intValue);
 
-    if (ref == NULL) {
-        return nil;
-    }
+                      if (ref != NULL) {
+                          newContact =  [[APContact alloc] initWithRecordRef:ref fieldMask:self.fieldsMask];
+                      }
 
-    return [[APContact alloc] initWithRecordRef:ref fieldMask:self.fieldsMask];
-}
+                  });
+
+    return newContact;}
 
 
 @end
