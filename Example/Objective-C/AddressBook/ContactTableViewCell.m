@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *companyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phonesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *noteLabel;
 @end
 
 @implementation ContactTableViewCell
@@ -43,7 +42,6 @@
     self.phonesLabel.text = [self contactPhones:contact];
     self.emailsLabel.text = [self contactEmails:contact];
     self.photoView.image = contact.thumbnail ?: [UIImage imageNamed:@"no_photo"];
-    self.noteLabel.text = contact.note;
 }
 
 #pragma mark - private
