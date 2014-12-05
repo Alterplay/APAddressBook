@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSArray *sortDescriptors;
 
 + (APAddressBookAccess)access;
++ (void)requestAccessWithCompletionBlock:(void(^)(BOOL))block;
 
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock;
 - (void)loadContactsOnQueue:(dispatch_queue_t)queue
