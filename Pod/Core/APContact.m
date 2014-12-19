@@ -102,7 +102,7 @@
         }
         if (fieldMask & APContactFieldLinkedRecordIDs)
         {
-            NSMutableSet *linkedRecordIDs = [NSMutableSet set];
+            NSMutableArray *linkedRecordIDs = [NSMutableArray array];
 
             CFArrayRef linkedPeopleRef = ABPersonCopyArrayOfAllLinkedPeople(recordRef);
             for (CFIndex i = 0; i < CFArrayGetCount(linkedPeopleRef); i++)
