@@ -9,6 +9,7 @@
 #import "ContactTableViewCell.h"
 #import "APContact.h"
 #import "APPhoneWithLabel.h"
+#import "APEmailWithLabel.h"
 
 @interface ContactTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -88,13 +89,21 @@
 
 - (NSString *)contactEmails:(APContact *)contact
 {
-    if (contact.emails.count > 1)
+    if (contact.emailsWithLabels.count > 0)
     {
-        return [contact.emails componentsJoinedByString:@", "];
+        NSMutableString *result = [[NSMutableString alloc] init];
+        for (APEmailWithLabel *emailWithLabel in contact.emailsWithLabels)
+        {
+            NSString *string = emailWithLabel.label.length == 0 ? emailWithLabel.email :
+            [NSString stringWithFormat:@"%@ (%@)", emailWithLabel.email,
+             emailWithLabel.label];
+            [result appendFormat:@"%@, ", string];
+        }
+        return result;
     }
     else
     {
-        return contact.emails.firstObject ?: @"(No emails)";
+        return @"(No emails)";
     }
 }
 

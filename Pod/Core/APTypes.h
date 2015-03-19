@@ -38,9 +38,10 @@ typedef NS_OPTIONS(NSUInteger , APContactField)
     APContactFieldMiddleName       = 1 << 13,
     APContactFieldSocialProfiles   = 1 << 14,
     APContactFieldNote             = 1 << 15,
+    APContactFieldEmailsWithLabels = 1 << 16,
     APContactFieldDefault          = APContactFieldFirstName | APContactFieldLastName |
                                      APContactFieldPhones,
-    APContactFieldAll              = 0xFFFF
+    APContactFieldAll              = 0xFFFFFFFF
 };
 
 #endif

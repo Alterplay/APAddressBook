@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		149FE9321ABA50F800324A04 /* APEmailWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 149FE9311ABA50F800324A04 /* APEmailWithLabel.m */; };
 		A495CDF35F214F43AFF3AAF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6084C3D31A504C79BEA08B84 /* libPods.a */; };
 		FA66281C187FE9EF00667C81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA66281B187FE9EF00667C81 /* Foundation.framework */; };
 		FA66281E187FE9EF00667C81 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA66281D187FE9EF00667C81 /* CoreGraphics.framework */; };
@@ -28,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		149FE9301ABA50F800324A04 /* APEmailWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APEmailWithLabel.h; sourceTree = "<group>"; };
+		149FE9311ABA50F800324A04 /* APEmailWithLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APEmailWithLabel.m; sourceTree = "<group>"; };
 		6084C3D31A504C79BEA08B84 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6496F61BD33753BB99E0AB3D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8DB33874E6CEAEB5C3CAD23B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -214,6 +217,8 @@
 				FAB405A7199E5F2000E8E62D /* APContact.m */,
 				FAB405A8199E5F2000E8E62D /* APPhoneWithLabel.h */,
 				FAB405A9199E5F2000E8E62D /* APPhoneWithLabel.m */,
+				149FE9301ABA50F800324A04 /* APEmailWithLabel.h */,
+				149FE9311ABA50F800324A04 /* APEmailWithLabel.m */,
 				FAB405AA199E5F2000E8E62D /* APSocialProfile.h */,
 				FAB405AB199E5F2000E8E62D /* APSocialProfile.m */,
 				FAB405AC199E5F2000E8E62D /* APTypes.h */,
@@ -253,7 +258,7 @@
 				ORGANIZATIONNAME = alterplay;
 				TargetAttributes = {
 					FA662817187FE9EF00667C81 = {
-						DevelopmentTeam = 7PZVJRC423;
+						DevelopmentTeam = 6SSZZPG6V3;
 					};
 				};
 			};
@@ -334,6 +339,7 @@
 				FAB405B2199E5F2000E8E62D /* APPhoneWithLabel.m in Sources */,
 				FAB405B0199E5F2000E8E62D /* APAddressBook.m in Sources */,
 				FA662854187FEC7F00667C81 /* ListViewController.m in Sources */,
+				149FE9321ABA50F800324A04 /* APEmailWithLabel.m in Sources */,
 				FAB405B1199E5F2000E8E62D /* APContact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
