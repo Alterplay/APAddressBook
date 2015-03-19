@@ -258,7 +258,7 @@
 				ORGANIZATIONNAME = alterplay;
 				TargetAttributes = {
 					FA662817187FE9EF00667C81 = {
-						DevelopmentTeam = 6SSZZPG6V3;
+						DevelopmentTeam = 7PZVJRC423;
 					};
 				};
 			};
