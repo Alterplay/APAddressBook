@@ -158,6 +158,7 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef __unused addressBookRe
                                          CFDictionaryRef __unused info,
                                          void *context)
 {
+    ABAddressBookRevert(addressBookRef);
     APAddressBook *addressBook = (__bridge APAddressBook *)(context);
     addressBook.changeCallback ? addressBook.changeCallback() : nil;
 }
