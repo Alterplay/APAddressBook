@@ -26,4 +26,6 @@
 - (void)startObserveChangesWithCallback:(void (^)())callback;
 - (void)stopObserveChanges;
 
+- (APContact*) getContactByRecordID:(NSNumber*)recordID;
+
 @end

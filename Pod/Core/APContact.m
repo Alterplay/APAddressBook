@@ -146,8 +146,10 @@
         if (phone)
         {
             NSString *label = [self localizedLabelFromMultiValue:multiValue index:index];
+            NSString *rawLabel = [self rawLabelFromMultiValue:multiValue index:index];
             APPhoneWithLabel *phoneWithLabel = [[APPhoneWithLabel alloc] initWithPhone:phone
-                                                                                 label:label];
+                                                                                 label:label
+                                                                              rawlabel:rawLabel];
             [array addObject:phoneWithLabel];
         }
     }];
@@ -160,6 +162,16 @@
                                  kABPersonImageFormatThumbnail;
     NSData *data = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(recordRef, format);
     return [UIImage imageWithData:data scale:UIScreen.mainScreen.scale];
+}
+
+-(NSString*)rawLabelFromMultiValue:(ABMultiValueRef)multiValue index:(NSUInteger)index
+{
+    ABMultiValueIdentifier ident = ABMultiValueGetIdentifierAtIndex(multiValue, index);
+
+    NSString *label;
+    CFTypeRef rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, index);
+    label = (__bridge_transfer NSString *)rawLabel;
+    return label;
 }
 
 - (NSString *)localizedLabelFromMultiValue:(ABMultiValueRef)multiValue index:(NSUInteger)index
