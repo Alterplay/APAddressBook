@@ -74,7 +74,7 @@
         }
         if (fieldMask & APContactFieldRecordID)
         {
-            _recordID = [NSNumber numberWithInteger:ABRecordGetRecordID(recordRef)];
+            _recordID = @(ABRecordGetRecordID(recordRef));
         }
         if (fieldMask & APContactFieldCreationDate)
         {
@@ -145,11 +145,10 @@
         NSString *phone = (__bridge_transfer NSString *)rawPhone;
         if (phone)
         {
-            NSString *label = [self localizedLabelFromMultiValue:multiValue index:index];
-            NSString *rawLabel = [self rawLabelFromMultiValue:multiValue index:index];
-            APPhoneWithLabel *phoneWithLabel = [[APPhoneWithLabel alloc] initWithPhone:phone
-                                                                                 label:label
-                                                                              rawlabel:rawLabel];
+            NSString *originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
+            NSString *localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
+            APPhoneWithLabel *phoneWithLabel = [[APPhoneWithLabel alloc] initWithPhone:phone originalLabel:originalLabel
+                                                                        localizedLabel:localizedLabel];
             [array addObject:phoneWithLabel];
         }
     }];
@@ -164,7 +163,7 @@
     return [UIImage imageWithData:data scale:UIScreen.mainScreen.scale];
 }
 
--(NSString*)rawLabelFromMultiValue:(ABMultiValueRef)multiValue index:(NSUInteger)index
+- (NSString *)originalLabelFromMultiValue:(ABMultiValueRef)multiValue index:(NSUInteger)index
 {
     NSString *label;
     CFTypeRef rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, index);

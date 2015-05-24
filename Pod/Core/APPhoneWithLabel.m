@@ -10,20 +10,32 @@
 
 @implementation APPhoneWithLabel
 
-- (id)initWithPhone:(NSString *)phone label:(NSString *)label rawlabel:(NSString*)rawlabel {
+#pragma mark - life cycle
+
+- (id)initWithPhone:(NSString *)phone originalLabel:(NSString *)originalLabel localizedLabel:(NSString *)localizedLabel
+{
     self = [super init];
-    if(self)
+    if (self)
     {
         _phone = phone;
-        _label = label;
-        _rawLabel = rawlabel;
+        _localizedLabel = localizedLabel;
+        _originalLabel = originalLabel;
     }
     return self;
 }
 
--(NSString*)description
+#pragma mark - properties
+
+- (NSString *)label
 {
-    return [NSString stringWithFormat:@"%@ (%@) - %@", _label, _rawLabel, _phone];
+    return self.localizedLabel;
+}
+
+#pragma mark - overrides
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ (%@) - %@", self.localizedLabel, self.originalLabel, self.phone];
 }
 
 @end
