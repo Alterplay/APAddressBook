@@ -166,8 +166,6 @@
 
 -(NSString*)rawLabelFromMultiValue:(ABMultiValueRef)multiValue index:(NSUInteger)index
 {
-    ABMultiValueIdentifier ident = ABMultiValueGetIdentifierAtIndex(multiValue, index);
-
     NSString *label;
     CFTypeRef rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, index);
     label = (__bridge_transfer NSString *)rawLabel;
