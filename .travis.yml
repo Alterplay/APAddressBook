@@ -11,4 +11,3 @@ before_install:
 
 script:
         - xcodebuild build -workspace Objective-C/AddressBook.xcworkspace -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
-        - xcodebuild build -workspace Swift/AddressBook.xcworkspace -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
