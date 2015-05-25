@@ -1,5 +1,5 @@
 <img src="https://dl.dropboxusercontent.com/u/2334198/APAddressBook-git-teaser.png">
-
+[![Build Status](https://api.travis-ci.org/Alterplay/APAddressBook.svg)](https://travis-ci.org/Alterplay/APAddressBook)
 APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.com/library/ios/documentation/AddressBook/Reference/AddressBook_iPhoneOS_Framework/_index.html) that gives easy access to native address book without pain in a head.
 
 #### Features
