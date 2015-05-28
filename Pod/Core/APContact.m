@@ -102,20 +102,20 @@
         }
         if (fieldMask & APContactFieldLinkedRecordIDs)
         {
-            NSMutableArray *linkedRecordIDs = [NSMutableArray array];
+            NSMutableOrderedSet *linkedRecordIDs = [[NSMutableOrderedSet alloc] init];
 
             CFArrayRef linkedPeopleRef = ABPersonCopyArrayOfAllLinkedPeople(recordRef);
-            for (CFIndex i = 0; i < CFArrayGetCount(linkedPeopleRef); i++)
+            CFIndex count = CFArrayGetCount(linkedPeopleRef);
+            for (CFIndex i = 0; i < count; i++)
             {
                 ABRecordRef linkedRecordRef = CFArrayGetValueAtIndex(linkedPeopleRef, i);
                 [linkedRecordIDs addObject:@(ABRecordGetRecordID(linkedRecordRef))];
             }
-
-            // ABPersonCopyArrayOfAllLinkedPeople() includes the recordRef.
-            [linkedRecordIDs removeObject:[NSNumber numberWithInteger:ABRecordGetRecordID(recordRef)]];
-
-            _linkedRecordIDs = [linkedRecordIDs copy];
             CFRelease(linkedPeopleRef);
+
+            // remove self from linked records
+            [linkedRecordIDs removeObject:@(ABRecordGetRecordID(recordRef))];
+            _linkedRecordIDs = linkedRecordIDs.array;
         }
     }
     return self;
