@@ -1,5 +1,7 @@
 language: objective-c
 
+osx_image: beta-xcode6.3
+
 before_install:
         - sudo gem update --system
         - sudo gem install cocoapods
@@ -11,3 +13,4 @@ before_install:
 
 script:
         - xcodebuild build -workspace Objective-C/AddressBook.xcworkspace -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
+        - xcodebuild build -workspace Swift/AddressBook.xcworkspace -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
