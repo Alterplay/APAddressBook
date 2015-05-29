@@ -31,6 +31,7 @@
 @property (nonatomic, readonly) NSArray *socialProfiles;
 @property (nonatomic, readonly) NSString *note;
 @property (nonatomic, readonly) NSArray *linkedRecordIDs;
+@property (nonatomic, readonly) NSArray *relatedPersons;
 
 - (id)initWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 

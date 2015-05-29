@@ -10,6 +10,7 @@
 #import "APPhoneWithLabel.h"
 #import "APAddress.h"
 #import "APSocialProfile.h"
+#import "APRelatedPersonWithLabel.h"
 
 @implementation APContact
 
@@ -117,6 +118,10 @@
             [linkedRecordIDs removeObject:@(ABRecordGetRecordID(recordRef))];
             _linkedRecordIDs = linkedRecordIDs.array;
         }
+        if (fieldMask & APContactFieldRelatedPersons)
+        {
+            _relatedPersons = [self arrayOfRelatedPersonsFromRecord:recordRef];
+        }
     }
     return self;
 }
@@ -169,6 +174,27 @@
             [array addObject:phoneWithLabel];
         }
     }];
+    return array.copy;
+}
+
+- (NSArray *)arrayOfRelatedPersonsFromRecord:(ABRecordRef)recordRef
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [self enumerateMultiValueOfProperty:kABPersonRelatedNamesProperty fromRecord:recordRef
+            withBlock:^(ABMultiValueRef multiValue, NSUInteger index)
+            {
+                CFTypeRef rawPerson = ABMultiValueCopyValueAtIndex(multiValue, index);
+                NSString *name = (__bridge_transfer NSString *)rawPerson;
+                if (name)
+                {
+                    NSString *originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
+                    NSString *localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
+                    APRelatedPersonWithLabel *relatedPerson = [[APRelatedPersonWithLabel alloc]
+                            initWithName:name originalLabel:originalLabel
+                            localizedLabel:localizedLabel];
+                    [array addObject:relatedPerson];
+                }
+            }];
     return array.copy;
 }
 
