@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A495CDF35F214F43AFF3AAF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6084C3D31A504C79BEA08B84 /* libPods.a */; };
+		DF2AE50AB998E771A391A24E /* APRelatedPersonWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2AE9D72E3D7DFF1D706E6D /* APRelatedPersonWithLabel.m */; };
 		FA66281C187FE9EF00667C81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA66281B187FE9EF00667C81 /* Foundation.framework */; };
 		FA66281E187FE9EF00667C81 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA66281D187FE9EF00667C81 /* CoreGraphics.framework */; };
 		FA662820187FE9EF00667C81 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA66281F187FE9EF00667C81 /* UIKit.framework */; };
@@ -31,6 +32,8 @@
 		6084C3D31A504C79BEA08B84 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6496F61BD33753BB99E0AB3D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8DB33874E6CEAEB5C3CAD23B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DF2AE9D72E3D7DFF1D706E6D /* APRelatedPersonWithLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APRelatedPersonWithLabel.m; sourceTree = "<group>"; };
+		DF2AEEB759A485E958C118FC /* APRelatedPersonWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APRelatedPersonWithLabel.h; sourceTree = "<group>"; };
 		FA662818187FE9EF00667C81 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA66281B187FE9EF00667C81 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FA66281D187FE9EF00667C81 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -217,6 +220,8 @@
 				FAB405AA199E5F2000E8E62D /* APSocialProfile.h */,
 				FAB405AB199E5F2000E8E62D /* APSocialProfile.m */,
 				FAB405AC199E5F2000E8E62D /* APTypes.h */,
+				DF2AEEB759A485E958C118FC /* APRelatedPersonWithLabel.h */,
+				DF2AE9D72E3D7DFF1D706E6D /* APRelatedPersonWithLabel.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				FAB405B0199E5F2000E8E62D /* APAddressBook.m in Sources */,
 				FA662854187FEC7F00667C81 /* ListViewController.m in Sources */,
 				FAB405B1199E5F2000E8E62D /* APContact.m in Sources */,
+				DF2AE50AB998E771A391A24E /* APRelatedPersonWithLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
