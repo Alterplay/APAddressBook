@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60274C051B187551009D4FDB /* APRelatedPersonWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 60274C041B187551009D4FDB /* APRelatedPersonWithLabel.m */; };
 		AC7C9DDD497D46C0BC5090E1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E250D68A454F4989DC2929 /* libPods.a */; };
 		FA3B984C198ABBB5005953CE /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B984B198ABBB5005953CE /* TableViewCell.swift */; };
 		FACA8345198AB2FD0059676C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACA8344198AB2FD0059676C /* AppDelegate.swift */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		60274C031B187551009D4FDB /* APRelatedPersonWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APRelatedPersonWithLabel.h; sourceTree = "<group>"; };
+		60274C041B187551009D4FDB /* APRelatedPersonWithLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APRelatedPersonWithLabel.m; sourceTree = "<group>"; };
 		66F112F4D42891A3F34E4113 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C119F157280640CA31CD4E27 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E7E250D68A454F4989DC2929 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +166,8 @@
 				FAE39647199E6150004276D3 /* APPhoneWithLabel.m */,
 				FAE39648199E6150004276D3 /* APSocialProfile.h */,
 				FAE39649199E6150004276D3 /* APSocialProfile.m */,
+				60274C031B187551009D4FDB /* APRelatedPersonWithLabel.h */,
+				60274C041B187551009D4FDB /* APRelatedPersonWithLabel.m */,
 				FAE3964A199E6150004276D3 /* APTypes.h */,
 			);
 			path = Core;
@@ -281,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FACA8345198AB2FD0059676C /* AppDelegate.swift in Sources */,
+				60274C051B187551009D4FDB /* APRelatedPersonWithLabel.m in Sources */,
 				FACA8347198AB2FD0059676C /* ViewController.swift in Sources */,
 				FAE39651199E6150004276D3 /* APSocialProfile.m in Sources */,
 				FAE3964E199E6150004276D3 /* APAddressBook.m in Sources */,
