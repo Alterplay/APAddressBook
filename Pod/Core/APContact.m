@@ -41,6 +41,10 @@
         {
             _company = [self stringProperty:kABPersonOrganizationProperty fromRecord:recordRef];
         }
+        if (fieldMask & APContactFieldTitle)
+        {
+            _jobTitle = [self stringProperty:kABPersonJobTitleProperty fromRecord:recordRef];
+        }
         if (fieldMask & APContactFieldPhones)
         {
             _phones = [self arrayProperty:kABPersonPhoneProperty fromRecord:recordRef];
