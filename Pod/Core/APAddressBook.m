@@ -47,9 +47,6 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
     {
         CFRelease(_addressBook);
     }
-#if !OS_OBJECT_USE_OBJC
-    dispatch_release(_localQueue);
-#endif
 }
 
 #pragma mark - public
