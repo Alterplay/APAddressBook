@@ -51,14 +51,6 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
 
 #pragma mark - public
 
-+ (void)requestAccessWithCompletionBlock:(void(^)(BOOL))block {
-    CFErrorRef *error = NULL;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
-    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error){
-        block(granted);
-    });
-}
-
 + (APAddressBookAccess)access
 {
     ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
@@ -76,9 +68,36 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
     }
 }
 
-- (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock
++ (void)requestAccess:(void (^)(BOOL granted, NSError * error))completionBlock {
+    [self requestAccessOnQueue:dispatch_get_main_queue() completion:completionBlock];
+}
+
++ (void)requestAccessOnQueue:(dispatch_queue_t)queue
+                  completion:(void (^)(BOOL granted, NSError * error))completionBlock
 {
-    [self loadContactsOnQueue:dispatch_get_main_queue() completion:callbackBlock];
+    CFErrorRef *initializationError = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, initializationError);
+    if (initializationError)
+    {
+
+        completionBlock ? completionBlock(NO, (__bridge NSError *)(*initializationError)) : nil;
+    }
+    else
+    {
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+        {
+            dispatch_async(queue, ^
+            {
+                completionBlock ? completionBlock(granted, (__bridge NSError *)error) : nil;
+            });
+        });
+    }
+
+}
+
+- (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))completionBlock
+{
+    [self loadContactsOnQueue:dispatch_get_main_queue() completion:completionBlock];
 }
 
 - (void)loadContactsOnQueue:(dispatch_queue_t)queue
@@ -115,10 +134,7 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
         error = errorRef ? (__bridge NSError *)errorRef : nil;
         dispatch_async(queue, ^
         {
-            if (completionBlock)
-            {
-                completionBlock(array, error);
-            }
+            completionBlock ? completionBlock(array, error) : nil;
         });
     });
 }
