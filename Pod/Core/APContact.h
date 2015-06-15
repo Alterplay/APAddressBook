@@ -19,6 +19,7 @@
 @property (nonatomic, readonly) NSString *lastName;
 @property (nonatomic, readonly) NSString *compositeName;
 @property (nonatomic, readonly) NSString *company;
+@property (nonatomic, readonly) NSString *jobTitle;
 @property (nonatomic, readonly) NSArray *phones;
 @property (nonatomic, readonly) NSArray *phonesWithLabels;
 @property (nonatomic, readonly) NSArray *emails;
