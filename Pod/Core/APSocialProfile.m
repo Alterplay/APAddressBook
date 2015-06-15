@@ -42,17 +42,25 @@
 
 - (APSocialNetworkType)socialNetworkTypeFromString:(NSString *)string
 {
-    if ([string isEqualToString:@"facebook"])
+    if ([string isEqualToString:(__bridge NSString *)kABPersonSocialProfileServiceFacebook])
     {
         return APSocialNetworkFacebook;
     }
-    else if ([string isEqualToString:@"twitter"])
+    else if ([string isEqualToString:(__bridge NSString *)kABPersonSocialProfileServiceTwitter])
     {
         return APSocialNetworkTwitter;
     }
-    else if ([string isEqualToString:@"linkedin"])
+    else if ([string isEqualToString:(__bridge NSString *)kABPersonSocialProfileServiceLinkedIn])
     {
         return APSocialNetworkLinkedIn;
+    }
+    else if ([string isEqualToString:(__bridge NSString *)kABPersonSocialProfileServiceFlickr])
+    {
+        return APSocialNetworkFlickr;
+    }
+    else if ([string isEqualToString:(__bridge NSString *)kABPersonSocialProfileServiceGameCenter])
+    {
+        return APSocialNetworkGameCenter;
     }
     else
     {
