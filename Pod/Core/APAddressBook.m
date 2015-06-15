@@ -51,6 +51,14 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
 
 #pragma mark - public
 
++ (void)requestAccessWithCompletionBlock:(void(^)(BOOL))block {
+    CFErrorRef *error = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
+    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error){
+        block(granted);
+    });
+}
+
 + (APAddressBookAccess)access
 {
     ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
