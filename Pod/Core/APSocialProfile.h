@@ -13,7 +13,9 @@ typedef NS_ENUM(NSUInteger, APSocialNetworkType)
     APSocialNetworkUnknown = 0,
     APSocialNetworkFacebook = 1,
     APSocialNetworkTwitter = 2,
-    APSocialNetworkLinkedIn = 3
+    APSocialNetworkLinkedIn = 3,
+    APSocialNetworkFlickr = 4,
+    APSocialNetworkGameCenter = 5
 };
 
 @interface APSocialProfile : NSObject
