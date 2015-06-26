@@ -14,25 +14,25 @@
 @interface APContact : NSObject
 
 @property (nonatomic, readonly) APContactField fieldMask;
-@property (nonatomic, readonly) NSString *firstName;
-@property (nonatomic, readonly) NSString *middleName;
-@property (nonatomic, readonly) NSString *lastName;
-@property (nonatomic, readonly) NSString *compositeName;
-@property (nonatomic, readonly) NSString *company;
-@property (nonatomic, readonly) NSString *jobTitle;
-@property (nonatomic, readonly) NSArray *phones;
-@property (nonatomic, readonly) NSArray *phonesWithLabels;
-@property (nonatomic, readonly) NSArray *emails;
-@property (nonatomic, readonly) NSArray *addresses;
-@property (nonatomic, readonly) UIImage *photo;
-@property (nonatomic, readonly) UIImage *thumbnail;
-@property (nonatomic, readonly) NSNumber *recordID;
-@property (nonatomic, readonly) NSDate *creationDate;
-@property (nonatomic, readonly) NSDate *modificationDate;
-@property (nonatomic, readonly) NSArray *socialProfiles;
-@property (nonatomic, readonly) NSString *note;
-@property (nonatomic, readonly) NSArray *linkedRecordIDs;
+@property (nullable, nonatomic, readonly) NSString *firstName;
+@property (nullable, nonatomic, readonly) NSString *middleName;
+@property (nullable, nonatomic, readonly) NSString *lastName;
+@property (nullable, nonatomic, readonly) NSString *compositeName;
+@property (nullable, nonatomic, readonly) NSString *company;
+@property (nullable, nonatomic, readonly) NSString *jobTitle;
+@property (nullable, nonatomic, readonly) NSArray *phones;
+@property (nullable, nonatomic, readonly) NSArray *phonesWithLabels;
+@property (nullable, nonatomic, readonly) NSArray *emails;
+@property (nullable, nonatomic, readonly) NSArray *addresses;
+@property (nullable, nonatomic, readonly) UIImage *photo;
+@property (nullable, nonatomic, readonly) UIImage *thumbnail;
+@property (nullable, nonatomic, readonly) NSNumber *recordID;
+@property (nullable, nonatomic, readonly) NSDate *creationDate;
+@property (nullable, nonatomic, readonly) NSDate *modificationDate;
+@property (nullable, nonatomic, readonly) NSArray *socialProfiles;
+@property (nullable, nonatomic, readonly) NSString *note;
+@property (nullable, nonatomic, readonly) NSArray *linkedRecordIDs;
 
-- (id)initWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
+- (nonnull id)initWithRecordRef:(nonnull ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 
 @end

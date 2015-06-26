@@ -21,10 +21,10 @@ typedef NS_ENUM(NSUInteger, APSocialNetworkType)
 @interface APSocialProfile : NSObject
 
 @property (nonatomic, readonly) APSocialNetworkType socialNetwork;
-@property (nonatomic, readonly) NSString *username;
-@property (nonatomic, readonly) NSString *userIdentifier;
-@property (nonatomic, readonly) NSURL *url;
+@property (nullable, nonatomic, readonly) NSString *username;
+@property (nullable, nonatomic, readonly) NSString *userIdentifier;
+@property (nullable, nonatomic, readonly) NSURL *url;
 
-- (instancetype)initWithSocialDictionary:(NSDictionary *)dictionary;
+- (nonnull instancetype)initWithSocialDictionary:(nonnull NSDictionary *)dictionary;
 
 @end

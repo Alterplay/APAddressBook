@@ -10,13 +10,13 @@
 
 @interface APAddress : NSObject
 
-@property (nonatomic, readonly) NSString *street;
-@property (nonatomic, readonly) NSString *city;
-@property (nonatomic, readonly) NSString *state;
-@property (nonatomic, readonly) NSString *zip;
-@property (nonatomic, readonly) NSString *country;
-@property (nonatomic, readonly) NSString *countryCode;
+@property (nullable, nonatomic, readonly) NSString *street;
+@property (nullable, nonatomic, readonly) NSString *city;
+@property (nullable, nonatomic, readonly) NSString *state;
+@property (nullable, nonatomic, readonly) NSString *zip;
+@property (nullable, nonatomic, readonly) NSString *country;
+@property (nullable, nonatomic, readonly) NSString *countryCode;
 
-- (id)initWithAddressDictionary:(NSDictionary *)dictionary;
+- (nonnull id)initWithAddressDictionary:(nonnull NSDictionary *)dictionary;
 
 @end
