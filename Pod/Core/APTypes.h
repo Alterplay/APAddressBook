@@ -43,6 +43,7 @@ typedef NS_OPTIONS(NSUInteger , APContactField)
     APContactFieldDefault          = APContactFieldFirstName | APContactFieldLastName |
                                      APContactFieldPhones,
     APContactFieldSourceType       = 1 << 18,
+    APContactFieldSourceID         = 1 << 19,
     APContactFieldAll              = 0xFFFFFFFF
 };
 

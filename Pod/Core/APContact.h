@@ -33,6 +33,7 @@
 @property (nonatomic, readonly) NSString *note;
 @property (nonatomic, readonly) NSArray *linkedRecordIDs;
 @property (nonatomic, readonly) NSString *sourceType;
+@property (nonatomic, readonly) NSNumber *sourceID;
 
 - (id)initWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 
