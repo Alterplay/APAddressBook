@@ -124,7 +124,7 @@
         if (fieldMask & APContactFieldSourceType)
         {
             ABRecordRef source = ABPersonCopySource(recordRef);
-            _sourceType = [self stringProperty:kABSourceNameProperty fromRecord:source]; ////(__bridge NSString *)((CFStringRef)ABRecordCopyValue(source, kABSourceNameProperty));
+            _sourceType = [self stringProperty:kABSourceNameProperty fromRecord:source];
         }
         if (fieldMask & APContactFieldSourceID)
         {
