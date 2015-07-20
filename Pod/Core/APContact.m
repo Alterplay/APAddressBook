@@ -129,7 +129,7 @@
         if (fieldMask & APContactFieldSourceID)
         {
             ABRecordRef source = ABPersonCopySource(recordRef);
-            _recordID = @(ABRecordGetRecordID(source));
+            _sourceID = @(ABRecordGetRecordID(source));
         }
     }
     return self;
