@@ -121,6 +121,11 @@
             [linkedRecordIDs removeObject:@(ABRecordGetRecordID(recordRef))];
             _linkedRecordIDs = linkedRecordIDs.array;
         }
+        if (fieldMask & APContactFieldSourceType)
+        {
+            ABRecordRef source = ABPersonCopySource(recordRef);
+            _sourceType = [self stringProperty:kABSourceNameProperty fromRecord:source]; ////(__bridge NSString *)((CFStringRef)ABRecordCopyValue(source, kABSourceNameProperty));
+        }
     }
     return self;
 }

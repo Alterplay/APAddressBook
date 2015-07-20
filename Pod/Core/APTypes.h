@@ -42,6 +42,7 @@ typedef NS_OPTIONS(NSUInteger , APContactField)
     APContactFieldJobTitle         = 1 << 17,
     APContactFieldDefault          = APContactFieldFirstName | APContactFieldLastName |
                                      APContactFieldPhones,
+    APContactFieldSourceType       = 1 << 18,
     APContactFieldAll              = 0xFFFFFFFF
 };
 
