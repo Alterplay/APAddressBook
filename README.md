@@ -130,7 +130,7 @@ pod 'APAddressBook/Swift'
 ```
 Import `APAddressBook-Bridging.h` to application's objective-c bridging file.
 ```objective-c
-#import "APAddressBook-Bridging.h"
+#import <APAddressBook/APAddressBook-Bridging.h>
 ```
 
 **Example**
