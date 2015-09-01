@@ -121,6 +121,9 @@
             [linkedRecordIDs removeObject:@(ABRecordGetRecordID(recordRef))];
             _linkedRecordIDs = linkedRecordIDs.array;
         }
+        if (fieldMask & APContactFieldBirthday) {
+            _birthday = [self dateProperty:kABPersonBirthdayProperty fromRecord:recordRef];
+        }
     }
     return self;
 }
