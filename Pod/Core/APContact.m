@@ -121,6 +121,9 @@
             [linkedRecordIDs removeObject:@(ABRecordGetRecordID(recordRef))];
             _linkedRecordIDs = linkedRecordIDs.array;
         }
+      if (fieldMask & APContactFieldWebsites) {
+        _websites = [self arrayProperty:kABPersonURLProperty fromRecord:recordRef];
+      }
     }
     return self;
 }
