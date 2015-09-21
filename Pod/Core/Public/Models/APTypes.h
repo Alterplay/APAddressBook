@@ -1,15 +1,10 @@
 //
 //  APTypes.h
-//  AddressBook
+//  APAddressBook
 //
 //  Created by Alexey Belkevich on 1/11/14.
 //  Copyright (c) 2014 alterplay. All rights reserved.
 //
-
-#ifndef AddressBook_APTypes_h
-#define AddressBook_APTypes_h
-
-@class APContact;
 
 typedef NS_ENUM(NSUInteger, APAddressBookAccess)
 {
@@ -17,8 +12,6 @@ typedef NS_ENUM(NSUInteger, APAddressBookAccess)
     APAddressBookAccessGranted = 1,
     APAddressBookAccessDenied  = 2
 };
-
-typedef BOOL(^APContactFilterBlock)(APContact *contact);
 
 typedef NS_OPTIONS(NSUInteger , APContactField)
 {
@@ -41,8 +34,6 @@ typedef NS_OPTIONS(NSUInteger , APContactField)
     APContactFieldLinkedRecordIDs  = 1 << 16,
     APContactFieldJobTitle         = 1 << 17,
     APContactFieldDefault          = APContactFieldFirstName | APContactFieldLastName |
-                                     APContactFieldPhones,
+                                     APContactFieldPhones | APContactFieldRecordID,
     APContactFieldAll              = 0xFFFFFFFF
 };
-
-#endif

@@ -13,6 +13,7 @@
 
 @interface ListViewController ()
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
+@property (nonatomic, strong) APAddressBook *addressBook;
 @end
 
 @implementation ListViewController
@@ -24,9 +25,10 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        addressBook = [[APAddressBook alloc] init];
+        self.addressBook = [[APAddressBook alloc] init];
         __weak typeof(self) weakSelf = self;
-        [addressBook startObserveChangesWithCallback:^{
+        [self.addressBook startObserveChangesWithCallback:^
+        {
             [weakSelf loadContacts];
         }];
     }
@@ -74,15 +76,15 @@
     [self.memoryStorage removeAllTableItems];
     [self.activity startAnimating];
     __weak __typeof(self) weakSelf = self;
-    addressBook.fieldsMask = APContactFieldAll;
-    addressBook.sortDescriptors = @[
+    self.addressBook.fieldsMask = APContactFieldAll;
+    self.addressBook.sortDescriptors = @[
      [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES],
      [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES]];
-    addressBook.filterBlock = ^BOOL(APContact *contact)
+    self.addressBook.filterBlock = ^BOOL(APContact *contact)
     {
         return contact.phones.count > 0;
     };
-    [addressBook loadContacts:^(NSArray *contacts, NSError *error)
+    [self.addressBook loadContacts:^(NSArray *contacts, NSError *error)
     {
         [weakSelf.activity stopAnimating];
         if (!error)
@@ -91,10 +93,8 @@
         }
         else
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                message:error.localizedDescription
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:error.localizedDescription
+                                                               delegate:nil cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
             [alertView show];
         }

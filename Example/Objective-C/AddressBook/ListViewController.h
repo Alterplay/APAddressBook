@@ -9,11 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "DTTableViewController.h"
 
-@class APAddressBook;
-
 @interface ListViewController : DTTableViewController
-{
-    APAddressBook *addressBook;
-}
-
 @end

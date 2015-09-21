@@ -8,12 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <AddressBook/AddressBook.h>
-#import "APTypes.h"
 
 @interface APContact : NSObject
 
-@property (nonatomic, readonly) APContactField fieldMask;
 @property (nonatomic, readonly) NSString *firstName;
 @property (nonatomic, readonly) NSString *middleName;
 @property (nonatomic, readonly) NSString *lastName;
@@ -32,7 +29,5 @@
 @property (nonatomic, readonly) NSArray *socialProfiles;
 @property (nonatomic, readonly) NSString *note;
 @property (nonatomic, readonly) NSArray *linkedRecordIDs;
-
-- (id)initWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 
 @end

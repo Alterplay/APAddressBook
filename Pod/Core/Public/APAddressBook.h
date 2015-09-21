@@ -10,6 +10,7 @@
 #import "APTypes.h"
 
 @class APContact;
+typedef BOOL(^APContactFilterBlock)(APContact *contact);
 
 @interface APAddressBook : NSObject
 
@@ -18,15 +19,16 @@
 @property (nonatomic, strong) NSArray *sortDescriptors;
 
 + (APAddressBookAccess)access;
-+ (void)requestAccess:(void (^)(BOOL granted, NSError * error))completionBlock;
++ (void)requestAccess:(void (^)(BOOL granted, NSError *error))completionBlock;
 + (void)requestAccessOnQueue:(dispatch_queue_t)queue
-                  completion:(void (^)(BOOL granted, NSError * error))completionBlock;
+                  completion:(void (^)(BOOL granted, NSError *error))completionBlock;
 
 - (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))completionBlock;
 - (void)loadContactsOnQueue:(dispatch_queue_t)queue
                  completion:(void (^)(NSArray *contacts, NSError *error))completionBlock;
 
 - (void)startObserveChangesWithCallback:(void (^)())callback;
+- (void)startObserveChangesOnQueue:(dispatch_queue_t)queue callback:(void (^)())callback;
 - (void)stopObserveChanges;
 
 - (APContact *)getContactByRecordID:(NSNumber *)recordID;
