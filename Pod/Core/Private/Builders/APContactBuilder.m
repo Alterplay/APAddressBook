@@ -103,6 +103,11 @@
     {
         contact.linkedRecordIDs = [self.extractor linkedRecordIDs];
     }
+    if (fieldMask & APContactFieldWebsites)
+    {
+        contact.websites = [self.extractor arrayProperty:kABPersonURLProperty];
+    }
+
     return contact;
 }
 

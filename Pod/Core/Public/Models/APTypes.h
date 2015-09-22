@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, APAddressBookAccess)
     APAddressBookAccessDenied  = 2
 };
 
-typedef NS_OPTIONS(NSUInteger , APContactField)
+typedef NS_OPTIONS(NSUInteger, APContactField)
 {
     APContactFieldFirstName        = 1 << 0,
     APContactFieldLastName         = 1 << 1,
@@ -33,6 +33,7 @@ typedef NS_OPTIONS(NSUInteger , APContactField)
     APContactFieldNote             = 1 << 15,
     APContactFieldLinkedRecordIDs  = 1 << 16,
     APContactFieldJobTitle         = 1 << 17,
+    APContactFieldWebsites         = 1 << 18,
     APContactFieldDefault          = APContactFieldFirstName | APContactFieldLastName |
                                      APContactFieldPhones | APContactFieldRecordID,
     APContactFieldAll              = 0xFFFFFFFF

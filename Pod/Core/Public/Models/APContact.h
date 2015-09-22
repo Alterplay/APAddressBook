@@ -29,5 +29,6 @@
 @property (nonatomic, strong) NSArray *socialProfiles;
 @property (nonatomic, strong) NSString *note;
 @property (nonatomic, strong) NSArray *linkedRecordIDs;
+@property (nonatomic, strong) NSArray *websites;
 
 @end
