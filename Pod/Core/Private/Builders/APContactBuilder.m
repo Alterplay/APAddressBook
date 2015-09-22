@@ -103,6 +103,10 @@
     {
         contact.linkedRecordIDs = [self.extractor linkedRecordIDs];
     }
+    if (fieldMask & APContactFieldBirthday)
+    {
+        contact.birthday = [self.extractor dateProperty:kABPersonBirthdayProperty];
+    }
     return contact;
 }
 
