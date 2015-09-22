@@ -8,10 +8,23 @@
 
 #import <AddressBook/AddressBook.h>
 #import "APAddressBookContactsRoutine.h"
-#import "APContactBuilder.h"
 #import "APAddressBookRefWrapper.h"
+#import "APContactBuilder.h"
+
+@interface APAddressBookContactsRoutine ()
+@property (nonatomic, strong) APContactBuilder *builder;
+@end
 
 @implementation APAddressBookContactsRoutine
+
+#pragma mark - life cycle
+
+- (instancetype)initWithAddressBookRefWrapper:(APAddressBookRefWrapper *)wrapper
+{
+    self = [super initWithAddressBookRefWrapper:wrapper];
+    self.builder = [[APContactBuilder alloc] init];
+    return self;
+}
 
 #pragma mark - public
 
@@ -25,7 +38,7 @@
         for (CFIndex i = 0; i < count; i++)
         {
             ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
-            APContact *contact = [APContactBuilder contactWithRecordRef:recordRef fieldMask:fieldMask];
+            APContact *contact = [self.builder contactWithRecordRef:recordRef fieldMask:fieldMask];
             [contacts addObject:contact];
         }
         CFRelease(peopleArrayRef);
@@ -38,7 +51,7 @@
     if (!self.wrapper.error)
     {
         ABRecordRef recordRef = ABAddressBookGetPersonWithRecordID(self.wrapper.ref, recordID.intValue);
-        return recordRef != NULL ? [APContactBuilder contactWithRecordRef:recordRef fieldMask:fieldMask] : nil;
+        return recordRef != NULL ? [self.builder contactWithRecordRef:recordRef fieldMask:fieldMask] : nil;
     }
     return nil;
 }

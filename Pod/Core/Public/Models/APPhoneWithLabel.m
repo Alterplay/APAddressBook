@@ -10,20 +10,6 @@
 
 @implementation APPhoneWithLabel
 
-#pragma mark - life cycle
-
-- (id)initWithPhone:(NSString *)phone originalLabel:(NSString *)originalLabel localizedLabel:(NSString *)localizedLabel
-{
-    self = [super init];
-    if (self)
-    {
-        _phone = phone;
-        _localizedLabel = localizedLabel;
-        _originalLabel = originalLabel;
-    }
-    return self;
-}
-
 #pragma mark - properties
 
 - (NSString *)label

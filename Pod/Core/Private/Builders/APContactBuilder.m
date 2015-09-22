@@ -6,95 +6,78 @@
 //  Copyright © 2015 alterplay. All rights reserved.
 //
 
-#import <AddressBook/AddressBook.h>
 #import "APContactBuilder.h"
+#import "APContactDataExtractor.h"
 #import "APContact.h"
-#import "APAddress.h"
-#import "APPhoneWithLabel.h"
-#import "APSocialProfile.h"
 
-@interface APContact ()
-@property (nonatomic, strong) NSString *firstName;
-@property (nonatomic, strong) NSString *middleName;
-@property (nonatomic, strong) NSString *lastName;
-@property (nonatomic, strong) NSString *compositeName;
-@property (nonatomic, strong) NSString *company;
-@property (nonatomic, strong) NSString *jobTitle;
-@property (nonatomic, strong) NSArray *phones;
-@property (nonatomic, strong) NSArray *phonesWithLabels;
-@property (nonatomic, strong) NSArray *emails;
-@property (nonatomic, strong) NSArray *addresses;
-@property (nonatomic, strong) UIImage *photo;
-@property (nonatomic, strong) UIImage *thumbnail;
-@property (nonatomic, strong) NSNumber *recordID;
-@property (nonatomic, strong) NSDate *creationDate;
-@property (nonatomic, strong) NSDate *modificationDate;
-@property (nonatomic, strong) NSArray *socialProfiles;
-@property (nonatomic, strong) NSString *note;
-@property (nonatomic, strong) NSArray *linkedRecordIDs;
+@interface APContactBuilder ()
+@property (nonatomic, strong) APContactDataExtractor *extractor;
 @end
 
 @implementation APContactBuilder
 
+#pragma mark - life cycle
+
+- (instancetype)init
+{
+    self = [super init];
+    self.extractor = [[APContactDataExtractor alloc] init];
+    return self;
+}
+
 #pragma mark - public
 
-+ (APContact *)contactWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask
+- (APContact *)contactWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask
 {
+    self.extractor.recordRef = recordRef;
     APContact *contact = [[APContact alloc] init];
     if (fieldMask & APContactFieldFirstName)
     {
-        contact.firstName = [self stringProperty:kABPersonFirstNameProperty fromRecord:recordRef];
+        contact.firstName = [self.extractor stringProperty:kABPersonFirstNameProperty];
     }
     if (fieldMask & APContactFieldMiddleName)
     {
-        contact.middleName = [self stringProperty:kABPersonMiddleNameProperty fromRecord:recordRef];
+        contact.middleName = [self.extractor stringProperty:kABPersonMiddleNameProperty];
     }
     if (fieldMask & APContactFieldLastName)
     {
-        contact.lastName = [self stringProperty:kABPersonLastNameProperty fromRecord:recordRef];
+        contact.lastName = [self.extractor stringProperty:kABPersonLastNameProperty];
     }
     if (fieldMask & APContactFieldCompositeName)
     {
-        contact.compositeName = [self compositeNameFromRecord:recordRef];
+        contact.compositeName = [self.extractor compositeName];
     }
     if (fieldMask & APContactFieldCompany)
     {
-        contact.company = [self stringProperty:kABPersonOrganizationProperty fromRecord:recordRef];
+        contact.company = [self.extractor stringProperty:kABPersonOrganizationProperty];
     }
     if (fieldMask & APContactFieldJobTitle)
     {
-        contact.jobTitle = [self stringProperty:kABPersonJobTitleProperty fromRecord:recordRef];
+        contact.jobTitle = [self.extractor stringProperty:kABPersonJobTitleProperty];
     }
     if (fieldMask & APContactFieldPhones)
     {
-        contact.phones = [self arrayProperty:kABPersonPhoneProperty fromRecord:recordRef];
+        contact.phones = [self.extractor arrayProperty:kABPersonPhoneProperty];
     }
     if (fieldMask & APContactFieldPhonesWithLabels)
     {
-        contact.phonesWithLabels = [self arrayOfPhonesWithLabelsFromRecord:recordRef];
+        contact.phonesWithLabels = [self.extractor phonesWithLabels];
     }
     if (fieldMask & APContactFieldEmails)
     {
-        contact.emails = [self arrayProperty:kABPersonEmailProperty fromRecord:recordRef];
+        contact.emails = [self.extractor arrayProperty:kABPersonEmailProperty];
     }
     if (fieldMask & APContactFieldPhoto)
     {
-        contact.photo = [self imagePropertyFullSize:YES fromRecord:recordRef];
+        contact.photo = [self.extractor imagePropertyFullSize:YES];
     }
     if (fieldMask & APContactFieldThumbnail)
     {
-        contact.thumbnail = [self imagePropertyFullSize:NO fromRecord:recordRef];
+        contact.thumbnail = [self.extractor imagePropertyFullSize:NO];
     }
     if (fieldMask & APContactFieldAddresses)
     {
-        NSMutableArray *addresses = [[NSMutableArray alloc] init];
-        NSArray *array = [self arrayProperty:kABPersonAddressProperty fromRecord:recordRef];
-        for (NSDictionary *dictionary in array)
-        {
-            APAddress *address = [[APAddress alloc] initWithAddressDictionary:dictionary];
-            [addresses addObject:address];
-        }
-        contact.addresses = addresses.copy;
+        contact.addresses = [self.extractor addresses];
     }
     if (fieldMask & APContactFieldRecordID)
     {
@@ -102,150 +85,25 @@
     }
     if (fieldMask & APContactFieldCreationDate)
     {
-        contact.creationDate = [self dateProperty:kABPersonCreationDateProperty fromRecord:recordRef];
+        contact.creationDate = [self.extractor dateProperty:kABPersonCreationDateProperty];
     }
     if (fieldMask & APContactFieldModificationDate)
     {
-        contact.modificationDate = [self dateProperty:kABPersonModificationDateProperty fromRecord:recordRef];
+        contact.modificationDate = [self.extractor dateProperty:kABPersonModificationDateProperty];
     }
     if (fieldMask & APContactFieldSocialProfiles)
     {
-        NSMutableArray *profiles = [[NSMutableArray alloc] init];
-        NSArray *array = [self arrayProperty:kABPersonSocialProfileProperty fromRecord:recordRef];
-        for (NSDictionary *dictionary in array)
-        {
-            APSocialProfile *profile = [[APSocialProfile alloc] initWithSocialDictionary:dictionary];
-            [profiles addObject:profile];
-        }
-
-        contact.socialProfiles = profiles;
+        contact.socialProfiles = [self.extractor socialProfiles];
     }
     if (fieldMask & APContactFieldNote)
     {
-        contact.note = [self stringProperty:kABPersonNoteProperty fromRecord:recordRef];
+        contact.note = [self.extractor stringProperty:kABPersonNoteProperty];
     }
     if (fieldMask & APContactFieldLinkedRecordIDs)
     {
-        NSMutableOrderedSet *linkedRecordIDs = [[NSMutableOrderedSet alloc] init];
-
-        CFArrayRef linkedPeopleRef = ABPersonCopyArrayOfAllLinkedPeople(recordRef);
-        CFIndex count = CFArrayGetCount(linkedPeopleRef);
-        for (CFIndex i = 0; i < count; i++)
-        {
-            ABRecordRef linkedRecordRef = CFArrayGetValueAtIndex(linkedPeopleRef, i);
-            [linkedRecordIDs addObject:@(ABRecordGetRecordID(linkedRecordRef))];
-        }
-        CFRelease(linkedPeopleRef);
-
-        // remove self from linked records
-        [linkedRecordIDs removeObject:@(ABRecordGetRecordID(recordRef))];
-        contact.linkedRecordIDs = linkedRecordIDs.array;
+        contact.linkedRecordIDs = [self.extractor linkedRecordIDs];
     }
     return contact;
-}
-
-#pragma mark - private
-
-+ (NSString *)stringProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
-{
-    CFTypeRef valueRef = (ABRecordCopyValue(recordRef, property));
-    return (__bridge_transfer NSString *)valueRef;
-}
-
-+ (NSArray *)arrayProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
-{
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    [self enumerateMultiValueOfProperty:property fromRecord:recordRef
-                              withBlock:^(ABMultiValueRef multiValue, NSUInteger index)
-                              {
-                                  CFTypeRef value = ABMultiValueCopyValueAtIndex(multiValue, index);
-                                  NSString *string = (__bridge_transfer NSString *)value;
-                                  if (string)
-                                  {
-                                      [array addObject:string];
-                                  }
-                              }];
-    return array.copy;
-}
-
-
-+ (NSDate *)dateProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
-{
-    CFDateRef dateRef = (ABRecordCopyValue(recordRef, property));
-    return (__bridge_transfer NSDate *)dateRef;
-}
-
-+ (NSArray *)arrayOfPhonesWithLabelsFromRecord:(ABRecordRef)recordRef
-{
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    [self enumerateMultiValueOfProperty:kABPersonPhoneProperty fromRecord:recordRef
-                              withBlock:^(ABMultiValueRef multiValue, NSUInteger index)
-                              {
-                                  CFTypeRef rawPhone = ABMultiValueCopyValueAtIndex(multiValue, index);
-                                  NSString *phone = (__bridge_transfer NSString *)rawPhone;
-                                  if (phone)
-                                  {
-                                      NSString *originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
-                                      NSString *localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
-                                      APPhoneWithLabel *phoneWithLabel = [[APPhoneWithLabel alloc] initWithPhone:phone originalLabel:originalLabel
-                                                                                                  localizedLabel:localizedLabel];
-                                      [array addObject:phoneWithLabel];
-                                  }
-                              }];
-    return array.copy;
-}
-
-+ (UIImage *)imagePropertyFullSize:(BOOL)isFullSize fromRecord:(ABRecordRef)recordRef
-{
-    ABPersonImageFormat format = isFullSize ? kABPersonImageFormatOriginalSize :
-                                 kABPersonImageFormatThumbnail;
-    NSData *data = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(recordRef, format);
-    return [UIImage imageWithData:data scale:UIScreen.mainScreen.scale];
-}
-
-+ (NSString *)originalLabelFromMultiValue:(ABMultiValueRef)multiValue index:(NSUInteger)index
-{
-    NSString *label;
-    CFTypeRef rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, index);
-    label = (__bridge_transfer NSString *)rawLabel;
-    return label;
-}
-
-+ (NSString *)localizedLabelFromMultiValue:(ABMultiValueRef)multiValue index:(NSUInteger)index
-{
-    NSString *label;
-    CFTypeRef rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, index);
-    if (rawLabel)
-    {
-        CFStringRef localizedLabel = ABAddressBookCopyLocalizedLabel(rawLabel);
-        if (localizedLabel)
-        {
-            label = (__bridge_transfer NSString *)localizedLabel;
-        }
-        CFRelease(rawLabel);
-    }
-    return label;
-}
-
-+ (NSString *)compositeNameFromRecord:(ABRecordRef)recordRef
-{
-    CFStringRef compositeNameRef = ABRecordCopyCompositeName(recordRef);
-    return (__bridge_transfer NSString *)compositeNameRef;
-}
-
-+ (void)enumerateMultiValueOfProperty:(ABPropertyID)property fromRecord:(ABRecordRef)recordRef
-                            withBlock:(void (^)(ABMultiValueRef multiValue, NSUInteger index))block
-{
-    ABMultiValueRef multiValue = ABRecordCopyValue(recordRef, property);
-    if (multiValue)
-    {
-        NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
-        for (NSUInteger i = 0; i < count; i++)
-        {
-            block(multiValue, i);
-        }
-        CFRelease(multiValue);
-    }
 }
 
 @end

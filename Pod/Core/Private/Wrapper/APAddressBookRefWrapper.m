@@ -9,7 +9,9 @@
 #import "APAddressBookRefWrapper.h"
 
 @interface APAddressBookRefWrapper ()
-@property (nonatomic, assign) ABAddressBookRef ref;
+{
+    ABAddressBookRef ref;
+}
 @property (nonatomic, strong) NSError *error;
 @end
 
@@ -21,7 +23,7 @@
 {
     self = [super init];
     CFErrorRef *error = NULL;
-    self.ref = ABAddressBookCreateWithOptions(NULL, error);
+    ref = ABAddressBookCreateWithOptions(NULL, error);
     if (error)
     {
         self.error = (__bridge NSError *)(*error);
@@ -31,10 +33,17 @@
 
 - (void)dealloc
 {
-    if (self.ref)
+    if (ref)
     {
-        CFRelease(self.ref);
+        CFRelease(ref);
     }
+}
+
+#pragma mark - properties
+
+- (ABAddressBookRef)ref
+{
+    return ref;
 }
 
 @end

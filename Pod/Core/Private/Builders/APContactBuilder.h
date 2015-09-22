@@ -14,6 +14,6 @@
 
 @interface APContactBuilder : NSObject
 
-+ (APContact *)contactWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
+- (APContact *)contactWithRecordRef:(ABRecordRef)recordRef fieldMask:(APContactField)fieldMask;
 
 @end

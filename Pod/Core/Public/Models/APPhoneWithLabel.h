@@ -10,11 +10,9 @@
 
 @interface APPhoneWithLabel : NSObject
 
-@property (nonatomic, readonly) NSString *phone;
-@property (nonatomic, readonly) NSString *originalLabel;
-@property (nonatomic, readonly) NSString *localizedLabel;
+@property (nonatomic, strong) NSString *phone;
+@property (nonatomic, strong) NSString *originalLabel;
+@property (nonatomic, strong) NSString *localizedLabel;
 @property (nonatomic, readonly) NSString *label __attribute__((deprecated("Use 'localizedLabel' instead")));
-
-- (id)initWithPhone:(NSString *)phone originalLabel:(NSString *)originalLabel localizedLabel:(NSString *)localizedLabel;
 
 @end

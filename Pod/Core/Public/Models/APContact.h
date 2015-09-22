@@ -11,23 +11,23 @@
 
 @interface APContact : NSObject
 
-@property (nonatomic, readonly) NSString *firstName;
-@property (nonatomic, readonly) NSString *middleName;
-@property (nonatomic, readonly) NSString *lastName;
-@property (nonatomic, readonly) NSString *compositeName;
-@property (nonatomic, readonly) NSString *company;
-@property (nonatomic, readonly) NSString *jobTitle;
-@property (nonatomic, readonly) NSArray *phones;
-@property (nonatomic, readonly) NSArray *phonesWithLabels;
-@property (nonatomic, readonly) NSArray *emails;
-@property (nonatomic, readonly) NSArray *addresses;
-@property (nonatomic, readonly) UIImage *photo;
-@property (nonatomic, readonly) UIImage *thumbnail;
-@property (nonatomic, readonly) NSNumber *recordID;
-@property (nonatomic, readonly) NSDate *creationDate;
-@property (nonatomic, readonly) NSDate *modificationDate;
-@property (nonatomic, readonly) NSArray *socialProfiles;
-@property (nonatomic, readonly) NSString *note;
-@property (nonatomic, readonly) NSArray *linkedRecordIDs;
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *middleName;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *compositeName;
+@property (nonatomic, strong) NSString *company;
+@property (nonatomic, strong) NSString *jobTitle;
+@property (nonatomic, strong) NSArray *phones;
+@property (nonatomic, strong) NSArray *phonesWithLabels;
+@property (nonatomic, strong) NSArray *emails;
+@property (nonatomic, strong) NSArray *addresses;
+@property (nonatomic, strong) UIImage *photo;
+@property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong) NSNumber *recordID;
+@property (nonatomic, strong) NSDate *creationDate;
+@property (nonatomic, strong) NSDate *modificationDate;
+@property (nonatomic, strong) NSArray *socialProfiles;
+@property (nonatomic, strong) NSString *note;
+@property (nonatomic, strong) NSArray *linkedRecordIDs;
 
 @end

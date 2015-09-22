@@ -37,3 +37,13 @@ typedef NS_OPTIONS(NSUInteger , APContactField)
                                      APContactFieldPhones | APContactFieldRecordID,
     APContactFieldAll              = 0xFFFFFFFF
 };
+
+typedef NS_ENUM(NSUInteger, APSocialNetworkType)
+{
+    APSocialNetworkUnknown = 0,
+    APSocialNetworkFacebook = 1,
+    APSocialNetworkTwitter = 2,
+    APSocialNetworkLinkedIn = 3,
+    APSocialNetworkFlickr = 4,
+    APSocialNetworkGameCenter = 5
+};

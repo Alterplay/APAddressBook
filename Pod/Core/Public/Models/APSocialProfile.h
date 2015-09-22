@@ -7,24 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSUInteger, APSocialNetworkType)
-{
-    APSocialNetworkUnknown = 0,
-    APSocialNetworkFacebook = 1,
-    APSocialNetworkTwitter = 2,
-    APSocialNetworkLinkedIn = 3,
-    APSocialNetworkFlickr = 4,
-    APSocialNetworkGameCenter = 5
-};
+#import "APTypes.h"
 
 @interface APSocialProfile : NSObject
 
-@property (nonatomic, readonly) APSocialNetworkType socialNetwork;
-@property (nonatomic, readonly) NSString *username;
-@property (nonatomic, readonly) NSString *userIdentifier;
-@property (nonatomic, readonly) NSURL *url;
-
-- (instancetype)initWithSocialDictionary:(NSDictionary *)dictionary;
+@property (nonatomic, assign) APSocialNetworkType socialNetwork;
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *userIdentifier;
+@property (nonatomic, strong) NSURL *url;
 
 @end
