@@ -58,6 +58,8 @@ Available fields:
 * APContactFieldNote - *contact notes*
 * APContactFieldLinkedRecordIDs - *linked contacts record IDs*
 * APContactFieldJobTitle - *contact job title*
+* APContactFieldWebsites - *array of contact websites*
+* APContactFieldBirthday - *contact birthday*
 * APContactFieldDefault - *contact first name, last name and phones array*
 * APContactFieldAll - *all contact fields described above*
 
