@@ -34,6 +34,7 @@ typedef NS_OPTIONS(NSUInteger, APContactField)
     APContactFieldLinkedRecordIDs  = 1 << 16,
     APContactFieldJobTitle         = 1 << 17,
     APContactFieldWebsites         = 1 << 18,
+    APContactFieldBirthday         = 1 << 19,
     APContactFieldDefault          = APContactFieldFirstName | APContactFieldLastName |
                                      APContactFieldPhones | APContactFieldRecordID,
     APContactFieldAll              = 0xFFFFFFFF

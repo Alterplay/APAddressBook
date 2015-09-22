@@ -107,7 +107,10 @@
     {
         contact.websites = [self.extractor arrayProperty:kABPersonURLProperty];
     }
-
+    if (fieldMask & APContactFieldBirthday)
+    {
+        contact.birthday = [self.extractor dateProperty:kABPersonBirthdayProperty];
+    }
     return contact;
 }
 

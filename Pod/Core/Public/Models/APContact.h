@@ -30,5 +30,6 @@
 @property (nonatomic, strong) NSString *note;
 @property (nonatomic, strong) NSArray *linkedRecordIDs;
 @property (nonatomic, strong) NSArray *websites;
+@property (nonatomic, strong) NSDate *birthday;
 
 @end
