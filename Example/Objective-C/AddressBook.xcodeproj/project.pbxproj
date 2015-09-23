@@ -15,6 +15,7 @@
 		2DBA1353F6D48E61D8FE52E9 /* APAddressBookAccessRoutine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA12274B8BFA605F110B91 /* APAddressBookAccessRoutine.m */; };
 		2DBA137D3076D6E6FC78ABB9 /* APContactBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA10055B7C4CA15B752EE5 /* APContactBuilder.m */; };
 		2DBA14C2B75EDDF1BE7BCE4B /* APRelatedPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1841E1F7B8E6EDEF5438 /* APRelatedPerson.m */; };
+		2DBA1592543ABA1E3A6B98EA /* APEmailWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA137692064C27CC3DDBC5 /* APEmailWithLabel.m */; };
 		2DBA161F7922FC8733E39BDF /* APSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1F7630DA6BBFED5D6526 /* APSource.m */; };
 		2DBA18FC2FF7F4AE18208C23 /* APAddressBookBaseRoutine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA14AE247588EB09FCB705 /* APAddressBookBaseRoutine.m */; };
 		2DBA1A57B40D47C26F1FC2EA /* NSArray+APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA163CB64937C13056022E /* NSArray+APAddressBook.m */; };
@@ -50,6 +51,7 @@
 		2DBA12CDF576C49EAEB83108 /* APPhoneWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPhoneWithLabel.h; sourceTree = "<group>"; };
 		2DBA12DDF7D558CB7281DF82 /* APAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddressBook.m; sourceTree = "<group>"; };
 		2DBA131ED390B35AF6A6F826 /* APAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBook.h; sourceTree = "<group>"; };
+		2DBA137692064C27CC3DDBC5 /* APEmailWithLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APEmailWithLabel.m; sourceTree = "<group>"; };
 		2DBA139B1186C6628062F238 /* APThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APThread.h; sourceTree = "<group>"; };
 		2DBA14AE247588EB09FCB705 /* APAddressBookBaseRoutine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddressBookBaseRoutine.m; sourceTree = "<group>"; };
 		2DBA14CA55A75A871C26C82F /* APContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APContact.m; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		2DBA16AB38312AA9DDBD1F1F /* APAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddress.h; sourceTree = "<group>"; };
 		2DBA1825CB9083C503993480 /* APSocialProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSocialProfile.m; sourceTree = "<group>"; };
 		2DBA1841E1F7B8E6EDEF5438 /* APRelatedPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APRelatedPerson.m; sourceTree = "<group>"; };
+		2DBA18CC8B9A9AC8355A4F58 /* APEmailWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APEmailWithLabel.h; sourceTree = "<group>"; };
 		2DBA19846B6F2A33EDA67564 /* APContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APContact.h; sourceTree = "<group>"; };
 		2DBA19EA7D800550FD7BB39A /* APSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSource.h; sourceTree = "<group>"; };
 		2DBA1A1320B550F8D7A58ED9 /* APAddressBookRefWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBookRefWrapper.h; sourceTree = "<group>"; };
@@ -224,6 +227,8 @@
 				2DBA19EA7D800550FD7BB39A /* APSource.h */,
 				2DBA1035DAD42BBC187C2E56 /* APRelatedPerson.h */,
 				2DBA1841E1F7B8E6EDEF5438 /* APRelatedPerson.m */,
+				2DBA18CC8B9A9AC8355A4F58 /* APEmailWithLabel.h */,
+				2DBA137692064C27CC3DDBC5 /* APEmailWithLabel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -492,6 +497,7 @@
 				2DBA12ED1646227C60CFEB8A /* APSocialServiceHelper.m in Sources */,
 				2DBA161F7922FC8733E39BDF /* APSource.m in Sources */,
 				2DBA14C2B75EDDF1BE7BCE4B /* APRelatedPerson.m in Sources */,
+				2DBA1592543ABA1E3A6B98EA /* APEmailWithLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

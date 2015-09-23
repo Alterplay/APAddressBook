@@ -67,6 +67,10 @@
     {
         contact.emails = [self.extractor arrayProperty:kABPersonEmailProperty];
     }
+    if (fieldMask & APContactFieldEmailsWithLabels)
+    {
+        contact.emailsWithLabels = [self.extractor emailsWithLabels];
+    }
     if (fieldMask & APContactFieldPhoto)
     {
         contact.photo = [self.extractor imagePropertyFullSize:YES];

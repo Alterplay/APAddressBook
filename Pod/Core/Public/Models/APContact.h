@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSArray *phones;
 @property (nonatomic, strong) NSArray *phonesWithLabels;
 @property (nonatomic, strong) NSArray *emails;
+@property (nonatomic, strong) NSArray *emailsWithLabels;
 @property (nonatomic, strong) NSArray *addresses;
 @property (nonatomic, strong) UIImage *photo;
 @property (nonatomic, strong) UIImage *thumbnail;

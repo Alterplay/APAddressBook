@@ -21,6 +21,7 @@
 - (NSDate *)dateProperty:(ABPropertyID)property;
 - (UIImage *)imagePropertyFullSize:(BOOL)isFullSize;
 - (NSArray *)phonesWithLabels;
+- (NSArray *)emailsWithLabels;
 - (NSArray *)addresses;
 - (NSString *)compositeName;
 - (NSArray *)socialProfiles;

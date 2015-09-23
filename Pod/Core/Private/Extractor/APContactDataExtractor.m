@@ -8,6 +8,7 @@
 
 #import "APContactDataExtractor.h"
 #import "APPhoneWithLabel.h"
+#import "APEmailWithLabel.h"
 #import "APAddress.h"
 #import "APSocialProfile.h"
 #import "APSocialServiceHelper.h"
@@ -25,17 +26,10 @@
 
 - (NSArray *)arrayProperty:(ABPropertyID)property
 {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    [self enumerateMultiValueOfProperty:property withBlock:^(ABMultiValueRef multiValue, CFIndex index)
+    return [self mapMultiValueOfProperty:property withBlock:^id(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index)
     {
-        CFTypeRef value = ABMultiValueCopyValueAtIndex(multiValue, index);
-        NSString *string = (__bridge_transfer NSString *)value;
-        if (string)
-        {
-            [array addObject:string];
-        }
+        return (__bridge NSString *)value;
     }];
-    return array.copy;
 }
 
 - (NSDate *)dateProperty:(ABPropertyID)property
@@ -54,23 +48,40 @@
 
 - (NSArray *)phonesWithLabels
 {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    [self enumerateMultiValueOfProperty:kABPersonPhoneProperty withBlock:^(ABMultiValueRef multiValue, CFIndex index)
+    return [self mapMultiValueOfProperty:kABPersonPhoneProperty withBlock:^id(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index)
     {
-        CFTypeRef rawPhone = ABMultiValueCopyValueAtIndex(multiValue, index);
-        NSString *phone = (__bridge_transfer NSString *)rawPhone;
-        if (phone)
+        APPhoneWithLabel *phoneWithLabel;
+        if (value)
         {
+            NSString *phone = (__bridge NSString *)value;
             NSString *originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
             NSString *localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
-            APPhoneWithLabel *phoneWithLabel = [[APPhoneWithLabel alloc] init];
+            phoneWithLabel = [[APPhoneWithLabel alloc] init];
             phoneWithLabel.phone = phone;
             phoneWithLabel.originalLabel = originalLabel;
             phoneWithLabel.localizedLabel = localizedLabel;
-            [array addObject:phoneWithLabel];
         }
+        return phoneWithLabel;
     }];
-    return array.copy;
+}
+
+- (NSArray *)emailsWithLabels
+{
+    return [self mapMultiValueOfProperty:kABPersonEmailProperty withBlock:^id(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index)
+    {
+        APEmailWithLabel *emailWithLabel;
+        if (value)
+        {
+            NSString *email = (__bridge NSString *)value;
+            NSString *originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
+            NSString *localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
+            emailWithLabel = [[APEmailWithLabel alloc] init];
+            emailWithLabel.email = email;
+            emailWithLabel.originalLabel = originalLabel;
+            emailWithLabel.localizedLabel = localizedLabel;
+        }
+        return emailWithLabel;
+    }];
 }
 
 - (NSArray *)addresses
@@ -149,20 +160,18 @@
 
 - (NSArray *)relatedPersons
 {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    [self enumerateMultiValueOfProperty:kABPersonRelatedNamesProperty withBlock:^(ABMultiValueRef multiValue, CFIndex index)
+    return [self mapMultiValueOfProperty:kABPersonRelatedNamesProperty withBlock:^id(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index)
     {
-        CFTypeRef rawPerson = ABMultiValueCopyValueAtIndex(multiValue, index);
-        if (rawPerson)
+        APRelatedPerson *relatedPerson;
+        if (value)
         {
-            APRelatedPerson *relatedPerson = [[APRelatedPerson alloc] init];
-            relatedPerson.name = (__bridge_transfer NSString *)rawPerson;
+            relatedPerson = [[APRelatedPerson alloc] init];
+            relatedPerson.name = (__bridge NSString *)value;
             relatedPerson.originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
             relatedPerson.localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
-            [array addObject:relatedPerson];
         }
+        return relatedPerson;
     }];
-    return array.copy;
 }
 
 #pragma mark - private
@@ -190,19 +199,27 @@
     return label;
 }
 
-- (void)enumerateMultiValueOfProperty:(ABPropertyID)property
-                            withBlock:(void (^)(ABMultiValueRef multiValue, CFIndex index))block
+- (NSArray *)mapMultiValueOfProperty:(ABPropertyID)property
+                           withBlock:(id (^)(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index))block
 {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
     ABMultiValueRef multiValue = ABRecordCopyValue(self.recordRef, property);
     if (multiValue)
     {
         CFIndex count = ABMultiValueGetCount(multiValue);
         for (CFIndex i = 0; i < count; i++)
         {
-            block(multiValue, i);
+            CFTypeRef value = ABMultiValueCopyValueAtIndex(multiValue, i);
+            id object = block(multiValue, value, i);
+            if (object)
+            {
+                [array addObject:object];
+            }
+            CFRelease(value);
         }
         CFRelease(multiValue);
     }
+    return array.count > 0 ? array.copy : nil;
 }
 
 - (NSString *)stringProperty:(ABPropertyID)property fromRecordRef:(ABRecordRef)recordRef
