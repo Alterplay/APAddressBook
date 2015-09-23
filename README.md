@@ -60,6 +60,9 @@ Available fields:
 * APContactFieldJobTitle - *contact job title*
 * APContactFieldWebsites - *array of contact websites*
 * APContactFieldBirthday - *contact birthday*
+* APContactFieldSource - *contact source ID and source name*
+* APContactFieldRelatedPersons - *contact related persons*
+* APContactFieldEmailsWithLabels - *emails with original and localized labels*
 * APContactFieldDefault - *contact first name, last name and phones array*
 * APContactFieldAll - *all contact fields described above*
 
