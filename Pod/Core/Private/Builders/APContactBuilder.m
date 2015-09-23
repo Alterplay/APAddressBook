@@ -115,6 +115,10 @@
     {
         contact.source = [self.extractor source];
     }
+    if (fieldMask & APContactFieldRelatedPersons)
+    {
+        contact.relatedPersons = [self.extractor relatedPersons];
+    }
     return contact;
 }
 

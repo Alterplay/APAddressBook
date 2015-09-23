@@ -12,6 +12,7 @@
 #import "APSocialProfile.h"
 #import "APSocialServiceHelper.h"
 #import "APSource.h"
+#import "APRelatedPerson.h"
 
 @implementation APContactDataExtractor
 
@@ -144,6 +145,24 @@
         CFRelease(sourceRef);
     }
     return source;
+}
+
+- (NSArray *)relatedPersons
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [self enumerateMultiValueOfProperty:kABPersonRelatedNamesProperty withBlock:^(ABMultiValueRef multiValue, CFIndex index)
+    {
+        CFTypeRef rawPerson = ABMultiValueCopyValueAtIndex(multiValue, index);
+        if (rawPerson)
+        {
+            APRelatedPerson *relatedPerson = [[APRelatedPerson alloc] init];
+            relatedPerson.name = (__bridge_transfer NSString *)rawPerson;
+            relatedPerson.originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
+            relatedPerson.localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
+            [array addObject:relatedPerson];
+        }
+    }];
+    return array.copy;
 }
 
 #pragma mark - private
