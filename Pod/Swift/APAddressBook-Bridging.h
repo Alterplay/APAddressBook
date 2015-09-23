@@ -16,3 +16,4 @@
 #import "APPhoneWithLabel.h"
 #import "APSource.h"
 #import "APRelatedPerson.h"
+#import "APEmailWithLabel.h"
