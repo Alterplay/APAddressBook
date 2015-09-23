@@ -14,4 +14,5 @@
 #import "APSocialProfile.h"
 #import "APAddress.h"
 #import "APPhoneWithLabel.h"
+#import "APSource.h"
 #import "APRelatedPerson.h"
