@@ -11,6 +11,7 @@
 #import "APAddress.h"
 #import "APSocialProfile.h"
 #import "APSocialServiceHelper.h"
+#import "APSource.h"
 
 @implementation APContactDataExtractor
 
@@ -18,8 +19,7 @@
 
 - (NSString *)stringProperty:(ABPropertyID)property
 {
-    CFTypeRef valueRef = (ABRecordCopyValue(self.recordRef, property));
-    return (__bridge_transfer NSString *)valueRef;
+    return [self stringProperty:property fromRecordRef:self.recordRef];
 }
 
 - (NSArray *)arrayProperty:(ABPropertyID)property
@@ -132,6 +132,20 @@
     return linkedRecordIDs.array;
 }
 
+- (APSource *)source
+{
+    APSource *source;
+    ABRecordRef sourceRef = ABPersonCopySource(self.recordRef);
+    if (sourceRef)
+    {
+        source = [[APSource alloc] init];
+        source.sourceType = [self stringProperty:kABSourceNameProperty fromRecordRef:sourceRef];
+        source.sourceID =  @(ABRecordGetRecordID(sourceRef));
+        CFRelease(sourceRef);
+    }
+    return source;
+}
+
 #pragma mark - private
 
 - (NSString *)originalLabelFromMultiValue:(ABMultiValueRef)multiValue index:(CFIndex)index
@@ -170,6 +184,12 @@
         }
         CFRelease(multiValue);
     }
+}
+
+- (NSString *)stringProperty:(ABPropertyID)property fromRecordRef:(ABRecordRef)recordRef
+{
+    CFTypeRef valueRef = (ABRecordCopyValue(recordRef, property));
+    return (__bridge_transfer NSString *)valueRef;
 }
 
 @end

@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 
+@class APSource;
+
 @interface APContactDataExtractor : NSObject
 
 @property (nonatomic, assign) ABRecordRef recordRef;
@@ -23,5 +25,6 @@
 - (NSString *)compositeName;
 - (NSArray *)socialProfiles;
 - (NSArray *)linkedRecordIDs;
+- (APSource *)source;
 
 @end

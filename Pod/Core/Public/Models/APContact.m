@@ -7,6 +7,7 @@
 //
 
 #import "APContact.h"
+#import "APSource.h"
 
 @implementation APContact
 @end

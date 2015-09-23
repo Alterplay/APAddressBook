@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class APSource;
+
 @interface APContact : NSObject
 
 @property (nonatomic, strong) NSString *firstName;
@@ -31,5 +33,6 @@
 @property (nonatomic, strong) NSArray *linkedRecordIDs;
 @property (nonatomic, strong) NSArray *websites;
 @property (nonatomic, strong) NSDate *birthday;
+@property (nonatomic, strong) APSource *source;
 
 @end
