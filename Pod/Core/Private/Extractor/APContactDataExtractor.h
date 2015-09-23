@@ -26,5 +26,6 @@
 - (NSArray *)socialProfiles;
 - (NSArray *)linkedRecordIDs;
 - (APSource *)source;
+- (NSArray *)relatedPersons;
 
 @end

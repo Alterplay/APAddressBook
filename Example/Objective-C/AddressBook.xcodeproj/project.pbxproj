@@ -14,6 +14,7 @@
 		2DBA12ED1646227C60CFEB8A /* APSocialServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1D50E367D26256BF6ACE /* APSocialServiceHelper.m */; };
 		2DBA1353F6D48E61D8FE52E9 /* APAddressBookAccessRoutine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA12274B8BFA605F110B91 /* APAddressBookAccessRoutine.m */; };
 		2DBA137D3076D6E6FC78ABB9 /* APContactBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA10055B7C4CA15B752EE5 /* APContactBuilder.m */; };
+		2DBA14C2B75EDDF1BE7BCE4B /* APRelatedPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1841E1F7B8E6EDEF5438 /* APRelatedPerson.m */; };
 		2DBA161F7922FC8733E39BDF /* APSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA1F7630DA6BBFED5D6526 /* APSource.m */; };
 		2DBA18FC2FF7F4AE18208C23 /* APAddressBookBaseRoutine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA14AE247588EB09FCB705 /* APAddressBookBaseRoutine.m */; };
 		2DBA1A57B40D47C26F1FC2EA /* NSArray+APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA163CB64937C13056022E /* NSArray+APAddressBook.m */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		2DBA10055B7C4CA15B752EE5 /* APContactBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APContactBuilder.m; sourceTree = "<group>"; };
+		2DBA1035DAD42BBC187C2E56 /* APRelatedPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APRelatedPerson.h; sourceTree = "<group>"; };
 		2DBA10804A06D410681819BD /* APAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddress.m; sourceTree = "<group>"; };
 		2DBA11586D1BD36B84E8D9B0 /* APAddressBookAccessRoutine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBookAccessRoutine.h; sourceTree = "<group>"; };
 		2DBA11E92C0A7C2973BD787B /* NSArray+APAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+APAddressBook.h"; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		2DBA163CB64937C13056022E /* NSArray+APAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+APAddressBook.m"; sourceTree = "<group>"; };
 		2DBA16AB38312AA9DDBD1F1F /* APAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddress.h; sourceTree = "<group>"; };
 		2DBA1825CB9083C503993480 /* APSocialProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APSocialProfile.m; sourceTree = "<group>"; };
+		2DBA1841E1F7B8E6EDEF5438 /* APRelatedPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APRelatedPerson.m; sourceTree = "<group>"; };
 		2DBA19846B6F2A33EDA67564 /* APContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APContact.h; sourceTree = "<group>"; };
 		2DBA19EA7D800550FD7BB39A /* APSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APSource.h; sourceTree = "<group>"; };
 		2DBA1A1320B550F8D7A58ED9 /* APAddressBookRefWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBookRefWrapper.h; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				2DBA161642CBB5F0613EABC7 /* APTypes.h */,
 				2DBA1F7630DA6BBFED5D6526 /* APSource.m */,
 				2DBA19EA7D800550FD7BB39A /* APSource.h */,
+				2DBA1035DAD42BBC187C2E56 /* APRelatedPerson.h */,
+				2DBA1841E1F7B8E6EDEF5438 /* APRelatedPerson.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				2DBA10B2D79BB0AB645BCED5 /* APContactDataExtractor.m in Sources */,
 				2DBA12ED1646227C60CFEB8A /* APSocialServiceHelper.m in Sources */,
 				2DBA161F7922FC8733E39BDF /* APSource.m in Sources */,
+				2DBA14C2B75EDDF1BE7BCE4B /* APRelatedPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

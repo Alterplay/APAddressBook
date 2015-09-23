@@ -34,5 +34,6 @@
 @property (nonatomic, strong) NSArray *websites;
 @property (nonatomic, strong) NSDate *birthday;
 @property (nonatomic, strong) APSource *source;
+@property (nonatomic, strong) NSArray *relatedPersons;
 
 @end
