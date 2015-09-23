@@ -111,6 +111,10 @@
     {
         contact.birthday = [self.extractor dateProperty:kABPersonBirthdayProperty];
     }
+    if (fieldMask & APContactFieldSource)
+    {
+        contact.source = [self.extractor source];
+    }
     return contact;
 }
 
