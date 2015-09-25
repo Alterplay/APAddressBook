@@ -14,11 +14,11 @@ class TableViewCell: DTTableViewCell {
         super.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func updateWithModel(model: AnyObject!) {
+    override func updateWithModel(model: AnyObject) {
         let contact = model as! APContact
         self.imageView?.image = contact.thumbnail
         self.textLabel?.text = self.contactName(contact)
