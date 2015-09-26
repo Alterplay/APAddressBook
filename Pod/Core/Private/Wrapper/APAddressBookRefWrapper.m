@@ -22,11 +22,11 @@
 - (id)init
 {
     self = [super init];
-    CFErrorRef *error = NULL;
-    ref = ABAddressBookCreateWithOptions(NULL, error);
+    CFErrorRef error = NULL;
+    ref = ABAddressBookCreateWithOptions(NULL, &error);
     if (error)
     {
-        self.error = (__bridge NSError *)(*error);
+        self.error = (__bridge NSError *)(error);
     }
     return self;
 }
