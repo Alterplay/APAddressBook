@@ -16,9 +16,9 @@ class ViewController: DTTableViewController {
 
     // MARK: - life cycle
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
-        self.addressBook.fieldsMask = APContactField.Default | APContactField.Thumbnail
+        self.addressBook.fieldsMask = [APContactField.Default, APContactField.Thumbnail]
         self.addressBook.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true),
                                             NSSortDescriptor(key: "lastName", ascending: true)]
         self.addressBook.filterBlock = {
