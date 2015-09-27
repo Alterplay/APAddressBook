@@ -9,4 +9,3 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "APAddressBook-Bridging.h"
-#import "DTTableViewManager.h"

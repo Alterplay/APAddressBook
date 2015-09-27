@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC7C9DDD497D46C0BC5090E1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E250D68A454F4989DC2929 /* libPods.a */; };
+		E3F1D892D235D625184F9F17 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB78809B6D8C50909ECAA0D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FA3B984C198ABBB5005953CE /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B984B198ABBB5005953CE /* TableViewCell.swift */; };
 		FA97F6981BB2F8D600723A61 /* APContactBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97F6681BB2F8D600723A61 /* APContactBuilder.m */; };
 		FA97F6991BB2F8D600723A61 /* NSArray+APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97F66B1BB2F8D600723A61 /* NSArray+APAddressBook.m */; };
@@ -34,9 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3BB78809B6D8C50909ECAA0D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66F112F4D42891A3F34E4113 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C119F157280640CA31CD4E27 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		E7E250D68A454F4989DC2929 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA3B984A198AB8C2005953CE /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		FA3B984B198ABBB5005953CE /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		FA97F6671BB2F8D600723A61 /* APContactBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APContactBuilder.h; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC7C9DDD497D46C0BC5090E1 /* libPods.a in Frameworks */,
+				E3F1D892D235D625184F9F17 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +110,7 @@
 		65E3953D9FB24ACD81049105 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E7E250D68A454F4989DC2929 /* libPods.a */,
+				3BB78809B6D8C50909ECAA0D /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -343,6 +343,7 @@
 				FACA833C198AB2FD0059676C /* Frameworks */,
 				FACA833D198AB2FD0059676C /* Resources */,
 				B2898E40613B4BB0A854A658 /* Copy Pods Resources */,
+				E0E8BCB42F883C2CED641DC0 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -427,6 +428,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0E8BCB42F883C2CED641DC0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -559,7 +575,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = AddressBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alterplay.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -574,7 +590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = AddressBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alterplay.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -36,10 +36,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Dhq-VU-MVC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="bc7-9b-hVh"/>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="vZe-PD-4cu"/>
-                                </connections>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2gY-eu-kMt">
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
@@ -67,8 +63,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activity" destination="2gY-eu-kMt" id="wow-Rk-7l4"/>
-                        <outlet property="tableView" destination="Dhq-VU-MVC" id="PAh-w6-Eqo"/>
+                        <outlet property="activity" destination="2gY-eu-kMt" id="gX5-AZ-WOu"/>
+                        <outlet property="tableView" destination="Dhq-VU-MVC" id="GMW-40-dbM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

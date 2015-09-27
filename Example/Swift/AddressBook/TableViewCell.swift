@@ -6,9 +6,12 @@
 //  Copyright (c) 2014 alterplay. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import DTModelStorage
 
-class TableViewCell: DTTableViewCell {
+class TableViewCell: UITableViewCell, ModelTransfer {
+
+    // MARK: - life cycle
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
@@ -17,20 +20,26 @@ class TableViewCell: DTTableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+
+    // MARK: - ModelTransfer
     
-    override func updateWithModel(model: AnyObject) {
-        let contact = model as! APContact
+    func updateWithModel(contact: APContact) {
         self.imageView?.image = contact.thumbnail
         self.textLabel?.text = self.contactName(contact)
         self.detailTextLabel?.text = self.contactPhones(contact)
     }
+
+    // MARK: - prviate
     
     func contactName(contact :APContact) -> String {
-        if contact.firstName != nil && contact.lastName != nil {
-            return "\(contact.firstName!) \(contact.lastName!)"
+        if let firstName = contact.firstName, lastName = contact.lastName {
+            return "\(firstName) \(lastName)"
         }
-        else if contact.firstName != nil || contact.lastName != nil {
-            return (contact.firstName != nil) ? "\(contact.firstName!)" : "\(contact.lastName!)"
+        else if let firstName = contact.firstName {
+            return "\(firstName)"
+        }
+        else if let lastName = contact.lastName {
+            return "\(lastName)"
         }
         else {
             return "Unnamed contact"
@@ -38,9 +47,8 @@ class TableViewCell: DTTableViewCell {
     }
     
     func contactPhones(contact :APContact) -> String {
-        if let phones = contact.phones {
-            let array = phones as NSArray
-            return array.componentsJoinedByString(" ")
+        if let phones = contact.phones as NSArray? {
+            return phones.componentsJoinedByString(" ")
         }
         return "No phone"
     }

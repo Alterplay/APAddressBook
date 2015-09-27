@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import DTTableViewManager
+import DTModelStorage
 
-class ViewController: DTTableViewController {
+class ViewController: UIViewController, DTTableViewManageable {
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
 
     let addressBook = APAddressBook()
@@ -38,7 +41,8 @@ class ViewController: DTTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.registerCellClass(TableViewCell.self, forModelClass: APContact.self)
+        self.manager.startManagingWithDelegate(self)
+        self.manager.registerCellClass(TableViewCell)
         self.loadContacts()
     }
 
@@ -52,12 +56,12 @@ class ViewController: DTTableViewController {
 
     func loadContacts() {
         self.activity.startAnimating();
-        self.memoryStorage().removeAllTableItems();
         self.addressBook.loadContacts({
             (contacts: [AnyObject]?, error: NSError?) in
             self.activity.stopAnimating()
+            self.manager.memoryStorage.removeAllTableItems();
             if let unwrappedContacts = contacts {
-                self.memoryStorage().addItems(unwrappedContacts)
+                self.manager.memoryStorage.addItems(unwrappedContacts)
             } else if let unwrappedError = error {
                 let alert = UIAlertView(title: "Error", message: unwrappedError.localizedDescription,
                     delegate: nil, cancelButtonTitle: "OK")
