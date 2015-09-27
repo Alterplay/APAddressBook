@@ -12,8 +12,8 @@
 @interface APSocialProfile : NSObject
 
 @property (nonatomic, assign) APSocialNetworkType socialNetwork;
-@property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *userIdentifier;
-@property (nonatomic, strong) NSURL *url;
+@property (nullable, nonatomic, strong) NSString *username;
+@property (nullable, nonatomic, strong) NSString *userIdentifier;
+@property (nullable, nonatomic, strong) NSURL *url;
 
 @end

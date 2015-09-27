@@ -13,28 +13,28 @@
 
 @interface APContact : NSObject
 
-@property (nonatomic, strong) NSString *firstName;
-@property (nonatomic, strong) NSString *middleName;
-@property (nonatomic, strong) NSString *lastName;
-@property (nonatomic, strong) NSString *compositeName;
-@property (nonatomic, strong) NSString *company;
-@property (nonatomic, strong) NSString *jobTitle;
-@property (nonatomic, strong) NSArray *phones;
-@property (nonatomic, strong) NSArray *phonesWithLabels;
-@property (nonatomic, strong) NSArray *emails;
-@property (nonatomic, strong) NSArray *emailsWithLabels;
-@property (nonatomic, strong) NSArray *addresses;
-@property (nonatomic, strong) UIImage *photo;
-@property (nonatomic, strong) UIImage *thumbnail;
-@property (nonatomic, strong) NSNumber *recordID;
-@property (nonatomic, strong) NSDate *creationDate;
-@property (nonatomic, strong) NSDate *modificationDate;
-@property (nonatomic, strong) NSArray *socialProfiles;
-@property (nonatomic, strong) NSString *note;
-@property (nonatomic, strong) NSArray *linkedRecordIDs;
-@property (nonatomic, strong) NSArray *websites;
-@property (nonatomic, strong) NSDate *birthday;
-@property (nonatomic, strong) APSource *source;
-@property (nonatomic, strong) NSArray *relatedPersons;
+@property (nullable, nonatomic, strong) NSString *firstName;
+@property (nullable, nonatomic, strong) NSString *middleName;
+@property (nullable, nonatomic, strong) NSString *lastName;
+@property (nullable, nonatomic, strong) NSString *compositeName;
+@property (nullable, nonatomic, strong) NSString *company;
+@property (nullable, nonatomic, strong) NSString *jobTitle;
+@property (nullable, nonatomic, strong) NSArray *phones;
+@property (nullable, nonatomic, strong) NSArray *phonesWithLabels;
+@property (nullable, nonatomic, strong) NSArray *emails;
+@property (nullable, nonatomic, strong) NSArray *emailsWithLabels;
+@property (nullable, nonatomic, strong) NSArray *addresses;
+@property (nullable, nonatomic, strong) UIImage *photo;
+@property (nullable, nonatomic, strong) UIImage *thumbnail;
+@property (nullable, nonatomic, strong) NSNumber *recordID;
+@property (nullable, nonatomic, strong) NSDate *creationDate;
+@property (nullable, nonatomic, strong) NSDate *modificationDate;
+@property (nullable, nonatomic, strong) NSArray *socialProfiles;
+@property (nullable, nonatomic, strong) NSString *note;
+@property (nullable, nonatomic, strong) NSArray *linkedRecordIDs;
+@property (nullable, nonatomic, strong) NSArray *websites;
+@property (nullable, nonatomic, strong) NSDate *birthday;
+@property (nullable, nonatomic, strong) APSource *source;
+@property (nullable, nonatomic, strong) NSArray *relatedPersons;
 
 @end
