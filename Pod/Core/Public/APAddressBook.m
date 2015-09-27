@@ -63,13 +63,13 @@
     return [APAddressBookAccessRoutine accessStatus];
 }
 
-+ (void)requestAccess:(void (^)(BOOL granted, NSError *error))completionBlock {
++ (void)requestAccess:(void (^)(BOOL granted, NSError *error))completionBlock
+{
     [self requestAccessOnQueue:dispatch_get_main_queue() completion:completionBlock];
 }
 
 + (void)requestAccessOnQueue:(dispatch_queue_t)queue
-                  completion:(void (^)(BOOL granted, NSError *error))completionBlock
-{
+                  completion:(void (^)(BOOL granted, NSError *error))completionBlock{
     APAddressBookRefWrapper *refWrapper = [[APAddressBookRefWrapper alloc] init];
     APAddressBookAccessRoutine *access = [[APAddressBookAccessRoutine alloc] initWithAddressBookRefWrapper:refWrapper];
     [access requestAccessWithCompletion:^(BOOL granted, NSError *error)
@@ -111,7 +111,7 @@
 
 - (void)startObserveChangesWithCallback:(void (^)())callback
 {
-    [self startObserveChangesOnQueue:nil callback:callback];
+    [self startObserveChangesOnQueue:dispatch_get_main_queue() callback:callback];
 }
 
 - (void)startObserveChangesOnQueue:(dispatch_queue_t)queue callback:(void (^)())callback
@@ -126,7 +126,7 @@
     self.externalChangeQueue = nil;
 }
 
-- (APContact *)getContactByRecordID:(NSNumber *)recordID
+- (nullable APContact *)getContactByRecordID:(NSNumber *)recordID
 {
     APContactField fieldMask = self.fieldsMask;
     __block APContact *contact = nil;

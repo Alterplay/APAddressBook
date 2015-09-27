@@ -10,8 +10,8 @@
 
 @interface APRelatedPerson : NSObject
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *originalLabel;
-@property (nonatomic, strong) NSString *localizedLabel;
+@property (nullable, nonatomic, strong) NSString *name;
+@property (nullable, nonatomic, strong) NSString *originalLabel;
+@property (nullable, nonatomic, strong) NSString *localizedLabel;
 
 @end

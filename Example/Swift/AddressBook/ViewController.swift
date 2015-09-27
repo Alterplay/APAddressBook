@@ -22,8 +22,11 @@ class ViewController: DTTableViewController {
         self.addressBook.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true),
                                             NSSortDescriptor(key: "lastName", ascending: true)]
         self.addressBook.filterBlock = {
-            (contact: APContact!) -> Bool in
-            return contact.phones.count > 0
+            (contact: APContact) -> Bool in
+            if let phones = contact.phones {
+                return phones.count > 0
+            }
+            return false
         }
         self.addressBook.startObserveChangesWithCallback({
             [unowned self] in
@@ -51,13 +54,13 @@ class ViewController: DTTableViewController {
         self.activity.startAnimating();
         self.memoryStorage().removeAllTableItems();
         self.addressBook.loadContacts({
-            (contacts: [AnyObject]!, error: NSError!) in
+            (contacts: [AnyObject]?, error: NSError?) in
             self.activity.stopAnimating()
-            if (contacts != nil) {
-                self.memoryStorage().addItems(contacts)
-            } else if (error != nil) {
-                let alert = UIAlertView(title: "Error", message: error.localizedDescription, delegate: nil,
-                        cancelButtonTitle: "OK")
+            if let unwrappedContacts = contacts {
+                self.memoryStorage().addItems(unwrappedContacts)
+            } else if let unwrappedError = error {
+                let alert = UIAlertView(title: "Error", message: unwrappedError.localizedDescription,
+                    delegate: nil, cancelButtonTitle: "OK")
                 alert.show()
             }
         })

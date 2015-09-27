@@ -10,27 +10,26 @@
 #import "APTypes.h"
 
 @class APContact;
-typedef BOOL(^APContactFilterBlock)(APContact *contact);
+typedef BOOL(^APContactFilterBlock)(APContact * _Nonnull contact);
 
 @interface APAddressBook : NSObject
 
 @property (nonatomic, assign) APContactField fieldsMask;
-@property (nonatomic, copy) APContactFilterBlock filterBlock;
-@property (nonatomic, strong) NSArray *sortDescriptors;
+@property (nullable, nonatomic, copy) APContactFilterBlock filterBlock;
+@property (nullable, nonatomic, strong) NSArray *sortDescriptors;
 
 + (APAddressBookAccess)access;
-+ (void)requestAccess:(void (^)(BOOL granted, NSError *error))completionBlock;
-+ (void)requestAccessOnQueue:(dispatch_queue_t)queue
-                  completion:(void (^)(BOOL granted, NSError *error))completionBlock;
++ (void)requestAccess:(nullable void (^)(BOOL granted, NSError * _Nullable error))completionBlock;
++ (void)requestAccessOnQueue:(nonnull dispatch_queue_t)queue
+                  completion:(nullable void (^)(BOOL granted, NSError * _Nullable error))completionBlock;
+- (void)loadContacts:(nullable void (^)(NSArray * _Nullable contacts, NSError * _Nullable error))completionBlock;
+- (void)loadContactsOnQueue:(nonnull dispatch_queue_t)queue
+                 completion:(nullable void (^)(NSArray * _Nullable contacts, NSError * _Nullable error))completionBlock;
 
-- (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))completionBlock;
-- (void)loadContactsOnQueue:(dispatch_queue_t)queue
-                 completion:(void (^)(NSArray *contacts, NSError *error))completionBlock;
-
-- (void)startObserveChangesWithCallback:(void (^)())callback;
-- (void)startObserveChangesOnQueue:(dispatch_queue_t)queue callback:(void (^)())callback;
+- (void)startObserveChangesWithCallback:(nonnull void (^)())callback;
+- (void)startObserveChangesOnQueue:(nonnull dispatch_queue_t)queue callback:(nonnull void (^)())callback;
 - (void)stopObserveChanges;
 
-- (APContact *)getContactByRecordID:(NSNumber *)recordID;
+- (nullable APContact *)getContactByRecordID:(nonnull NSNumber *)recordID;
 
 @end

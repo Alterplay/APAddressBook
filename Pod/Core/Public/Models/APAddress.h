@@ -10,11 +10,11 @@
 
 @interface APAddress : NSObject
 
-@property (nonatomic, strong) NSString *street;
-@property (nonatomic, strong) NSString *city;
-@property (nonatomic, strong) NSString *state;
-@property (nonatomic, strong) NSString *zip;
-@property (nonatomic, strong) NSString *country;
-@property (nonatomic, strong) NSString *countryCode;
+@property (nullable, nonatomic, strong) NSString *street;
+@property (nullable, nonatomic, strong) NSString *city;
+@property (nullable, nonatomic, strong) NSString *state;
+@property (nullable, nonatomic, strong) NSString *zip;
+@property (nullable, nonatomic, strong) NSString *country;
+@property (nullable, nonatomic, strong) NSString *countryCode;
 
 @end
