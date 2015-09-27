@@ -57,7 +57,7 @@ class ViewController: UIViewController, DTTableViewManageable {
     func loadContacts() {
         self.activity.startAnimating();
         self.addressBook.loadContacts({
-            (contacts: [AnyObject]?, error: NSError?) in
+            (contacts: [APContact]?, error: NSError?) in
             self.activity.stopAnimating()
             self.manager.memoryStorage.removeAllTableItems();
             if let unwrappedContacts = contacts {

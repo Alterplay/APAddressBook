@@ -28,7 +28,10 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
 
 - (void)dealloc
 {
-    [self unregisterExternalChangeCallback];
+    if (!self.wrapper.error)
+    {
+        [self unregisterExternalChangeCallback];
+    }
 }
 
 #pragma mark - private

@@ -9,7 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class APPhoneWithLabel;
+@class APEmailWithLabel;
+@class APAddress;
+@class APSocialProfile;
 @class APSource;
+@class APRelatedPerson;
 
 @interface APContact : NSObject
 
@@ -19,22 +24,22 @@
 @property (nullable, nonatomic, strong) NSString *compositeName;
 @property (nullable, nonatomic, strong) NSString *company;
 @property (nullable, nonatomic, strong) NSString *jobTitle;
-@property (nullable, nonatomic, strong) NSArray *phones;
-@property (nullable, nonatomic, strong) NSArray *phonesWithLabels;
-@property (nullable, nonatomic, strong) NSArray *emails;
-@property (nullable, nonatomic, strong) NSArray *emailsWithLabels;
-@property (nullable, nonatomic, strong) NSArray *addresses;
+@property (nullable, nonatomic, strong) NSArray <NSString *> *phones;
+@property (nullable, nonatomic, strong) NSArray <APPhoneWithLabel *> *phonesWithLabels;
+@property (nullable, nonatomic, strong) NSArray <NSString *> *emails;
+@property (nullable, nonatomic, strong) NSArray <APEmailWithLabel *> *emailsWithLabels;
+@property (nullable, nonatomic, strong) NSArray <APAddress *> *addresses;
 @property (nullable, nonatomic, strong) UIImage *photo;
 @property (nullable, nonatomic, strong) UIImage *thumbnail;
 @property (nullable, nonatomic, strong) NSNumber *recordID;
 @property (nullable, nonatomic, strong) NSDate *creationDate;
 @property (nullable, nonatomic, strong) NSDate *modificationDate;
-@property (nullable, nonatomic, strong) NSArray *socialProfiles;
+@property (nullable, nonatomic, strong) NSArray <APSocialProfile *> *socialProfiles;
 @property (nullable, nonatomic, strong) NSString *note;
-@property (nullable, nonatomic, strong) NSArray *linkedRecordIDs;
-@property (nullable, nonatomic, strong) NSArray *websites;
+@property (nullable, nonatomic, strong) NSArray <NSNumber *> *linkedRecordIDs;
+@property (nullable, nonatomic, strong) NSArray <NSString *> *websites;
 @property (nullable, nonatomic, strong) NSDate *birthday;
 @property (nullable, nonatomic, strong) APSource *source;
-@property (nullable, nonatomic, strong) NSArray *relatedPersons;
+@property (nullable, nonatomic, strong) NSArray <APRelatedPerson *> *relatedPersons;
 
 @end

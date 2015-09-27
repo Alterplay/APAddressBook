@@ -63,13 +63,13 @@
     return [APAddressBookAccessRoutine accessStatus];
 }
 
-+ (void)requestAccess:(void (^)(BOOL granted, NSError *error))completionBlock
++ (void)requestAccess:(APRequestAccessBlock)completionBlock
 {
     [self requestAccessOnQueue:dispatch_get_main_queue() completion:completionBlock];
 }
 
-+ (void)requestAccessOnQueue:(dispatch_queue_t)queue
-                  completion:(void (^)(BOOL granted, NSError *error))completionBlock{
++ (void)requestAccessOnQueue:(dispatch_queue_t)queue completion:(APRequestAccessBlock)completionBlock
+{
     APAddressBookRefWrapper *refWrapper = [[APAddressBookRefWrapper alloc] init];
     APAddressBookAccessRoutine *access = [[APAddressBookAccessRoutine alloc] initWithAddressBookRefWrapper:refWrapper];
     [access requestAccessWithCompletion:^(BOOL granted, NSError *error)
@@ -81,16 +81,15 @@
     }];
 }
 
-- (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))completionBlock
+- (void)loadContacts:(APLoadContactsBlock)completionBlock
 {
     [self loadContactsOnQueue:dispatch_get_main_queue() completion:completionBlock];
 }
 
-- (void)loadContactsOnQueue:(dispatch_queue_t)queue
-                 completion:(void (^)(NSArray *contacts, NSError *error))completionBlock
+- (void)loadContactsOnQueue:(dispatch_queue_t)queue completion:(APLoadContactsBlock)completionBlock
 {
     NSArray *descriptors = self.sortDescriptors;
-    APContactFilterBlock filterBlock = self.filterBlock;
+    APFilterContactsBlock filterBlock = self.filterBlock;
     APContactField fieldMask = self.fieldsMask;
     [self.thread dispatchAsync:^
     {

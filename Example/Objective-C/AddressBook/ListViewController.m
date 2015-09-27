@@ -20,7 +20,7 @@
 
 #pragma mark - life cycle
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -84,17 +84,18 @@
     {
         return contact.phones.count > 0;
     };
-    [self.addressBook loadContacts:^(NSArray *contacts, NSError *error)
-    {
+    [self.addressBook loadContacts:^(NSArray<APContact *> *contacts, NSError *error) {
         [weakSelf.activity stopAnimating];
-        if (!error)
+        if (contacts)
         {
             [weakSelf.memoryStorage addTableItems:contacts];
         }
-        else
+        else if (error)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:error.localizedDescription
-                                                               delegate:nil cancelButtonTitle:@"OK"
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                message:error.localizedDescription
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
             [alertView show];
         }
