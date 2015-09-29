@@ -31,6 +31,7 @@
 {
     self.extractor.recordRef = recordRef;
     APContact *contact = [[APContact alloc] init];
+    contact.recordID = @(ABRecordGetRecordID(recordRef));
     if (fieldMask & APContactFieldFirstName)
     {
         contact.firstName = [self.extractor stringProperty:kABPersonFirstNameProperty];
@@ -71,10 +72,6 @@
     {
         contact.emailsWithLabels = [self.extractor emailsWithLabels];
     }
-    if (fieldMask & APContactFieldPhoto)
-    {
-        contact.photo = [self.extractor imagePropertyFullSize:YES];
-    }
     if (fieldMask & APContactFieldThumbnail)
     {
         contact.thumbnail = [self.extractor imagePropertyFullSize:NO];
@@ -82,10 +79,6 @@
     if (fieldMask & APContactFieldAddresses)
     {
         contact.addresses = [self.extractor addresses];
-    }
-    if (fieldMask & APContactFieldRecordID)
-    {
-        contact.recordID = @(ABRecordGetRecordID(recordRef));
     }
     if (fieldMask & APContactFieldCreationDate)
     {

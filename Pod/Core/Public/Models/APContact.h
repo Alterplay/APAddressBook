@@ -18,6 +18,7 @@
 
 @interface APContact : NSObject
 
+@property (nullable, nonatomic, strong) NSNumber *recordID;
 @property (nullable, nonatomic, strong) NSString *firstName;
 @property (nullable, nonatomic, strong) NSString *middleName;
 @property (nullable, nonatomic, strong) NSString *lastName;
@@ -29,9 +30,7 @@
 @property (nullable, nonatomic, strong) NSArray <NSString *> *emails;
 @property (nullable, nonatomic, strong) NSArray <APEmailWithLabel *> *emailsWithLabels;
 @property (nullable, nonatomic, strong) NSArray <APAddress *> *addresses;
-@property (nullable, nonatomic, strong) UIImage *photo;
 @property (nullable, nonatomic, strong) UIImage *thumbnail;
-@property (nullable, nonatomic, strong) NSNumber *recordID;
 @property (nullable, nonatomic, strong) NSDate *creationDate;
 @property (nullable, nonatomic, strong) NSDate *modificationDate;
 @property (nullable, nonatomic, strong) NSArray <APSocialProfile *> *socialProfiles;
