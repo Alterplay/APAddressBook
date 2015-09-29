@@ -108,6 +108,27 @@
     }];
 }
 
+- (void)loadContactByRecordId:(nonnull NSNumber *)recordID
+                   completion:(nonnull APLoadContactBlock)completion
+{
+    [self loadContactByRecordId:recordID onQueue:dispatch_get_main_queue() completion:completion];
+}
+
+- (void)loadContactByRecordId:(nonnull NSNumber *)recordID
+                      onQueue:(nonnull dispatch_queue_t)queue
+                   completion:(nonnull APLoadContactBlock)completion
+{
+    [self.thread dispatchAsync:^
+    {
+        APContact *contact = [self.contacts contactByRecordID:recordID
+                                                withFieldMask:self.fieldsMask];
+        dispatch_async(queue, ^
+        {
+            completion ? completion(contact) : nil;
+        });
+    }];
+}
+
 - (void)startObserveChangesWithCallback:(void (^)())callback
 {
     [self startObserveChangesOnQueue:dispatch_get_main_queue() callback:callback];
@@ -125,17 +146,6 @@
     self.externalChangeQueue = nil;
 }
 
-- (nullable APContact *)getContactByRecordID:(NSNumber *)recordID
-{
-    APContactField fieldMask = self.fieldsMask;
-    __block APContact *contact = nil;
-    [self.thread dispatchSync:^
-    {
-        contact = [self.contacts contactByRecordID:recordID withFieldMask:fieldMask];
-    }];
-    return contact;
-}
-
 #pragma mark - APAddressBookExternalChangeDelegate
 
 - (void)addressBookDidChange
@@ -145,6 +155,19 @@
     {
         self.externalChangeCallback ? self.externalChangeCallback() : nil;
     });
+}
+
+#pragma mark - deprecated
+
+- (nullable APContact *)getContactByRecordID:(NSNumber *)recordID
+{
+    APContactField fieldMask = self.fieldsMask;
+    __block APContact *contact = nil;
+    [self.thread dispatchSync:^
+    {
+        contact = [self.contacts contactByRecordID:recordID withFieldMask:fieldMask];
+    }];
+    return contact;
 }
 
 @end
