@@ -38,14 +38,6 @@
     return (__bridge_transfer NSDate *)dateRef;
 }
 
-- (UIImage *)imagePropertyFullSize:(BOOL)isFullSize
-{
-    ABPersonImageFormat format = isFullSize ? kABPersonImageFormatOriginalSize :
-                                 kABPersonImageFormatThumbnail;
-    NSData *data = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(self.recordRef, format);
-    return [UIImage imageWithData:data scale:UIScreen.mainScreen.scale];
-}
-
 - (NSArray *)phonesWithLabels
 {
     return [self mapMultiValueOfProperty:kABPersonPhoneProperty withBlock:^id(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index)

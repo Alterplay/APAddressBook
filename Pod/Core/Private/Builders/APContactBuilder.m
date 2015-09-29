@@ -9,6 +9,7 @@
 #import "APContactBuilder.h"
 #import "APContactDataExtractor.h"
 #import "APContact.h"
+#import "APImageExtractor.h"
 
 @interface APContactBuilder ()
 @property (nonatomic, strong) APContactDataExtractor *extractor;
@@ -74,7 +75,7 @@
     }
     if (fieldMask & APContactFieldThumbnail)
     {
-        contact.thumbnail = [self.extractor imagePropertyFullSize:NO];
+        contact.thumbnail = [APImageExtractor thumbnailWithRecordRef:recordRef];
     }
     if (fieldMask & APContactFieldAddresses)
     {

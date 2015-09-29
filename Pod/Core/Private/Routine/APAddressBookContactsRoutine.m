@@ -10,6 +10,7 @@
 #import "APAddressBookContactsRoutine.h"
 #import "APAddressBookRefWrapper.h"
 #import "APContactBuilder.h"
+#import "APImageExtractor.h"
 
 @interface APAddressBookContactsRoutine ()
 @property (nonatomic, strong) APContactBuilder *builder;
@@ -55,5 +56,16 @@
     }
     return nil;
 }
+
+- (UIImage *)imageWithRecordID:(NSNumber *)recordID
+{
+    if (!self.wrapper.error)
+    {
+        ABRecordRef recordRef = ABAddressBookGetPersonWithRecordID(self.wrapper.ref, recordID.intValue);
+        return recordRef != NULL ? [APImageExtractor photoWithRecordRef:recordRef] : nil;
+    }
+    return nil;
+}
+
 
 @end

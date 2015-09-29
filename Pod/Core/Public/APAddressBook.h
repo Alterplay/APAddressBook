@@ -13,6 +13,7 @@
 typedef BOOL(^APFilterContactsBlock)(APContact * _Nonnull contact);
 typedef void(^APLoadContactsBlock)(NSArray <APContact *> * _Nullable contacts, NSError * _Nullable error);
 typedef void(^APLoadContactBlock)(APContact * _Nullable contact);
+typedef void(^APLoadPhotoBlock)(UIImage * _Nullable photo);
 typedef void(^APRequestAccessBlock)(BOOL granted, NSError * _Nullable error);
 
 @interface APAddressBook : NSObject
@@ -28,11 +29,16 @@ typedef void(^APRequestAccessBlock)(BOOL granted, NSError * _Nullable error);
 - (void)loadContacts:(nonnull APLoadContactsBlock)completionBlock;
 - (void)loadContactsOnQueue:(nonnull dispatch_queue_t)queue
                  completion:(nonnull APLoadContactsBlock)completionBlock;
-- (void)loadContactByRecordId:(nonnull NSNumber *)recordID
+- (void)loadContactByRecordID:(nonnull NSNumber *)recordID
                    completion:(nonnull APLoadContactBlock)completion;
-- (void)loadContactByRecordId:(nonnull NSNumber *)recordID
+- (void)loadContactByRecordID:(nonnull NSNumber *)recordID
                       onQueue:(nonnull dispatch_queue_t)queue
                    completion:(nonnull APLoadContactBlock)completion;
+- (void)loadPhotoByRecordID:(nonnull NSNumber *)recordID
+                 completion:(APLoadPhotoBlock)completion;
+- (void)loadPhotoByRecordID:(nonnull NSNumber *)recordID
+                    onQueue:(nonnull dispatch_queue_t)queue
+                 completion:(APLoadPhotoBlock)completion;
 - (void)startObserveChangesWithCallback:(nonnull void (^)())callback;
 - (void)startObserveChangesOnQueue:(nonnull dispatch_queue_t)queue
                           callback:(nonnull void (^)())callback;
@@ -46,6 +52,6 @@ typedef void(^APRequestAccessBlock)(BOOL granted, NSError * _Nullable error);
 @interface APAddressBook (Deprecated)
 
 - (nullable APContact *)getContactByRecordID:(nonnull NSNumber *)recordID
-AP_DEPRECATED("loadContactByRecordId:completion:");
+AP_DEPRECATED("loadContactByRecordID:completion:");
 
 @end

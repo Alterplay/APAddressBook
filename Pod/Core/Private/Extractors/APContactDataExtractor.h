@@ -19,7 +19,6 @@
 - (NSString *)stringProperty:(ABPropertyID)property;
 - (NSArray *)arrayProperty:(ABPropertyID)property;
 - (NSDate *)dateProperty:(ABPropertyID)property;
-- (UIImage *)imagePropertyFullSize:(BOOL)isFullSize;
 - (NSArray *)phonesWithLabels;
 - (NSArray *)emailsWithLabels;
 - (NSArray *)addresses;

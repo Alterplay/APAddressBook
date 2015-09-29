@@ -16,5 +16,6 @@
 
 - (NSArray *)allContactsWithContactFieldMask:(APContactField)fieldMask;
 - (APContact *)contactByRecordID:(NSNumber *)recordID withFieldMask:(APContactField)fieldMask;
+- (UIImage *)imageWithRecordID:(NSNumber *)recordID;
 
 @end

@@ -108,15 +108,13 @@
     }];
 }
 
-- (void)loadContactByRecordId:(nonnull NSNumber *)recordID
-                   completion:(nonnull APLoadContactBlock)completion
+- (void)loadContactByRecordID:(NSNumber *)recordID completion:(APLoadContactBlock)completion
 {
-    [self loadContactByRecordId:recordID onQueue:dispatch_get_main_queue() completion:completion];
+    [self loadContactByRecordID:recordID onQueue:dispatch_get_main_queue() completion:completion];
 }
 
-- (void)loadContactByRecordId:(nonnull NSNumber *)recordID
-                      onQueue:(nonnull dispatch_queue_t)queue
-                   completion:(nonnull APLoadContactBlock)completion
+- (void)loadContactByRecordID:(NSNumber *)recordID onQueue:(dispatch_queue_t)queue
+                   completion:(APLoadContactBlock)completion
 {
     [self.thread dispatchAsync:^
     {
@@ -125,6 +123,24 @@
         dispatch_async(queue, ^
         {
             completion ? completion(contact) : nil;
+        });
+    }];
+}
+
+- (void)loadPhotoByRecordID:(nonnull NSNumber *)recordID completion:(APLoadPhotoBlock)completion
+{
+    [self loadPhotoByRecordID:recordID onQueue:dispatch_get_main_queue() completion:completion];
+}
+
+- (void)loadPhotoByRecordID:(NSNumber *)recordID onQueue:(dispatch_queue_t)queue
+                 completion:(APLoadPhotoBlock)completion
+{
+    [self.thread dispatchAsync:^
+    {
+        UIImage *image = [self.contacts imageWithRecordID:recordID];
+        dispatch_async(queue, ^
+        {
+            completion ? completion(image) : nil;
         });
     }];
 }
