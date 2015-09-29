@@ -10,13 +10,6 @@
 
 @implementation APThread
 
-#pragma mark - life cycle
-
-- (void)dealloc
-{
-    [self cancel];
-}
-
 #pragma mark - public
 
 - (void)dispatchAsync:(void (^)())block
