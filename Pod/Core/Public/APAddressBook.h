@@ -23,9 +23,6 @@ typedef void(^APRequestAccessBlock)(BOOL granted, NSError * _Nullable error);
 @property (nullable, nonatomic, strong) NSArray <NSSortDescriptor *> *sortDescriptors;
 
 + (APAddressBookAccess)access;
-+ (void)requestAccess:(nonnull APRequestAccessBlock)completionBlock;
-+ (void)requestAccessOnQueue:(nonnull dispatch_queue_t)queue
-                  completion:(nonnull APRequestAccessBlock)completionBlock;
 - (void)loadContacts:(nonnull APLoadContactsBlock)completionBlock;
 - (void)loadContactsOnQueue:(nonnull dispatch_queue_t)queue
                  completion:(nonnull APLoadContactsBlock)completionBlock;
@@ -43,6 +40,9 @@ typedef void(^APRequestAccessBlock)(BOOL granted, NSError * _Nullable error);
 - (void)startObserveChangesOnQueue:(nonnull dispatch_queue_t)queue
                           callback:(nonnull void (^)())callback;
 - (void)stopObserveChanges;
+- (void)requestAccess:(nonnull APRequestAccessBlock)completionBlock;
+- (void)requestAccessOnQueue:(nonnull dispatch_queue_t)queue
+                  completion:(nonnull APRequestAccessBlock)completionBlock;
 
 @end
 
@@ -51,6 +51,11 @@ typedef void(^APRequestAccessBlock)(BOOL granted, NSError * _Nullable error);
 
 @interface APAddressBook (Deprecated)
 
++ (void)requestAccess:(nonnull APRequestAccessBlock)completionBlock
+AP_DEPRECATED("instance method requestAccess:");
++ (void)requestAccessOnQueue:(nonnull dispatch_queue_t)queue
+        completion:(nonnull APRequestAccessBlock)completionBlock
+AP_DEPRECATED("instance method requestAccessOnQueue:completion:");
 - (nullable APContact *)getContactByRecordID:(nonnull NSNumber *)recordID
 AP_DEPRECATED("loadContactByRecordID:completion:");
 

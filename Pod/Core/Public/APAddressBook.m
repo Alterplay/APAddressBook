@@ -63,24 +63,6 @@
     return [APAddressBookAccessRoutine accessStatus];
 }
 
-+ (void)requestAccess:(APRequestAccessBlock)completionBlock
-{
-    [self requestAccessOnQueue:dispatch_get_main_queue() completion:completionBlock];
-}
-
-+ (void)requestAccessOnQueue:(dispatch_queue_t)queue completion:(APRequestAccessBlock)completionBlock
-{
-    APAddressBookRefWrapper *refWrapper = [[APAddressBookRefWrapper alloc] init];
-    APAddressBookAccessRoutine *access = [[APAddressBookAccessRoutine alloc] initWithAddressBookRefWrapper:refWrapper];
-    [access requestAccessWithCompletion:^(BOOL granted, NSError *error)
-    {
-        dispatch_async(queue, ^
-        {
-            completionBlock ? completionBlock(granted, error) : nil;
-        });
-    }];
-}
-
 - (void)loadContacts:(APLoadContactsBlock)completionBlock
 {
     [self loadContactsOnQueue:dispatch_get_main_queue() completion:completionBlock];
@@ -162,6 +144,26 @@
     self.externalChangeQueue = nil;
 }
 
+- (void)requestAccess:(nonnull APRequestAccessBlock)completionBlock
+{
+    [self requestAccessOnQueue:dispatch_get_main_queue() completion:completionBlock];
+}
+
+- (void)requestAccessOnQueue:(nonnull dispatch_queue_t)queue
+                  completion:(nonnull APRequestAccessBlock)completionBlock
+{
+    [self.thread dispatchAsync:^
+    {
+        [self.access requestAccessWithCompletion:^(BOOL granted, NSError *error)
+        {
+            dispatch_async(queue, ^
+            {
+                completionBlock ? completionBlock(granted, error);
+            });
+        }];
+    }];
+}
+
 #pragma mark - APAddressBookExternalChangeDelegate
 
 - (void)addressBookDidChange
@@ -175,7 +177,25 @@
 
 #pragma mark - deprecated
 
-- (nullable APContact *)getContactByRecordID:(NSNumber *)recordID
++ (void)requestAccess:(APRequestAccessBlock)completionBlock
+{
+    [self requestAccessOnQueue:dispatch_get_main_queue() completion:completionBlock];
+}
+
++ (void)requestAccessOnQueue:(dispatch_queue_t)queue completion:(APRequestAccessBlock)completionBlock
+{
+    APAddressBookRefWrapper *refWrapper = [[APAddressBookRefWrapper alloc] init];
+    APAddressBookAccessRoutine *access = [[APAddressBookAccessRoutine alloc] initWithAddressBookRefWrapper:refWrapper];
+    [access requestAccessWithCompletion:^(BOOL granted, NSError *error)
+    {
+        dispatch_async(queue, ^
+        {
+            completionBlock ? completionBlock(granted, error) : nil;
+        });
+    }];
+}
+
+- (APContact *)getContactByRecordID:(NSNumber *)recordID
 {
     APContactField fieldMask = self.fieldsMask;
     __block APContact *contact = nil;
