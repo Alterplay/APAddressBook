@@ -1,5 +1,5 @@
 //
-//  APPhoneWithLabel.h
+//  APPhone.h
 //  APAddressBook
 //
 //  Created by John Hobbs on 2/7/14.

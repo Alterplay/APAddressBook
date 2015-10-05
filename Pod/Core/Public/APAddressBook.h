@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "APTypes.h"
 
 @class APContact;
@@ -32,10 +33,10 @@ typedef void(^APRequestAccessBlock)(BOOL granted, NSError * _Nullable error);
                       onQueue:(nonnull dispatch_queue_t)queue
                    completion:(nonnull APLoadContactBlock)completion;
 - (void)loadPhotoByRecordID:(nonnull NSNumber *)recordID
-                 completion:(APLoadPhotoBlock)completion;
+                 completion:(nonnull APLoadPhotoBlock)completion;
 - (void)loadPhotoByRecordID:(nonnull NSNumber *)recordID
                     onQueue:(nonnull dispatch_queue_t)queue
-                 completion:(APLoadPhotoBlock)completion;
+                 completion:(nonnull APLoadPhotoBlock)completion;
 - (void)startObserveChangesWithCallback:(nonnull void (^)())callback;
 - (void)startObserveChangesOnQueue:(nonnull dispatch_queue_t)queue
                           callback:(nonnull void (^)())callback;

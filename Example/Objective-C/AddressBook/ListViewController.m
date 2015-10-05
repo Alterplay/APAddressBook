@@ -78,8 +78,8 @@
     __weak __typeof(self) weakSelf = self;
     self.addressBook.fieldsMask = APContactFieldAll;
     self.addressBook.sortDescriptors = @[
-     [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES],
-     [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES]];
+     [NSSortDescriptor sortDescriptorWithKey:@"name.firstName" ascending:YES],
+     [NSSortDescriptor sortDescriptorWithKey:@"name.lastName" ascending:YES]];
     self.addressBook.filterBlock = ^BOOL(APContact *contact)
     {
         return contact.phones.count > 0;

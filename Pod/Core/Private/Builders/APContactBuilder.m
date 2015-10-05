@@ -33,89 +33,61 @@
     self.extractor.recordRef = recordRef;
     APContact *contact = [[APContact alloc] init];
     contact.recordID = @(ABRecordGetRecordID(recordRef));
-    if (fieldMask & APContactFieldFirstName)
+    if (fieldMask & APContactFieldName)
     {
-        contact.firstName = [self.extractor stringProperty:kABPersonFirstNameProperty];
+        contact.name = [self.extractor name];
     }
-    if (fieldMask & APContactFieldMiddleName)
+    if (fieldMask & APContactFieldJob)
     {
-        contact.middleName = [self.extractor stringProperty:kABPersonMiddleNameProperty];
-    }
-    if (fieldMask & APContactFieldLastName)
-    {
-        contact.lastName = [self.extractor stringProperty:kABPersonLastNameProperty];
-    }
-    if (fieldMask & APContactFieldCompositeName)
-    {
-        contact.compositeName = [self.extractor compositeName];
-    }
-    if (fieldMask & APContactFieldCompany)
-    {
-        contact.company = [self.extractor stringProperty:kABPersonOrganizationProperty];
-    }
-    if (fieldMask & APContactFieldJobTitle)
-    {
-        contact.jobTitle = [self.extractor stringProperty:kABPersonJobTitleProperty];
-    }
-    if (fieldMask & APContactFieldPhones)
-    {
-        contact.phones = [self.extractor arrayProperty:kABPersonPhoneProperty];
-    }
-    if (fieldMask & APContactFieldPhonesWithLabels)
-    {
-        contact.phonesWithLabels = [self.extractor phonesWithLabels];
-    }
-    if (fieldMask & APContactFieldEmails)
-    {
-        contact.emails = [self.extractor arrayProperty:kABPersonEmailProperty];
-    }
-    if (fieldMask & APContactFieldEmailsWithLabels)
-    {
-        contact.emailsWithLabels = [self.extractor emailsWithLabels];
+        contact.job = [self.extractor job];
     }
     if (fieldMask & APContactFieldThumbnail)
     {
         contact.thumbnail = [APImageExtractor thumbnailWithRecordRef:recordRef];
     }
+    if (fieldMask & APContactFieldPhonesOnly || fieldMask & APContactFieldPhonesWithLabels)
+    {
+        contact.phones = [self.extractor phonesWithLabels:(fieldMask & APContactFieldPhonesWithLabels)];
+    }
+    if (fieldMask & APContactFieldEmailsOnly || fieldMask & APContactFieldEmailsWithLabels)
+    {
+        contact.emails = [self.extractor emailsWithLabels:(fieldMask & APContactFieldEmailsWithLabels)];
+    }
     if (fieldMask & APContactFieldAddresses)
     {
         contact.addresses = [self.extractor addresses];
-    }
-    if (fieldMask & APContactFieldCreationDate)
-    {
-        contact.creationDate = [self.extractor dateProperty:kABPersonCreationDateProperty];
-    }
-    if (fieldMask & APContactFieldModificationDate)
-    {
-        contact.modificationDate = [self.extractor dateProperty:kABPersonModificationDateProperty];
     }
     if (fieldMask & APContactFieldSocialProfiles)
     {
         contact.socialProfiles = [self.extractor socialProfiles];
     }
-    if (fieldMask & APContactFieldNote)
+    if (fieldMask & APContactFieldBirthday)
     {
-        contact.note = [self.extractor stringProperty:kABPersonNoteProperty];
-    }
-    if (fieldMask & APContactFieldLinkedRecordIDs)
-    {
-        contact.linkedRecordIDs = [self.extractor linkedRecordIDs];
+        contact.birthday = [self.extractor dateProperty:kABPersonBirthdayProperty];
     }
     if (fieldMask & APContactFieldWebsites)
     {
         contact.websites = [self.extractor arrayProperty:kABPersonURLProperty];
     }
-    if (fieldMask & APContactFieldBirthday)
+    if (fieldMask & APContactFieldNote)
     {
-        contact.birthday = [self.extractor dateProperty:kABPersonBirthdayProperty];
+        contact.note = [self.extractor stringProperty:kABPersonNoteProperty];
+    }
+    if (fieldMask & APContactFieldRelatedPersons)
+    {
+        contact.relatedPersons = [self.extractor relatedPersons];
+    }
+    if (fieldMask & APContactFieldLinkedRecordIDs)
+    {
+        contact.linkedRecordIDs = [self.extractor linkedRecordIDs];
     }
     if (fieldMask & APContactFieldSource)
     {
         contact.source = [self.extractor source];
     }
-    if (fieldMask & APContactFieldRelatedPersons)
+    if (fieldMask & APContactFieldRecordDate)
     {
-        contact.relatedPersons = [self.extractor relatedPersons];
+        contact.recordDate = [self.extractor recordDate];
     }
     return contact;
 }

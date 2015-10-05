@@ -26,12 +26,13 @@
 
 - (void)main
 {
-    @autoreleasepool
+    while (!self.cancelled)
     {
-        while (!self.cancelled)
+        @autoreleasepool
         {
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:NSDate.distantFuture];
         }
+        
     }
 }
 

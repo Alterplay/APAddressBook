@@ -32,23 +32,29 @@ class TableViewCell: UITableViewCell, ModelTransfer {
     // MARK: - prviate
     
     func contactName(contact :APContact) -> String {
-        if let firstName = contact.firstName, lastName = contact.lastName {
+        if let firstName = contact.name?.firstName, lastName = contact.name?.lastName {
             return "\(firstName) \(lastName)"
         }
-        else if let firstName = contact.firstName {
+        else if let firstName = contact.name?.firstName {
             return "\(firstName)"
         }
-        else if let lastName = contact.lastName {
+        else if let lastName = contact.name?.lastName {
             return "\(lastName)"
         }
         else {
             return "Unnamed contact"
         }
     }
-    
+
     func contactPhones(contact :APContact) -> String {
-        if let phones = contact.phones as NSArray? {
-            return phones.componentsJoinedByString(" ")
+        if let phones = contact.phones {
+            var phonesString = ""
+            for phone in phones {
+                if let number = phone.number {
+                    phonesString = phonesString + " " + number
+                }
+            }
+            return phonesString
         }
         return "No phone"
     }

@@ -6,15 +6,16 @@
 //  Copyright (c) 2014 alterplay. All rights reserved.
 //
 
-#import "APRelatedPerson.h"
+#import "APPhone.h"
 
-@implementation APRelatedPerson
+@implementation APPhone
 
 #pragma mark - overrides
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ (%@) - %@", self.localizedLabel, self.originalLabel, self.name];
+    return [NSString stringWithFormat:@"%@ (%@) - %@", self.localizedLabel, self.originalLabel,
+                                      self.number];
 }
 
 @end

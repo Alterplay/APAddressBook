@@ -8,7 +8,10 @@
 
 #import "ContactTableViewCell.h"
 #import "APContact.h"
-#import "APPhoneWithLabel.h"
+#import "APPhone.h"
+#import "APJob.h"
+#import "APName.h"
+#import "APEmail.h"
 
 @interface ContactTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
@@ -38,7 +41,7 @@
 {
     APContact *contact = model;
     self.nameLabel.text = [self contactName:contact];
-    self.companyLabel.text = contact.company ?: @"(No company)";
+    self.companyLabel.text = contact.job.company ?: @"(No company)";
     self.phonesLabel.text = [self contactPhones:contact];
     self.emailsLabel.text = [self contactEmails:contact];
     self.photoView.image = contact.thumbnail ?: [UIImage imageNamed:@"no_photo"];
@@ -48,17 +51,17 @@
 
 - (NSString *)contactName:(APContact *)contact
 {
-    if (contact.compositeName)
+    if (contact.name.compositeName)
     {
-        return contact.compositeName;
+        return contact.name.compositeName;
     }
-    else if (contact.firstName && contact.lastName)
+    else if (contact.name.firstName && contact.name.lastName)
     {
-        return [NSString stringWithFormat:@"%@ %@", contact.firstName, contact.lastName];
+        return [NSString stringWithFormat:@"%@ %@", contact.name.firstName, contact.name.lastName];
     }
-    else if (contact.firstName || contact.lastName)
+    else if (contact.name.firstName || contact.name.lastName)
     {
-        return contact.firstName ?: contact.lastName;
+        return contact.name.firstName ?: contact.name.lastName;
     }
     else
     {
@@ -68,14 +71,14 @@
 
 - (NSString *)contactPhones:(APContact *)contact
 {
-    if (contact.phonesWithLabels.count > 0)
+    if (contact.phones.count > 0)
     {
         NSMutableString *result = [[NSMutableString alloc] init];
-        for (APPhoneWithLabel *phoneWithLabel in contact.phonesWithLabels)
+        for (APPhone *phone in contact.phones)
         {
-            NSString *string = phoneWithLabel.localizedLabel.length == 0 ? phoneWithLabel.phone :
-                               [NSString stringWithFormat:@"%@ (%@)", phoneWithLabel.phone,
-                                                          phoneWithLabel.localizedLabel];
+            NSString *string = phone.localizedLabel.length == 0 ? phone.number :
+                               [NSString stringWithFormat:@"%@ (%@)", phone.number,
+                                                          phone.localizedLabel];
             [result appendFormat:@"%@, ", string];
         }
         return result;
@@ -90,11 +93,16 @@
 {
     if (contact.emails.count > 1)
     {
-        return [contact.emails componentsJoinedByString:@", "];
+        NSMutableString *result = [[NSMutableString alloc] init];
+        for (APEmail *email in contact.emails)
+        {
+            [result appendFormat:@"%@, ", email.address];
+        }
+        return result;
     }
     else
     {
-        return contact.emails.firstObject ?: @"(No emails)";
+        return contact.emails.count == 1 ? contact.emails[0].address : @"(No emails)";
     }
 }
 

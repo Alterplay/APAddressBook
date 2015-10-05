@@ -1,5 +1,5 @@
 //
-//  APPhoneWithLabel.h
+//  APPhone.h
 //  APAddressBook
 //
 //  Created by John Hobbs on 2/7/14.
@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface APPhoneWithLabel : NSObject
+@interface APPhone : NSObject
 
-@property (nullable, nonatomic, strong) NSString *phone;
+@property (nullable, nonatomic, strong) NSString *number;
 @property (nullable, nonatomic, strong) NSString *originalLabel;
 @property (nullable, nonatomic, strong) NSString *localizedLabel;
-@property (nullable, nonatomic, readonly) NSString *label __attribute__((deprecated("Use 'localizedLabel' instead")));
 
 @end

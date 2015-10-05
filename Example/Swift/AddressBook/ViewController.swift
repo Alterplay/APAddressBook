@@ -22,8 +22,8 @@ class ViewController: UIViewController, DTTableViewManageable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
         self.addressBook.fieldsMask = [APContactField.Default, APContactField.Thumbnail]
-        self.addressBook.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true),
-                                            NSSortDescriptor(key: "lastName", ascending: true)]
+        self.addressBook.sortDescriptors = [NSSortDescriptor(key: "name.firstName", ascending: true),
+                                            NSSortDescriptor(key: "name.lastName", ascending: true)]
         self.addressBook.filterBlock = {
             (contact: APContact) -> Bool in
             if let phones = contact.phones {

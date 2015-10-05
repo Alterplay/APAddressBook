@@ -10,22 +10,27 @@
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 
+@class APName;
+@class APJob;
 @class APSource;
+@class APRecordDate;
 
 @interface APContactDataExtractor : NSObject
 
 @property (nonatomic, assign) ABRecordRef recordRef;
 
+- (APName *)name;
+- (APJob *)job;
+- (NSArray *)phonesWithLabels:(BOOL)needLabels;
+- (NSArray *)emailsWithLabels:(BOOL)needLabels;
+- (NSArray *)addresses;
+- (NSArray *)socialProfiles;
+- (NSArray *)relatedPersons;
+- (NSArray *)linkedRecordIDs;
+- (APSource *)source;
+- (APRecordDate *)recordDate;
 - (NSString *)stringProperty:(ABPropertyID)property;
 - (NSArray *)arrayProperty:(ABPropertyID)property;
 - (NSDate *)dateProperty:(ABPropertyID)property;
-- (NSArray *)phonesWithLabels;
-- (NSArray *)emailsWithLabels;
-- (NSArray *)addresses;
-- (NSString *)compositeName;
-- (NSArray *)socialProfiles;
-- (NSArray *)linkedRecordIDs;
-- (APSource *)source;
-- (NSArray *)relatedPersons;
 
 @end

@@ -158,7 +158,7 @@
         {
             dispatch_async(queue, ^
             {
-                completionBlock ? completionBlock(granted, error);
+                completionBlock ? completionBlock(granted, error) : nil;
             });
         }];
     }];

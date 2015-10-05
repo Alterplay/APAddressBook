@@ -1,5 +1,5 @@
 //
-//  APEmailWithLabel.h
+//  APEmail.h
 //  AddressBook
 //
 //  Created by Sean Langley on 2015-03-18.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface APEmailWithLabel : NSObject
+@interface APEmail : NSObject
 
-@property (nullable, nonatomic, strong) NSString *email;
+@property (nullable, nonatomic, strong) NSString *address;
 @property (nullable, nonatomic, strong) NSString *originalLabel;
 @property (nullable, nonatomic, strong) NSString *localizedLabel;
 
