@@ -5,9 +5,10 @@ APAddressBook is a wrapper on [AddressBook.framework](https://developer.apple.co
 
 #### Features
 * Load contacts from iOS address book asynchronously
-* Decide what contact data fields you need to load (for example, only first name and phone number)
+* Decide what contact data fields you need to load (for example, only name and phone number)
 * Filter contacts to get only necessary records (for example, you need only contacts with email)
 * Sort contacts with array of any [NSSortDescriptor](https://developer.apple.com/library/mac/documentation/cocoa/reference/foundation/classes/NSSortDescriptor_Class/Reference/Reference.html)
+* Get photo of contact
 
 #### Objective-c
 **Installation**
@@ -21,7 +22,7 @@ pod 'APAddressBook'
 ```objective-c
 APAddressBook *addressBook = [[APAddressBook alloc] init];
 // don't forget to show some activity
-[addressBook loadContacts:^(NSArray *contacts, NSError *error)
+[addressBook loadContacts:^(NSArray <APContact *> *contacts, NSError *error)
 {
     // hide activity
     if (!error)
@@ -40,38 +41,31 @@ APAddressBook *addressBook = [[APAddressBook alloc] init];
 **Select contact fields bit-mask**
 
 Available fields:
-* APContactFieldFirstName - *contact first name*
-* APContactFieldMiddleName - *contact middle name*
-* APContactFieldLastName - *contact last name*
-* APContactFieldCompany - *contact company (organization)*
-* APContactFieldPhones - *contact phones array*
-* APContactFieldEmails - *contact emails array*
-* APContactFieldPhoto - *contact photo*
-* APContactFieldThumbnail - *contact thumbnail*
-* APContactFieldCreationDate - *contact creation date*
-* APContactFieldModificationDate - *contact modification date*
-* APContactFieldPhonesWithLabels - *contact phones with original and localized labels*
-* APContactFieldCompositeName - *the concatenated value of prefix, suffix, organization, first name, and last name*
-* APContactFieldAddresses - *array of user addresses*
-* APContactFieldRecordID - *ID of record in iOS address book*
-* APContactFieldSocialProfiles - *array of social profiles*
-* APContactFieldNote - *contact notes*
-* APContactFieldLinkedRecordIDs - *linked contacts record IDs*
-* APContactFieldJobTitle - *contact job title*
-* APContactFieldWebsites - *array of contact websites*
-* APContactFieldBirthday - *contact birthday*
-* APContactFieldSource - *contact source ID and source name*
-* APContactFieldRelatedPersons - *contact related persons*
-* APContactFieldEmailsWithLabels - *emails with original and localized labels*
-* APContactFieldDefault - *contact first name, last name and phones array*
-* APContactFieldAll - *all contact fields described above*
+* APContactFieldName - *first name*, *last name*, *middle name*, *composite name*
+* APContactFieldJob - *company (organization)*, *job title*
+* APContactFieldThumbnail - *thumbnail* image
+* APContactFieldPhonesOnly - array of *phone numbers* disregarding *phone labels*
+* APContactFieldPhonesWithLabels - array *phones* with *original and localized labels*
+* APContactFieldEmailsOnly - array of *email addresses* disregarding *email labels*
+* APContactFieldEmailsWithLabels - array of *email addresses* with *original and localized labels*
+* APContactFieldAddresses - array of contact *addresses*
+* APContactFieldSocialProfiles - array of contact *profiles in social networks*
+* APContactFieldBirthday - date of *birthday*
+* APContactFieldWebsites - array of strings with *website URLs*
+* APContactFieldNote - string with *notes*
+* APContactFieldRelatedPersons - array of *related persons*
+* APContactFieldLinkedRecordIDs - array of contact *linked records IDs*
+* APContactFieldSource - contact *source ID* and *source name*
+* APContactFieldRecordDate - contact record *creation date* and *modification date*
+* APContactFieldDefault - contact *name and phones* without *labels*
+* APContactFieldAll - all contact fields described above
 
-> You should use `APContactFieldPhoto` very carefully, because it takes a lot of memory and may crash the application. Using `APContactFieldThumbnail` is much safer.
+> Contact `recordID` property is always available
 
-Example of loading contact with first name and photo:
+Example of field mask with name and thumbnail:
 ```objective-c
 APAddressBook *addressBook = [[APAddressBook alloc] init];
-addressBook.fieldsMask = APContactFieldFirstName | APContactFieldPhoto;
+addressBook.fieldsMask = APContactFieldFirstName | APContactFieldThumbnail;
 ```
 
 **Filter contacts**
@@ -89,14 +83,51 @@ addressBook.filterBlock = ^BOOL(APContact *contact)
 APAddressBook returns unsorted contacts. So, most of users would like to sort contacts by first name and last name.
 ```objective-c
 addressBook.sortDescriptors = @[
-    [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES],
-    [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES]
+    [NSSortDescriptor sortDescriptorWithKey:@"name.firstName" ascending:YES],
+    [NSSortDescriptor sortDescriptorWithKey:@"name.lastName" ascending:YES]
 ];
 ```
 
-**Get contact by address book record ID**
+**Load contact by address book record ID**
 ```objective-c
-APContact *contact = [addressBook getContactByRecordID:recordID];
+[addressBook loadContactByRecordID:recordID completion:^(APContact *contact)
+{
+    self.contact = contact;
+}];
+```
+
+> `APContact` instance will contain fields that set in `addressBook.fieldsMask`
+
+> Callback block will be run on main queue! If you need to run callback block on custom queue use `loadContactByRecordID:onQueue:completion:` method
+
+
+** Load contact photo by address book record ID **
+```objective-c
+[addressBook loadPhotoByRecordID:recordID completion:^(UIImage *image)
+{
+    self.imageView.image = image;
+}];
+```
+> Callback block will be run on main queue! If you need to run callback block on custom queue use `loadPhotoByRecordID:onQueue:completion:` method
+
+
+**Observe address book external changes**
+```objective-c
+// start observing
+[addressBook startObserveChangesWithCallback:^
+{
+    // reload contacts
+}];
+// stop observing
+[addressBook stopObserveChanges];
+```
+
+**Request address book access**
+```objective-c
+[addressBook requestAccess:^(BOOL granted, NSError *error)
+{
+    // check `granted`
+}];
 ```
 
 **Check address book access**
@@ -117,17 +148,6 @@ switch([APAddressBook access])
 }
 ```
 
-**Observe address book external changes**
-```objective-c
-// start observing
-[addressBook startObserveChangesWithCallback:^
-{
-    NSLog(@"Address book changed!");
-}];
-// stop observing
-[addressBook stopObserveChanges];
-```
-
 #### Swift
 **Installation**
 ```ruby
@@ -140,18 +160,21 @@ Import `APAddressBook-Bridging.h` to application's objective-c bridging file.
 
 **Example**
 
-See exmaple application in `Example/Swift` directory.
+See example application in `Example/Swift` directory.
 ```Swift
 self.addressBook.loadContacts(
-    { (contacts: [AnyObject]!, error: NSError!) in
-        if contacts {
+    { (contacts: [APContact]?, error: NSError?) in
+        if let uwrappedContacts = contacts {
             // do something with contacts
         }
-        else if error {
+        else if let unwrappedError = error {
             // show error
         }
     })
 ```
+
+#### 0.1.x to 0.2.x Migration guide
+[Migration Guide](https://github.com/Alterplay/APAddressBook/wiki/0.1.x-to-0.2.x-migration-guide)
 
 #### History
 
