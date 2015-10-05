@@ -21,7 +21,7 @@
 
 @interface APContact : NSObject
 
-@property (nullable, nonatomic, strong) NSNumber *recordID;
+@property (nonnull, nonatomic, strong) NSNumber *recordID;
 @property (nullable, nonatomic, strong) APName *name;
 @property (nullable, nonatomic, strong) APJob *job;
 @property (nullable, nonatomic, strong) UIImage *thumbnail;

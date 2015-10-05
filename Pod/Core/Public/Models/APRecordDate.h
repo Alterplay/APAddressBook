@@ -10,7 +10,7 @@
 
 @interface APRecordDate : NSObject
 
-@property (nullable, nonatomic, strong) NSDate *creationDate;
-@property (nullable, nonatomic, strong) NSDate *modificationDate;
+@property (nonnull, nonatomic, strong) NSDate *creationDate;
+@property (nonnull, nonatomic, strong) NSDate *modificationDate;
 
 @end

@@ -10,7 +10,7 @@
 
 @interface APSource : NSObject
 
-@property (nullable, nonatomic, strong) NSString *sourceType;
-@property (nullable, nonatomic, strong) NSNumber *sourceID;
+@property (nonnull, nonatomic, strong) NSString *sourceType;
+@property (nonnull, nonatomic, strong) NSNumber *sourceID;
 
 @end
