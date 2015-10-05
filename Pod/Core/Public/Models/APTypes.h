@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, APAddressBookAccess)
 typedef NS_OPTIONS(NSUInteger, APContactField)
 {
     APContactFieldName             = 1 << 0,
-    APContactFieldJob               = 1 << 1,
+    APContactFieldJob              = 1 << 1,
     APContactFieldThumbnail        = 1 << 2,
     APContactFieldPhonesOnly       = 1 << 3,
     APContactFieldPhonesWithLabels = 1 << 4,
