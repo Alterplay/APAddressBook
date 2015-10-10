@@ -36,9 +36,9 @@
     [self.thread dispatchAsync:^
     {
         APAddressBookRefWrapper *refWrapper = [[APAddressBookRefWrapper alloc] init];
+        self.access = [[APAddressBookAccessRoutine alloc] initWithAddressBookRefWrapper:refWrapper];
         if (!refWrapper.error)
         {
-            self.access = [[APAddressBookAccessRoutine alloc] initWithAddressBookRefWrapper:refWrapper];
             self.contacts = [[APAddressBookContactsRoutine alloc] initWithAddressBookRefWrapper:refWrapper];
             self.externalChange = [[APAddressBookExternalChangeRoutine alloc] initWithAddressBookRefWrapper:refWrapper];
             self.externalChange.delegate = self;
