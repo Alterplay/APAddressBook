@@ -8,16 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-@class APName;
-@class APJob;
-@class APPhone;
-@class APEmail;
-@class APAddress;
-@class APSocialProfile;
-@class APRelatedPerson;
-@class APSource;
-@class APRecordDate;
+#import "APName.h"
+#import "APJob.h"
+#import "APPhone.h"
+#import "APEmail.h"
+#import "APAddress.h"
+#import "APSocialProfile.h"
+#import "APRelatedPerson.h"
+#import "APSource.h"
+#import "APRecordDate.h"
 
 @interface APContact : NSObject
 
