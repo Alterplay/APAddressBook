@@ -11,6 +11,7 @@
 #import "APAddressBookRefWrapper.h"
 #import "APContactBuilder.h"
 #import "APImageExtractor.h"
+#import "APContact.h"
 
 @interface APAddressBookContactsRoutine ()
 @property (nonatomic, strong) APContactBuilder *builder;
@@ -66,6 +67,5 @@
     }
     return nil;
 }
-
 
 @end

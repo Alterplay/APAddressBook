@@ -10,9 +10,9 @@
 #import "APAddressBookAccessRoutine.h"
 #import "APAddressBookContactsRoutine.h"
 #import "APAddressBookExternalChangeRoutine.h"
+#import "APContactListBuilder.h"
 #import "APAddressBookRefWrapper.h"
 #import "APThread.h"
-#import "NSArray+APAddressBook.h"
 
 @interface APAddressBook () <APAddressBookExternalChangeDelegate>
 @property (nonatomic, strong) APAddressBookAccessRoutine *access;
@@ -70,9 +70,10 @@
 
 - (void)loadContactsOnQueue:(dispatch_queue_t)queue completion:(APLoadContactsBlock)completionBlock
 {
-    NSArray *descriptors = self.sortDescriptors;
-    APFilterContactsBlock filterBlock = self.filterBlock;
     APContactField fieldMask = self.fieldsMask;
+    APContactListBuilder *listBuilder = [[APContactListBuilder alloc] init];
+    listBuilder.filterBlock = self.filterBlock;
+    listBuilder.sortDescriptors = self.sortDescriptors;
     [self.thread dispatchAsync:^
     {
         [self.access requestAccessWithCompletion:^(BOOL granted, NSError *error)
@@ -80,7 +81,7 @@
             [self.thread dispatchAsync:^
             {
                 NSArray *contacts = granted ? [self.contacts allContactsWithContactFieldMask:fieldMask] : nil;
-                contacts = [contacts filteredArrayWithBlock:filterBlock sortedWithDescriptors:descriptors];
+                contacts = [listBuilder contactListWithAllContacts:contacts];
                 dispatch_async(queue, ^
                 {
                     completionBlock ? completionBlock(contacts, error) : nil;
@@ -100,8 +101,7 @@
 {
     [self.thread dispatchAsync:^
     {
-        APContact *contact = [self.contacts contactByRecordID:recordID
-                                                withFieldMask:self.fieldsMask];
+        APContact *contact = [self.contacts contactByRecordID:recordID withFieldMask:self.fieldsMask];
         dispatch_async(queue, ^
         {
             completion ? completion(contact) : nil;
