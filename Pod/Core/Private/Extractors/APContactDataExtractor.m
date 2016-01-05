@@ -82,10 +82,10 @@
 
 - (NSArray *)addresses
 {
-    NSMutableArray *addresses = [[NSMutableArray alloc] init];
-    NSArray *array = [self arrayProperty:kABPersonAddressProperty];
-    for (NSDictionary *dictionary in array)
+    return [self mapMultiValueOfProperty:kABPersonAddressProperty
+                               withBlock:^id(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index)
     {
+        NSDictionary *dictionary = (__bridge NSDictionary *)value;
         APAddress *address = [[APAddress alloc] init];
         address.street = dictionary[(__bridge NSString *)kABPersonAddressStreetKey];
         address.city = dictionary[(__bridge NSString *)kABPersonAddressCityKey];
@@ -93,9 +93,10 @@
         address.zip = dictionary[(__bridge NSString *)kABPersonAddressZIPKey];
         address.country = dictionary[(__bridge NSString *)kABPersonAddressCountryKey];
         address.countryCode = dictionary[(__bridge NSString *)kABPersonAddressCountryCodeKey];
-        [addresses addObject:address];
-    }
-    return addresses.copy;
+        address.originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
+        address.localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
+        return address;
+    }];
 }
 
 - (NSArray *)socialProfiles
