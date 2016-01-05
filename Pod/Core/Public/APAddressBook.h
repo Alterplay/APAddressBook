@@ -48,8 +48,6 @@ typedef void(^APRequestAccessBlock)(BOOL granted, NSError * _Nullable error);
 @end
 
 
-#define AP_DEPRECATED(_useInstead) __attribute__((deprecated("Use " #_useInstead " instead")))
-
 @interface APAddressBook (Deprecated)
 
 + (void)requestAccess:(nonnull APRequestAccessBlock)completionBlock

@@ -53,6 +53,7 @@
 		2DBA12274B8BFA605F110B91 /* APAddressBookAccessRoutine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddressBookAccessRoutine.m; sourceTree = "<group>"; };
 		2DBA125B051EE9D46F45C505 /* APThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APThread.m; sourceTree = "<group>"; };
 		2DBA12CDF576C49EAEB83108 /* APPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPhone.h; sourceTree = "<group>"; };
+		2DBA12D09D8CD39546DE39A8 /* APDeprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDeprecated.h; sourceTree = "<group>"; };
 		2DBA12DDF7D558CB7281DF82 /* APAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAddressBook.m; sourceTree = "<group>"; };
 		2DBA1306FE1FC39976165204 /* APName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APName.h; sourceTree = "<group>"; };
 		2DBA131ED390B35AF6A6F826 /* APAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAddressBook.h; sourceTree = "<group>"; };
@@ -164,6 +165,14 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
+		2DBA10E72DB90812D445957A /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA12D09D8CD39546DE39A8 /* APDeprecated.h */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
 		2DBA1693A4961B92662AFC34 /* Private */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +182,7 @@
 				2DBA1705BC593F92C1870534 /* Wrapper */,
 				2DBA17FB82D91E188A92BA0E /* Extractors */,
 				2DBA18B5003E6C7FB8A14478 /* Helpers */,
+				2DBA10E72DB90812D445957A /* Deprecated */,
 			);
 			path = Private;
 			sourceTree = "<group>";

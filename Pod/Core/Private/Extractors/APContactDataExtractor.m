@@ -80,7 +80,7 @@
     }];
 }
 
-- (NSArray *)addresses
+- (NSArray *)addressesWithLabels:(BOOL)needLabels
 {
     return [self mapMultiValueOfProperty:kABPersonAddressProperty
                                withBlock:^id(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index)
@@ -93,8 +93,11 @@
         address.zip = dictionary[(__bridge NSString *)kABPersonAddressZIPKey];
         address.country = dictionary[(__bridge NSString *)kABPersonAddressCountryKey];
         address.countryCode = dictionary[(__bridge NSString *)kABPersonAddressCountryCodeKey];
-        address.originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
-        address.localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
+        if (needLabels)
+        {
+            address.originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
+            address.localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
+        }
         return address;
     }];
 }
