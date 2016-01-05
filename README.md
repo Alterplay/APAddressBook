@@ -48,7 +48,8 @@ Available fields:
 * APContactFieldPhonesWithLabels - array *phones* with *original and localized labels*
 * APContactFieldEmailsOnly - array of *email addresses* disregarding *email labels*
 * APContactFieldEmailsWithLabels - array of *email addresses* with *original and localized labels*
-* APContactFieldAddresses - array of contact *addresses*
+* APContactFieldAddressesWithLabels - array of contact *addresses* with *original and localized labels*
+* APContactFieldAddressesOnly - array of contact *addresses* disregarding *addresses labels*
 * APContactFieldSocialProfiles - array of contact *profiles in social networks*
 * APContactFieldBirthday - date of *birthday*
 * APContactFieldWebsites - array of strings with *website URLs*
