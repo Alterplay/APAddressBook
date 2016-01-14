@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "APAddressBook"
-  s.version      = "0.2.2"
+  s.version      = "0.2.3"
   s.summary      = "Easy access to iOS address book"
   s.homepage     = "https://github.com/Alterplay/APAddressBook"
   s.license      = { :type => 'MIT', :file => 'LICENSE.txt' }
