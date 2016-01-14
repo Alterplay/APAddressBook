@@ -27,8 +27,8 @@
 - (NSArray *)socialProfiles;
 - (NSArray *)relatedPersons;
 - (NSArray *)linkedRecordIDs;
-- (NSArray *)dates;
 - (APSource *)source;
+- (NSArray *)dates;
 - (APRecordDate *)recordDate;
 - (NSString *)stringProperty:(ABPropertyID)property;
 - (NSArray *)arrayProperty:(ABPropertyID)property;

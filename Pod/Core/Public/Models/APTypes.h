@@ -29,13 +29,13 @@ typedef NS_OPTIONS(NSUInteger, APContactField)
     APContactFieldAddresses AP_DEPRECATED('APContactFieldAddressesOnly') = APContactFieldAddressesOnly,
     APContactFieldSocialProfiles        = 1 << 9,
     APContactFieldBirthday              = 1 << 10,
-    APContactFieldDates                 = 1 << 17,
     APContactFieldWebsites              = 1 << 11,
     APContactFieldNote                  = 1 << 12,
     APContactFieldRelatedPersons        = 1 << 13,
     APContactFieldLinkedRecordIDs       = 1 << 14,
     APContactFieldSource                = 1 << 15,
-    APContactFieldRecordDate            = 1 << 16,
+    APContactFieldDates                 = 1 << 16,
+    APContactFieldRecordDate            = 1 << 17,
     APContactFieldDefault               = APContactFieldName | APContactFieldPhonesOnly,
     APContactFieldAll                   = 0xFFFFFFFF
 };

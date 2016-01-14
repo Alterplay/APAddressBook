@@ -1,6 +1,6 @@
 //
-//  APDate.h
-//  Pods
+//  APContactDate.h
+//  APAddressBook
 //
 //  Created by Alexandre Plisson on 14/01/2016.
 //
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface APDate : NSObject
+@interface APContactDate : NSObject
 
 @property (nullable, nonatomic, strong) NSDate *date;
 @property (nullable, nonatomic, strong) NSString *originalLabel;

@@ -65,10 +65,6 @@
     {
         contact.birthday = [self.extractor dateProperty:kABPersonBirthdayProperty];
     }
-    if (fieldMask & APContactFieldDates)
-    {
-        contact.dates = [self.extractor dates];
-    }
     if (fieldMask & APContactFieldWebsites)
     {
         contact.websites = [self.extractor arrayProperty:kABPersonURLProperty];
@@ -88,6 +84,10 @@
     if (fieldMask & APContactFieldSource)
     {
         contact.source = [self.extractor source];
+    }
+    if (fieldMask & APContactFieldDates)
+    {
+        contact.dates = [self.extractor dates];
     }
     if (fieldMask & APContactFieldRecordDate)
     {
