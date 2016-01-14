@@ -58,6 +58,7 @@ Available fields:
 * APContactFieldRelatedPersons - array of *related persons*
 * APContactFieldLinkedRecordIDs - array of contact *linked records IDs*
 * APContactFieldSource - contact *source ID* and *source name*
+* APContactFieldDates - contact *dates* with *localized and original labels*
 * APContactFieldRecordDate - contact record *creation date* and *modification date*
 * APContactFieldDefault - contact *name and phones* without *labels*
 * APContactFieldAll - all contact fields described above
