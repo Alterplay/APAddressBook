@@ -17,6 +17,7 @@
 #import "APSource.h"
 #import "APRelatedPerson.h"
 #import "APRecordDate.h"
+#import "APDate.h"
 
 @implementation APContactDataExtractor
 
@@ -153,6 +154,23 @@
     }
     CFRelease(linkedPeopleRef);
     return linkedRecordIDs.array;
+}
+
+- (NSArray *) dates
+{
+    return [self mapMultiValueOfProperty:kABPersonDateProperty
+                               withBlock:^id(ABMultiValueRef multiValue, CFTypeRef value, CFIndex index)
+    {
+        APDate *date;
+        if (value)
+        {
+            date = [[APDate alloc] init];
+            date.date = (__bridge NSDate *)ABMultiValueCopyValueAtIndex(multiValue, index);
+            date.originalLabel = [self originalLabelFromMultiValue:multiValue index:index];
+            date.localizedLabel = [self localizedLabelFromMultiValue:multiValue index:index];
+        }
+        return date;
+    }];
 }
 
 - (APSource *)source
