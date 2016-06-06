@@ -1,6 +1,7 @@
 language: objective-c
 
 before_install:
+        - rvm install ruby-2.3
         - gem install cocoapods -v 0.39.0
         - cd Example/Objective-C
         - pod install
