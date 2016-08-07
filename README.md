@@ -19,6 +19,12 @@ Add `APAddressBook` pod to [Podfile](http://guides.cocoapods.org/syntax/podfile.
 pod 'APAddressBook'
 ```
 
+**Warning for iOS 10.0 and after**
+
+To protect user privacy, an iOS app linked on or after iOS 10.0, and which accesses the user’s contacts, must statically declare the intent to do so. Include the `NSContactsUsageDescription` key in your app’s `Info.plist` file and provide a purpose string for this key. If your app attempts to access the user’s contacts without a corresponding purpose string, your app exits.
+
+From [here](https://developer.apple.com/library/prerelease/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html).
+
 **Load contacts**
 ```objective-c
 APAddressBook *addressBook = [[APAddressBook alloc] init];
