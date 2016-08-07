@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E3F1D892D235D625184F9F17 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB78809B6D8C50909ECAA0D /* Pods.framework */; };
+		1836CB688EEA66DEB8909B57 /* Pods_AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56F1B181C271D768A508D1C /* Pods_AddressBook.framework */; };
 		FA3B984C198ABBB5005953CE /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3B984B198ABBB5005953CE /* TableViewCell.swift */; };
 		FA5B3EAC1D05C3E20002FD25 /* APContactBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5B3E711D05C3E20002FD25 /* APContactBuilder.m */; };
 		FA5B3EAD1D05C3E20002FD25 /* APContactListBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5B3E731D05C3E20002FD25 /* APContactListBuilder.m */; };
@@ -39,9 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00579F423ED1339EB0D8245E /* Pods-AddressBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AddressBook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook.debug.xcconfig"; sourceTree = "<group>"; };
 		3BB78809B6D8C50909ECAA0D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		66F112F4D42891A3F34E4113 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		C119F157280640CA31CD4E27 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A56F1B181C271D768A508D1C /* Pods_AddressBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AddressBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAD7C88476E77E1FA29521BB /* Pods-AddressBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AddressBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook.release.xcconfig"; sourceTree = "<group>"; };
 		FA3B984A198AB8C2005953CE /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		FA3B984B198ABBB5005953CE /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		FA5B3E701D05C3E20002FD25 /* APContactBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APContactBuilder.h; sourceTree = "<group>"; };
@@ -107,18 +108,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3F1D892D235D625184F9F17 /* Pods.framework in Frameworks */,
+				1836CB688EEA66DEB8909B57 /* Pods_AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4845391491E59C918D93E784 /* Pods */ = {
+		609A72A3C3649D4ED56E0AE8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C119F157280640CA31CD4E27 /* Pods.debug.xcconfig */,
-				66F112F4D42891A3F34E4113 /* Pods.release.xcconfig */,
+				00579F423ED1339EB0D8245E /* Pods-AddressBook.debug.xcconfig */,
+				CAD7C88476E77E1FA29521BB /* Pods-AddressBook.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -127,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				3BB78809B6D8C50909ECAA0D /* Pods.framework */,
+				A56F1B181C271D768A508D1C /* Pods_AddressBook.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -324,8 +326,8 @@
 				FACA8341198AB2FD0059676C /* AddressBook */,
 				FACA8340198AB2FD0059676C /* Products */,
 				65E3953D9FB24ACD81049105 /* Frameworks */,
-				4845391491E59C918D93E784 /* Pods */,
 				FA5B3E6C1D05C3E20002FD25 /* Pod */,
+				609A72A3C3649D4ED56E0AE8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -365,12 +367,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FACA835B198AB2FD0059676C /* Build configuration list for PBXNativeTarget "AddressBook" */;
 			buildPhases = (
-				33F0520C9FDA49DCA3BB9D9C /* Check Pods Manifest.lock */,
+				EBBC7A7CC9849A978FBDD09A /* [CP] Check Pods Manifest.lock */,
 				FACA833B198AB2FD0059676C /* Sources */,
 				FACA833C198AB2FD0059676C /* Frameworks */,
 				FACA833D198AB2FD0059676C /* Resources */,
-				B2898E40613B4BB0A854A658 /* Copy Pods Resources */,
-				E0E8BCB42F883C2CED641DC0 /* Embed Pods Frameworks */,
+				6A90289BF3ED606138FDD768 /* [CP] Embed Pods Frameworks */,
+				93766096ECFE5B6DECE22A19 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -427,49 +429,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		33F0520C9FDA49DCA3BB9D9C /* Check Pods Manifest.lock */ = {
+		6A90289BF3ED606138FDD768 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		93766096ECFE5B6DECE22A19 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBBC7A7CC9849A978FBDD09A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B2898E40613B4BB0A854A658 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E0E8BCB42F883C2CED641DC0 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -602,7 +604,7 @@
 		};
 		FACA835C198AB2FD0059676C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C119F157280640CA31CD4E27 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 00579F423ED1339EB0D8245E /* Pods-AddressBook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -617,7 +619,7 @@
 		};
 		FACA835D198AB2FD0059676C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66F112F4D42891A3F34E4113 /* Pods.release.xcconfig */;
+			baseConfigurationReference = CAD7C88476E77E1FA29521BB /* Pods-AddressBook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
