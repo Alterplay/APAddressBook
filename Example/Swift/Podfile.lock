@@ -1,4 +1,7 @@
 PODS:
+  - APAddressBook/Core (0.2.3)
+  - APAddressBook/Swift (0.2.3):
+    - APAddressBook/Core
   - DTModelStorage (2.6.2):
     - DTModelStorage/Core (= 2.6.2)
   - DTModelStorage/Core (2.6.2)
@@ -6,12 +9,14 @@ PODS:
     - DTModelStorage (~> 2.6.0)
 
 DEPENDENCIES:
+  - APAddressBook/Swift
   - DTTableViewManager
 
 SPEC CHECKSUMS:
+  APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
   DTModelStorage: afd736e5309f374c29dcd7e4364e7571e32e5db1
   DTTableViewManager: 4a961b5ffaa9a57387ccff7f9280d001c9c64082
 
-PODFILE CHECKSUM: e4b62ba1ef2a3f257d0601411efd74e243efe0f7
+PODFILE CHECKSUM: 3147938b07de20fa4e00e54bb0416d3a893a6fb1
 
 COCOAPODS: 1.0.1

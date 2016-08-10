@@ -8,6 +8,7 @@
 
 import UIKit
 import DTModelStorage
+import APAddressBook
 
 class TableViewCell: UITableViewCell, ModelTransfer {
 
