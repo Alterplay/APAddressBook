@@ -10,7 +10,8 @@ import UIKit
 import DTTableViewManager
 import DTModelStorage
 
-class ViewController: UIViewController, DTTableViewManageable {
+class ViewController: UIViewController, DTTableViewManageable
+{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
@@ -19,54 +20,65 @@ class ViewController: UIViewController, DTTableViewManageable {
 
     // MARK: - life cycle
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder)
+    {
         super.init(coder: aDecoder);
-        self.addressBook.fieldsMask = [APContactField.Default, APContactField.Thumbnail]
-        self.addressBook.sortDescriptors = [NSSortDescriptor(key: "name.firstName", ascending: true),
-                                            NSSortDescriptor(key: "name.lastName", ascending: true)]
-        self.addressBook.filterBlock = {
+        addressBook.fieldsMask = [APContactField.Default, APContactField.Thumbnail]
+        addressBook.sortDescriptors = [NSSortDescriptor(key: "name.firstName", ascending: true),
+                                       NSSortDescriptor(key: "name.lastName", ascending: true)]
+        addressBook.filterBlock =
+        {
             (contact: APContact) -> Bool in
-            if let phones = contact.phones {
+            if let phones = contact.phones
+            {
                 return phones.count > 0
             }
             return false
         }
-        self.addressBook.startObserveChangesWithCallback({
+        addressBook.startObserveChangesWithCallback
+        {
             [unowned self] in
             self.loadContacts()
-        })
+        }
     }
 
     // MARK: - appearance
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        self.manager.startManagingWithDelegate(self)
-        self.manager.registerCellClass(TableViewCell)
-        self.loadContacts()
+        manager.startManagingWithDelegate(self)
+        manager.registerCellClass(TableViewCell)
+        loadContacts()
     }
 
     // MARK: - actions
 
-    @IBAction func reloadButtonPressed(sender: AnyObject) {
-        self.loadContacts()
+    @IBAction func reloadButtonPressed(sender: AnyObject)
+    {
+        loadContacts()
     }
 
     // MARK: - private
 
-    func loadContacts() {
-        self.activity.startAnimating();
-        self.addressBook.loadContacts({
-            (contacts: [APContact]?, error: NSError?) in
+    func loadContacts()
+    {
+        activity.startAnimating();
+        addressBook.loadContacts
+        {
+            [unowned self] (contacts: [APContact]?, error: NSError?) in
             self.activity.stopAnimating()
             self.manager.memoryStorage.removeAllTableItems();
-            if let unwrappedContacts = contacts {
-                self.manager.memoryStorage.addItems(unwrappedContacts)
-            } else if let unwrappedError = error {
-                let alert = UIAlertView(title: "Error", message: unwrappedError.localizedDescription,
-                    delegate: nil, cancelButtonTitle: "OK")
+            if let contacts = contacts
+            {
+                self.manager.memoryStorage.addItems(contacts)
+            }
+            else if let error = error
+            {
+                let alert = UIAlertView(title: "Error", message: error.localizedDescription,
+                                        delegate: nil, cancelButtonTitle: "OK")
                 alert.show()
             }
-        })
+        }
     }
 }

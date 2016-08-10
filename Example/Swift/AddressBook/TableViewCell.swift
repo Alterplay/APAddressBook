@@ -24,9 +24,9 @@ class TableViewCell: UITableViewCell, ModelTransfer {
     // MARK: - ModelTransfer
     
     func updateWithModel(contact: APContact) {
-        self.imageView?.image = contact.thumbnail
-        self.textLabel?.text = self.contactName(contact)
-        self.detailTextLabel?.text = self.contactPhones(contact)
+        imageView?.image = contact.thumbnail
+        textLabel?.text = contactName(contact)
+        detailTextLabel?.text = contactPhones(contact)
     }
 
     // MARK: - prviate
