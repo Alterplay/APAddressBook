@@ -68,7 +68,7 @@ class ViewController: UIViewController, DTTableViewManageable
         {
             [unowned self] (contacts: [APContact]?, error: NSError?) in
             self.activity.stopAnimating()
-            self.manager.memoryStorage.removeAllTableItems();
+            self.manager.memoryStorage.removeAllItems();
             if let contacts = contacts
             {
                 self.manager.memoryStorage.addItems(contacts)

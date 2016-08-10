@@ -1,14 +1,16 @@
 PODS:
-  - DTModelStorage (2.0.0)
-  - DTTableViewManager (4.0.0):
-    - DTModelStorage (~> 2.0.0)
+  - DTModelStorage (2.6.2):
+    - DTModelStorage/Core (= 2.6.2)
+  - DTModelStorage/Core (2.6.2)
+  - DTTableViewManager (4.7.0):
+    - DTModelStorage (~> 2.6.0)
 
 DEPENDENCIES:
   - DTTableViewManager
 
 SPEC CHECKSUMS:
-  DTModelStorage: 5cb631b8bd747e3f11a972e781af1c814bd95995
-  DTTableViewManager: a40598cccf2ba79470c0b2b65e02e27b8cf155ee
+  DTModelStorage: afd736e5309f374c29dcd7e4364e7571e32e5db1
+  DTTableViewManager: 4a961b5ffaa9a57387ccff7f9280d001c9c64082
 
 PODFILE CHECKSUM: e4b62ba1ef2a3f257d0601411efd74e243efe0f7
 
