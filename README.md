@@ -172,7 +172,7 @@ Import `APAddressBook-Bridging.h` to application's objective-c bridging file.
 See example application in `Example/Swift` directory.
 ```Swift
 self.addressBook.loadContacts(
-    { (contacts: [APContact]?, error: NSError?) in
+    { (contacts: [APContact]?, error: Error?) in
         if let uwrappedContacts = contacts {
             // do something with contacts
         }
