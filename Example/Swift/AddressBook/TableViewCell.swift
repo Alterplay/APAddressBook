@@ -14,7 +14,7 @@ class TableViewCell: UITableViewCell, ModelTransfer {
     // MARK: - life cycle
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
-        super.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
+        super.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -23,16 +23,17 @@ class TableViewCell: UITableViewCell, ModelTransfer {
 
     // MARK: - ModelTransfer
     
-    func updateWithModel(contact: APContact) {
-        imageView?.image = contact.thumbnail
-        textLabel?.text = contactName(contact)
-        detailTextLabel?.text = contactPhones(contact)
+    func update(with model: APContact) {
+        imageView?.image = model.thumbnail
+        textLabel?.text = contactName(model)
+        detailTextLabel?.text = contactPhones(model)
+        
     }
 
     // MARK: - prviate
     
-    func contactName(contact :APContact) -> String {
-        if let firstName = contact.name?.firstName, lastName = contact.name?.lastName {
+    func contactName(_ contact :APContact) -> String {
+        if let firstName = contact.name?.firstName, let lastName = contact.name?.lastName {
             return "\(firstName) \(lastName)"
         }
         else if let firstName = contact.name?.firstName {
@@ -46,7 +47,7 @@ class TableViewCell: UITableViewCell, ModelTransfer {
         }
     }
 
-    func contactPhones(contact :APContact) -> String {
+    func contactPhones(_ contact :APContact) -> String {
         if let phones = contact.phones {
             var phonesString = ""
             for phone in phones {

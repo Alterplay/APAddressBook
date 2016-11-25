@@ -23,7 +23,7 @@ class ViewController: UIViewController, DTTableViewManageable
     required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder);
-        addressBook.fieldsMask = [APContactField.Default, APContactField.Thumbnail]
+        addressBook.fieldsMask = [APContactField.default, APContactField.thumbnail]
         addressBook.sortDescriptors = [NSSortDescriptor(key: "name.firstName", ascending: true),
                                        NSSortDescriptor(key: "name.lastName", ascending: true)]
         addressBook.filterBlock =
@@ -35,7 +35,7 @@ class ViewController: UIViewController, DTTableViewManageable
             }
             return false
         }
-        addressBook.startObserveChangesWithCallback
+        addressBook.startObserveChanges
         {
             [unowned self] in
             self.loadContacts()
@@ -47,14 +47,14 @@ class ViewController: UIViewController, DTTableViewManageable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        manager.startManagingWithDelegate(self)
-        manager.registerCellClass(TableViewCell)
+        manager.startManaging(withDelegate: self)
+        manager.register(TableViewCell.self)
         loadContacts()
     }
 
     // MARK: - actions
 
-    @IBAction func reloadButtonPressed(sender: AnyObject)
+    @IBAction func reloadButtonPressed(_ sender: AnyObject)
     {
         loadContacts()
     }
@@ -66,7 +66,7 @@ class ViewController: UIViewController, DTTableViewManageable
         activity.startAnimating();
         addressBook.loadContacts
         {
-            [unowned self] (contacts: [APContact]?, error: NSError?) in
+            [unowned self] (contacts: [APContact]?, error: Error?) in
             self.activity.stopAnimating()
             self.manager.memoryStorage.removeAllItems();
             if let contacts = contacts
