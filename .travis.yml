@@ -1,6 +1,7 @@
 language: objective-c
 
 before_install:
+        - pod repo update
         - cd Example/Objective-C
         - pod install
         - cd ../Swift
