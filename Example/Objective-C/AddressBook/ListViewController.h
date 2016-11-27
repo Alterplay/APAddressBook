@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DTTableViewController.h"
 
-@interface ListViewController : DTTableViewController
+@interface ListViewController : UIViewController
 @end

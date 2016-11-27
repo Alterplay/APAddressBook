@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DTTableViewCell.h"
 
-@interface ContactTableViewCell : DTTableViewCell
+@class APContact;
+
+@interface ContactTableViewCell: UITableViewCell
+
+- (void)updateWithContact:(APContact *)contact;
 
 @end

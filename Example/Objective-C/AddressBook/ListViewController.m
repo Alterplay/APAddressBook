@@ -11,9 +11,11 @@
 #import "APContact.h"
 #import "APAddressBook.h"
 
-@interface ListViewController ()
+@interface ListViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 @property (nonatomic, strong) APAddressBook *addressBook;
+@property (nonatomic, strong) NSArray *contacts;
 @end
 
 @implementation ListViewController
@@ -44,7 +46,9 @@
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:nil
                                                                             action:nil];
-    [self registerCellClass:ContactTableViewCell.class forModelClass:APContact.class];
+    NSString *cellIdentifier = NSStringFromClass(ContactTableViewCell.class);
+    UINib *nib = [UINib nibWithNibName:cellIdentifier bundle:NSBundle.mainBundle];
+    [self.tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
     [self loadContacts];
 }
 
@@ -55,14 +59,34 @@
     [self loadContacts];
 }
 
-#pragma mark - table view data source implementation
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.contacts.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = NSStringFromClass(ContactTableViewCell.class);
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier
+                                                            forIndexPath:indexPath];
+    if ([cell isKindOfClass:ContactTableViewCell.class])
+    {
+        ContactTableViewCell *contactCell = (ContactTableViewCell *)cell;
+        [contactCell updateWithContact:self.contacts[(NSUInteger)indexPath.row]];
+    }
+    return cell;
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 85.f;
 }
 
-#pragma mark - table view delegate implementation
+#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -73,7 +97,7 @@
 
 - (void)loadContacts
 {
-    [self.memoryStorage removeAllTableItems];
+    self.contacts = nil;
     [self.activity startAnimating];
     __weak __typeof(self) weakSelf = self;
     self.addressBook.fieldsMask = APContactFieldAll;
@@ -88,7 +112,8 @@
         [weakSelf.activity stopAnimating];
         if (contacts)
         {
-            [weakSelf.memoryStorage addTableItems:contacts];
+            weakSelf.contacts = contacts;
+            [weakSelf.tableView reloadData];
         }
         else if (error)
         {

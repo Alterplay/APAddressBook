@@ -1,13 +1,5 @@
 language: objective-c
 
-before_install:
-        - pod repo update
-        - cd Example/Objective-C
-        - pod install
-        - cd ../Swift
-        - pod install
-        - cd ..
-
 script:
-        - xcodebuild build -workspace Objective-C/AddressBook.xcworkspace -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
-        - xcodebuild build -workspace Swift/AddressBook.xcworkspace -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
+        - xcodebuild build -workspace Objective-C/AddressBook.xcodeproj -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
+        - xcodebuild build -workspace Swift/AddressBook.xcodeproj -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'

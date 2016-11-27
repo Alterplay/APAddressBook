@@ -35,11 +35,10 @@
     return self;
 }
 
-#pragma mark - table view model transfer implementation
+#pragma mark - public
 
-- (void)updateWithModel:(id)model
+- (void)updateWithContact:(APContact *)contact
 {
-    APContact *contact = model;
     self.nameLabel.text = [self contactName:contact];
     self.companyLabel.text = contact.job.company ?: @"(No company)";
     self.phonesLabel.text = [self contactPhones:contact];

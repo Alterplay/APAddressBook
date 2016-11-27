@@ -7,16 +7,17 @@
 //
 
 import UIKit
-import DTTableViewManager
-import DTModelStorage
 
-class ViewController: UIViewController, DTTableViewManageable
+fileprivate let cellIdentifier = String(describing: TableViewCell.self)
+
+class ViewController: UIViewController
 {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activity: UIActivityIndicatorView!
 
     let addressBook = APAddressBook()
+    var contacts = [APContact]()
 
     // MARK: - life cycle
 
@@ -47,8 +48,7 @@ class ViewController: UIViewController, DTTableViewManageable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        manager.startManaging(withDelegate: self)
-        manager.register(TableViewCell.self)
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         loadContacts()
     }
 
@@ -68,10 +68,11 @@ class ViewController: UIViewController, DTTableViewManageable
         {
             [unowned self] (contacts: [APContact]?, error: Error?) in
             self.activity.stopAnimating()
-            self.manager.memoryStorage.removeAllItems();
+            self.contacts = [APContact]()
             if let contacts = contacts
             {
-                self.manager.memoryStorage.addItems(contacts)
+                self.contacts = contacts
+                self.tableView.reloadData()
             }
             else if let error = error
             {
@@ -80,5 +81,27 @@ class ViewController: UIViewController, DTTableViewManageable
                 alert.show()
             }
         }
+    }
+}
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contacts.count
+    }
+
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                 for: indexPath)
+        if let cell = cell as? TableViewCell {
+            cell.update(with: contacts[indexPath.row])
+        }
+        return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 }

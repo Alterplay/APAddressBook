@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import DTModelStorage
 
-class TableViewCell: UITableViewCell, ModelTransfer {
+class TableViewCell: UITableViewCell {
 
     // MARK: - life cycle
     
