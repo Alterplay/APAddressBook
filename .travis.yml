@@ -1,5 +1,6 @@
 language: objective-c
 
 script:
-        - xcodebuild build -project Objective-C/AddressBook.xcodeproj -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
-        - xcodebuild build -project Swift/AddressBook.xcodeproj -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
+        - xcodebuild build -project Example/Objective-C/AddressBook.xcodeproj -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
+        - xcodebuild build -project Example/Swift/AddressBook.xcodeproj -scheme AddressBook -destination 'platform=iOS Simulator,name=iPhone 5,OS=latest'
+
