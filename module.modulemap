@@ -1,0 +1,5 @@
+framework module APAddressBook {
+    umbrella header "APAddressBookFramework.h"
+    export *
+    module * { export * }
+}
