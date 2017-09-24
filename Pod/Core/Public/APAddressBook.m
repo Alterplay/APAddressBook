@@ -19,7 +19,7 @@
 @property (nonatomic, strong) APAddressBookContactsRoutine *contacts;
 @property (nonatomic, strong) APAddressBookExternalChangeRoutine *externalChange;
 @property (nonatomic, strong) APThread *thread;
-@property (atomic, copy) void (^externalChangeCallback)();
+@property (atomic, copy) void (^externalChangeCallback)(void);
 @property (atomic, strong) dispatch_queue_t externalChangeQueue;
 @end
 
@@ -130,12 +130,12 @@
     }];
 }
 
-- (void)startObserveChangesWithCallback:(void (^)())callback
+- (void)startObserveChangesWithCallback:(void (^)(void))callback
 {
     [self startObserveChangesOnQueue:dispatch_get_main_queue() callback:callback];
 }
 
-- (void)startObserveChangesOnQueue:(dispatch_queue_t)queue callback:(void (^)())callback
+- (void)startObserveChangesOnQueue:(dispatch_queue_t)queue callback:(void (^)(void))callback
 {
     self.externalChangeCallback = callback;
     self.externalChangeQueue = queue;
